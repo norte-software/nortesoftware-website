@@ -39,3 +39,36 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Norte Software - Security additions
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production
+.env.staging
+
+# Credentials and secrets
+*.pem
+*.key
+*.p12
+*.pfx
+*_rsa
+*_ed25519
+*.kdbx
+secrets.json
+credentials.json
+config/secrets/
+.secrets/
+
+# Editor and OS
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.log
+.cache/
