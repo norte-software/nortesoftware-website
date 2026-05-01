@@ -1,236 +1,346 @@
-# NORTE SOFTWARE — Step 3 · Home Real
+# NORTE SOFTWARE — Step 4 · Servicios + Form de Contacto
 
-Este paquete reemplaza el placeholder del home con el home **real**:
-Hero con globo terráqueo interactivo, sección Pilares, Servicios,
-Industrias (con Salud destacada), Stack y CTA final.
+Este paquete agrega:
+
+- Página `/servicios` con detalle expandido de los 4 servicios
+- Página `/contacto` con form completo (Resend + Turnstile + rate limit)
+- API route `/api/contacto` con validación server-side
+- Componentes UI: Input, Textarea, Select, FormField
+- ContactForm con react-hook-form + Zod
+- Email templates (admin notification + auto-reply)
+- Validación de variables de entorno (Zod)
 
 ---
 
 ## ARCHIVOS NUEVOS
 
 ```
+src/app/
+├── api/contacto/route.ts            ← API endpoint POST /api/contacto
+├── contacto/page.tsx                ← /contacto con form
+└── servicios/page.tsx               ← /servicios con detalle
+
 src/components/
 ├── ui/
-│   ├── Section.tsx              ← wrapper de secciones con padding
-│   └── SectionHeader.tsx        ← eyebrow + title + description con stagger
-├── sections/
-│   ├── Hero.tsx                 ← hero con globo cobe
-│   ├── PillarsSection.tsx       ← 5 pilares con íconos
-│   ├── ServicesSection.tsx      ← 4 servicios en cards 2x2
-│   ├── IndustriesSection.tsx    ← Salud destacada + 7 secundarias
-│   ├── StackSection.tsx         ← pills de tecnologías
-│   └── FinalCTA.tsx             ← CTA grande antes del footer
-└── visuals/
-    └── Globe.tsx                ← globo terráqueo con cobe
+│   ├── Input.tsx                    ← input con validación
+│   ├── Textarea.tsx                 ← textarea con contador
+│   └── Select.tsx                   ← select con styled chevron
+└── forms/
+    └── ContactForm.tsx              ← form completo con Turnstile
+
+src/lib/
+├── contact-schema.ts                ← Zod schema compartido
+├── env.ts                           ← validación env vars
+├── resend.ts                        ← wrapper Resend
+├── turnstile.ts                     ← verificación Turnstile server-side
+├── rate-limit.ts                    ← rate limiter en memoria
+└── email-templates/
+    ├── admin-notification.ts        ← HTML email a info@
+    └── auto-reply.ts                ← HTML email confirmación cliente
 ```
 
-## ARCHIVOS MODIFICADOS
+## ARCHIVOS ACTUALIZADOS
 
 ```
-src/app/page.tsx                 ← orquesta todas las secciones
+.env.example                         ← agregar nuevas vars
 ```
 
 ---
 
 ## PASO A PASO
 
-### 1) Sincronizar local + nueva rama
+### 1) Sincronizar y crear rama
 
 ```bash
 cd ~/norte/sitio-web/nortesoftware-website
 git checkout main
 git pull origin main
-git checkout -b feat/home-sections
+git checkout -b feat/contact-form-services
 ```
 
 ### 2) Instalar dependencias nuevas
 
 ```bash
-npm install cobe
+npm install resend react-hook-form @hookform/resolvers @marsidev/react-turnstile
 ```
 
-`cobe` es la única dependencia nueva (~12 KB). Pesa nada.
+Tamaños aproximados:
+- `resend` — ~50 KB (SDK)
+- `react-hook-form` — ~25 KB (sin re-renders innecesarios)
+- `@hookform/resolvers` — ~5 KB (integración Zod)
+- `@marsidev/react-turnstile` — ~10 KB (wrapper)
+
+Total: ~90 KB en deps + JS del form (lazy-loaded en `/contacto`).
 
 ### 3) Copiar archivos del paquete
 
 ```bash
-cp -r ~/Downloads/norte-step3/proyecto/* .
+cp -r ~/Downloads/norte-step4/proyecto/* .
 ```
 
 Verifica que aparecen los archivos nuevos:
 
 ```bash
-ls -la src/components/ui/Section.tsx
-ls -la src/components/ui/SectionHeader.tsx
-ls -la src/components/sections/
-ls -la src/components/visuals/Globe.tsx
+ls -la src/app/api/contacto/
+ls -la src/app/contacto/
+ls -la src/app/servicios/
+ls -la src/lib/
+ls -la src/lib/email-templates/
+ls -la src/components/forms/
 ```
 
-### 4) Probar en local
+### 4) Configurar variables de entorno LOCALES
+
+Crea (o edita) `.env.local` en la raíz del proyecto:
+
+```bash
+cd ~/norte/sitio-web/nortesoftware-website
+nano .env.local
+```
+
+Pega las siguientes variables y reemplaza los valores con los reales:
+
+```bash
+# Públicas
+NEXT_PUBLIC_SITE_URL=https://nortesoftware.dev
+NEXT_PUBLIC_TURNSTILE_SITE_KEY=0x4AAAAAADG1OVRjwX_HwJ2g
+
+# Privadas (NUNCA al repo)
+RESEND_API_KEY=re_TU_API_KEY_AQUI
+TURNSTILE_SECRET_KEY=0x4_TU_SECRET_AQUI
+
+# Destinatarios
+CONTACT_EMAIL_TO=info@nortesoftware.dev
+CONTACT_EMAIL_FROM=info@nortesoftware.dev
+```
+
+⚠️ **IMPORTANTE**:
+- `RESEND_API_KEY` la copias de tu password manager (la que generaste en Resend)
+- `TURNSTILE_SECRET_KEY` la copias de tu password manager (la que copiaste de Cloudflare Turnstile)
+- `NEXT_PUBLIC_TURNSTILE_SITE_KEY` ya está rellena con la pública: `0x4AAAAAADG1OVRjwX_HwJ2g`
+
+Guarda el archivo (`Ctrl+O`, Enter, `Ctrl+X` en nano).
+
+### 5) Configurar variables de entorno EN VERCEL (producción)
+
+Después de probar local, antes de mergear:
+
+1. Ve a `https://vercel.com/dashboard`
+2. Selecciona tu proyecto `nortesoftware-website`
+3. Tab **Settings** → **Environment Variables**
+4. Agrega CADA una de estas variables (la mismas que en .env.local):
+
+   - `NEXT_PUBLIC_SITE_URL` = `https://nortesoftware.dev`
+   - `NEXT_PUBLIC_TURNSTILE_SITE_KEY` = `0x4AAAAAADG1OVRjwX_HwJ2g`
+   - `RESEND_API_KEY` = (tu API key de Resend)
+   - `TURNSTILE_SECRET_KEY` = (tu secret key de Turnstile)
+   - `CONTACT_EMAIL_TO` = `info@nortesoftware.dev`
+   - `CONTACT_EMAIL_FROM` = `info@nortesoftware.dev`
+
+5. Para cada variable, marca los 3 environments: **Production**, **Preview**, **Development**
+
+6. **Save** después de cada una
+
+### 6) Probar en local
 
 ```bash
 npm run dev
 ```
 
-Abre `http://localhost:3000`. **Recuerda hacer Ctrl+Shift+R para evitar caché.**
+Abre `http://localhost:3000/contacto` (Ctrl+Shift+R para evitar caché).
 
-#### Hero
-- Texto a la izquierda con animación de entrada cascada
-- Globo terráqueo a la derecha rotando solo
-- Markers en mint accent en CDMX, NYC, SF, London, Tokyo, Singapur, Tuxtla
-- Puedes **arrastrar el globo** para rotarlo manualmente
-- Botones "Iniciar proyecto" (verde menta filled) + "Solicitar propuesta" (ghost)
-- Indicador "Conoce más ↓" abajo en desktop
+#### Validaciones del form
 
-#### Pilares (al hacer scroll)
-- Eyebrow "CÓMO TRABAJAMOS"
-- Título "Cinco pilares que nos definen"
-- Grid de 5 cards en desktop (2 cols en tablet, 1 col en mobile)
-- Cada card: número editorial (01, 02...), ícono, título, descripción
-- Hover: la card se aclara sutilmente
+**Test 1: validación cliente**
+- Submit sin llenar → debe mostrar errores: "El nombre debe tener al menos 2 caracteres", etc.
+- Email inválido (e.g. "abc") → "Por favor ingresa un correo electrónico válido"
+- Mensaje muy corto (e.g. "hola") → "Cuéntanos más sobre tu proyecto (mínimo 20 caracteres)"
 
-#### Servicios
-- Grid 2x2 de cards grandes
-- 4 servicios: Desarrollo, Auditoría, Consultoría, Soporte
-- Cada card es link a `/servicios#id`
-- Hover: card se eleva, flecha diagonal se mueve, glow sutil
-- Línea decorativa arriba aparece al hover
+**Test 2: Turnstile widget**
+- Debe aparecer el widget de Cloudflare con tema oscuro
+- Si no resuelve el challenge, no debe dejarte enviar
+- Si Turnstile no carga (problema de red), botón submit muestra error
 
-#### Industrias
-- Card grande de "Salud privada" a la izquierda con badge animado
-- Grid 3x2 de las otras industrias a la derecha
-- En mobile: todas apiladas en 1 columna con Salud arriba
+**Test 3: envío exitoso**
+- Llena el form con datos válidos:
+  - Nombre: "Chris Test"
+  - Email: tu email personal (donde recibirás el auto-reply)
+  - Mensaje: "Esta es una prueba del form de contacto del sitio web de Norte Software para verificar que todo funciona correctamente."
+- Resuelve el Turnstile
+- Click "Enviar mensaje"
+- Debe aparecer pantalla de éxito verde
 
-#### Stack
-- Pills horizontales de TypeScript, Next.js, React, etc.
-- Hover: pill se ilumina en electric blue
+**Verificación**:
+1. Abre `https://mail.google.com` con `chris@nortesoftware.dev`
+2. Debe haber llegado un correo de "Norte Software" con tus datos
+3. En tu email personal, debe haber llegado el auto-reply
 
-#### FinalCTA
-- Bloque grande con borde y glow ambiental
-- 3 botones: Iniciar proyecto + Solicitar propuesta + WhatsApp
+**Test 4: rate limit**
+- Envía 4 mensajes en menos de 1 hora
+- El 4to debe mostrar error: "Has enviado demasiadas solicitudes..."
 
-#### Validaciones generales
-- Header se vuelve glass al hacer scroll
-- FAB de WhatsApp aparece a los 1.2s
-- Mobile menu sigue funcionando bien
-- Navegación entre páginas funciona (`/privacidad`, `/terminos`)
+### 7) Probar /servicios
 
-### 5) Lint y types
+- `http://localhost:3000/servicios` carga
+- 4 servicios con cards alternados izquierda/derecha
+- Anchors: `/servicios#desarrollo`, `/servicios#ciberseguridad`, etc. funcionan
+- Links de home `/servicios#desarrollo` (etc) llevan al servicio correcto
+
+### 8) Lint y tipos
 
 ```bash
 npm run lint
 npx tsc --noEmit
 ```
 
-Ambos deben pasar limpios. Si tira error, pégamelo.
+Ambos deben pasar limpios.
 
-### 6) Build de producción
+### 9) Build de producción
 
 ```bash
 npm run build
-npm run start
 ```
 
-Verifica que se ve igual. Performance debe ser excelente — el globo es lazy-loaded así que no afecta first paint.
+Verifica que aparezcan en la lista:
+- `/contacto`
+- `/servicios`
+- `/api/contacto` (será marcado como `λ` route, no estático)
 
-Cuando termines, `Ctrl+C` para parar.
-
-### 7) Commit y push
+### 10) Commit y push
 
 ```bash
 git add .
-git commit -m "feat(home): hero con globo + pilares + servicios + industrias + CTA
+git commit -m "feat(contact): página servicios + form de contacto con Resend
 
-- Hero rediseñado con globo terráqueo interactivo (cobe ~12KB)
-- Sección Pilares: 5 cards con íconos y números editoriales
-- Sección Servicios: grid 2x2 con cards animadas, links a /servicios#id
-- Sección Industrias: Salud privada destacada como card grande,
-  7 industrias secundarias en grid
-- Sección Stack: pills de tecnologías (sin métricas inventadas)
-- FinalCTA: bloque de cierre con primary + secondary + WhatsApp
-- Componentes reusables: Section, SectionHeader
-- Animaciones con stagger y scroll-triggered reveals
-- Respeta prefers-reduced-motion"
+- Página /servicios con detalle expandido por servicio
+  (anchors #desarrollo, #ciberseguridad, #consultoria, #mantenimiento)
+- Página /contacto con form completo
+- ContactForm con react-hook-form + Zod validation
+- Cloudflare Turnstile como anti-bot
+- API route /api/contacto con:
+  * Validación server-side (Zod)
+  * Verificación Turnstile contra Cloudflare
+  * Rate limiting (3 req/h por IP)
+  * Envío de email a info@ (admin notification)
+  * Auto-reply al cliente (best-effort)
+- HTML email templates profesionales
+- Componentes UI: Input, Textarea, Select
+- Validación de env vars al iniciar (fail-fast)
+- Sanitización HTML para prevenir XSS en emails"
 
-git push origin feat/home-sections
+git push origin feat/contact-form-services
 ```
 
-### 8) PR + merge en GitHub
+### 11) PR + merge en GitHub
 
 1. Abre el repo
-2. "Compare & pull request"
+2. Banner "Compare & pull request" → click
 3. Verifica el diff
-4. "Create pull request" → "Merge pull request" → "Confirm merge"
-5. "Delete branch"
+4. **Antes de mergear**, asegúrate de que las env vars en Vercel estén configuradas (paso 5)
+5. "Create pull request" → "Merge pull request" → "Confirm merge"
+6. "Delete branch"
 
-### 9) Sincroniza local
+### 12) Sincroniza local
 
 ```bash
 git checkout main
 git pull origin main
-git branch -d feat/home-sections
+git branch -d feat/contact-form-services
 ```
+
+### 13) Verificar producción
+
+Espera 2-3 min para que Vercel deploye, luego:
+
+1. Abre `https://nortesoftware.dev/contacto` en incógnito
+2. Llena el form con datos reales
+3. Verifica que llegue el correo a info@ y el auto-reply a tu email
+4. Si algo falla, revisa Vercel Logs (`Dashboard → Project → Logs`)
 
 ---
 
 ## DECISIONES TÉCNICAS
 
-### cobe vs Three.js para el globo
+### Por qué Resend (no Nodemailer/SendGrid/Postmark)
 
-**cobe**: 12 KB, single draw call, API simple, optimizado para esto.
-**Three.js**: 150+ KB, mucho más capable pero overkill para un globo decorativo.
+- **DX excepcional**: API simple, SDK de TypeScript first-class
+- **Pricing transparente**: 3,000 emails/mes gratis, $20/mes por 50,000
+- **DNS verification**: SPF + DKIM automático con UI clara
+- **Built for devs**: docs y examples enfocados a Next.js
 
-cobe es lo que usan Linear, Vercel, GitHub. Es el estándar para este caso.
+### Por qué Cloudflare Turnstile (no reCAPTCHA)
 
-### Lazy load del globo
+- **Privacy-friendly**: no usa tracking de Google
+- **Mejor UX**: la mayoría de visitantes legítimos no ven challenge
+- **Performance**: widget más liviano (~30 KB vs 60 KB de reCAPTCHA)
+- **Gratis ilimitado**: sin costo independiente del volumen
+- **Mismo proveedor que tu DNS**: integración natural
 
-`dynamic(() => import(...), { ssr: false })`. El globo usa WebGL y `document`,
-no funciona en SSR. Con lazy load: el HTML del hero se sirve inmediatamente,
-el globo aparece cuando carga (con un placeholder pulse mientras tanto).
-Esto mantiene el First Contentful Paint excelente.
+### Rate limiting en memoria vs Redis
 
-### Por qué el hero NO tiene métricas
+Por ahora rate limit es en memoria. Razones:
+- Tráfico esperado bajo (sitio nuevo, B2B)
+- Cada cold start de Vercel tiene su propio Map (acceptable)
+- Turnstile es la primera barrera, rate limit es 2da línea
 
-Por decisión expresa. Mostrar "12 proyectos" cuando la S.A. de C.V. firma
-mañana sería técnicamente cierto (proyectos del fundador) pero comunicacionalmente
-impreciso. Mejor sin números que con números cuestionables.
+**Cuando migrar a Upstash/Vercel KV**:
+- Cuando recibas más de ~100 forms/día
+- Cuando tengas múltiples instances escalando
+- Cuando necesites ban-list persistente
 
-Cuando tengas casos de estudio reales con clientes de Norte Software,
-agregamos sección "Trabajo realizado" con casos detallados (mucho más
-poderoso que un contador anónimo).
+### Auto-reply best-effort vs blocking
 
-### Motion + scroll-triggered
+Si el auto-reply al cliente falla (e.g. dirección bouncea), NO devolvemos error
+al usuario. Razón: el correo principal a info@ SÍ se envió, así que el lead no se pierde.
+El cliente verá su mensaje como exitoso, simplemente no recibirá la confirmación.
 
-Cada sección anima al entrar al viewport con `viewport={{ once: true }}`.
-Esto significa que la animación corre UNA vez (no cada vez que scrolleas).
-Más performante y menos distractor.
+Esto se logea en console (visible en Vercel Logs) para debugging.
 
-`prefers-reduced-motion` es respetado globalmente vía nuestro CSS reset.
-Usuarios con reducción de movimiento activada ven el sitio sin animaciones.
+### Validación cliente vs servidor
 
-### Asimetría intencional
+**Cliente**: react-hook-form + zodResolver. Da feedback inmediato al usuario.
+**Servidor**: Zod parsing del body antes de procesar. Es la barrera real.
 
-- Hero: texto izquierda + globo derecha (no centrado)
-- Pillars: header alineado izquierda (no centrado)
-- Industries: card grande izquierda + grid pequeño derecha
-- Stack: pills wrap libre (no centrado)
-
-Esto rompe la simetría predecible de "AI templates" y le da carácter editorial
-al sitio. Es deliberado.
+NUNCA confiar solo en validación cliente — un atacante puede saltarse el JS
+y enviar request directo. La validación server-side es ley.
 
 ---
 
-## QUÉ SIGUE (Step 4)
+## TROUBLESHOOTING
 
-Después de que mergees Step 3:
+### "Variables de entorno inválidas" al iniciar dev
 
-**Step 4: Página /servicios y página /contacto con form**
+Falta una env var en `.env.local`. Revisa que las 6 estén con valor real
+(no vacías ni con `TODO`).
 
-- /servicios con detalle expandido por servicio + casos por industria
-- /contacto con form completo (Resend + Cloudflare Turnstile + rate limit)
-- Aquí necesitas haber configurado:
-  - [ ] Resend (API key + dominio verificado)
-  - [ ] Cloudflare Turnstile (site key + secret key)
-  - [ ] Google Workspace (info@ apuntando a tu inbox)
+### Turnstile widget no aparece
 
-Avísame cuando estés listo para Step 4.
+- Verifica que `NEXT_PUBLIC_TURNSTILE_SITE_KEY` tenga la site key correcta
+- Verifica que `localhost` esté en la lista de hostnames del widget en Cloudflare
+- Abre consola del navegador y busca errores de Turnstile
+
+### Form se envía pero correo no llega
+
+- Verifica que `chris@nortesoftware.dev` exista en Workspace
+- Verifica que el dominio esté Verified en Resend
+- Revisa logs: `npm run dev` muestra errores en terminal
+- Revisa Resend dashboard: tab "Emails" debe mostrar el correo (sent/bounced/etc)
+
+### En producción funciona local pero no Vercel
+
+- Probable causa: env vars no configuradas en Vercel
+- Ve a Vercel → Project Settings → Environment Variables
+- Después de agregar/cambiar env vars, **redeploy** el último commit
+
+---
+
+## QUÉ SIGUE (Step 5)
+
+Posibles mejoras futuras:
+
+- **Step 5A — SEO avanzado**: structured data más rico, sitemap dinámico, og-image generado, schema FAQPage
+- **Step 5B — Blog/casos de estudio**: cuando tengas clientes, agregar `/casos` con casos detallados (mucho más poderoso que testimonios genéricos)
+- **Step 5C — Analytics privacidad-friendly**: Plausible o Umami (sin cookies, sin GDPR drama)
+- **Step 5D — i18n English**: si decides exportar a clientes US/CA, sitio en inglés con contenido localizado
+
+Cuando estés listo para alguno de esos, avísame.
