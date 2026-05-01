@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { League_Spartan, DM_Sans } from "next/font/google";
 import { SITE } from "@/lib/constants";
+import { SiteShell } from "@/components/layout/SiteShell";
 import "./globals.css";
 
 const leagueSpartan = League_Spartan({
@@ -91,11 +92,12 @@ const organizationJsonLd = {
   url: SITE.url,
   logo: `${SITE.url}/icon-512.png`,
   description: SITE.description,
-  email: SITE.contactEmail,
+  email: SITE.emails.info,
+  telephone: SITE.phone.e164,
   address: {
     "@type": "PostalAddress",
-    addressLocality: "San Cristóbal de las Casas",
-    addressRegion: "Chiapas",
+    addressLocality: SITE.address.city,
+    addressRegion: SITE.address.state,
     addressCountry: "MX",
   },
   areaServed: ["MX", "US"],
@@ -105,6 +107,23 @@ const organizationJsonLd = {
     "Consultoría tecnológica",
     "Salud privada",
   ],
+};
+
+/**
+ * Skip link como CSS-in-JS inline para garantizar que funciona
+ * sin depender de utilities de Tailwind. Se oculta visualmente pero
+ * sigue siendo accesible para screen readers, y aparece al recibir foco.
+ */
+const skipLinkStyle: React.CSSProperties = {
+  position: "absolute",
+  width: 1,
+  height: 1,
+  padding: 0,
+  margin: -1,
+  overflow: "hidden",
+  clip: "rect(0, 0, 0, 0)",
+  whiteSpace: "nowrap",
+  borderWidth: 0,
 };
 
 export default function RootLayout({
@@ -117,7 +136,16 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-navy-deep text-ice-white antialiased min-h-svh font-sans">
-        {children}
+        <a
+          href="#main"
+          className="skip-link focus:not-skip-link"
+          style={skipLinkStyle}
+        >
+          Saltar al contenido principal
+        </a>
+
+        <SiteShell>{children}</SiteShell>
+
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}

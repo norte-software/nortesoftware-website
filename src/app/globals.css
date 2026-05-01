@@ -23,7 +23,7 @@
   --shadow-glow-md: 0 0 48px -8px rgba(59, 130, 246, 0.35);
   --shadow-glow-lg: 0 0 96px -16px rgba(59, 130, 246, 0.45);
 
-  /* Easings refinados (no los default de Tailwind) */
+  /* Easings refinados */
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
 }
@@ -60,7 +60,7 @@
     line-height: 1.05;
   }
 
-  /* Focus visible accesible — anillo verde menta (acento de marca) */
+  /* Focus visible accesible */
   :focus-visible {
     outline: 2px solid var(--color-mint-accent);
     outline-offset: 3px;
@@ -75,8 +75,7 @@
 }
 
 /* ============================================================
-   ACCESIBILIDAD
-   Respeta prefers-reduced-motion (no negociable).
+   ACCESIBILIDAD - PREFERS REDUCED MOTION
    ============================================================ */
 
 @media (prefers-reduced-motion: reduce) {
@@ -91,20 +90,42 @@
 }
 
 /* ============================================================
-   UTILIDADES PERSONALIZADAS
-   Patrones recurrentes de la marca como utilidades reusables.
+   UTILITIES NECESARIAS QUE TAILWIND V4 NO INCLUYE BY DEFAULT
+   ============================================================
+   Tailwind v4 reorganizó utilities. Algunas que en v3 venían
+   automáticas ahora requieren opt-in. Las definimos aquí como
+   @utility para que Tailwind las trate como clases first-class.
    ============================================================ */
 
-@utility container-narrow {
-  width: 100%;
-  max-width: 72rem;
-  margin-inline: auto;
-  padding-inline: 1.5rem;
-
-  @media (min-width: 1024px) {
-    padding-inline: 2.5rem;
-  }
+/* sr-only — oculta visualmente pero accesible para screen readers.
+   CRÍTICO para "Saltar al contenido principal" y "Pie de página". */
+@utility sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }
+
+/* not-sr-only — revertir sr-only (al hacer focus en skip link) */
+@utility not-sr-only {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ============================================================
+   UTILIDADES DE MARCA (custom)
+   ============================================================ */
 
 @utility text-balance {
   text-wrap: balance;
@@ -114,7 +135,7 @@
   text-wrap: pretty;
 }
 
-/* Gradiente "El norte de tu **tecnología**" — texto con highlight azul */
+/* Gradiente "El norte de tu **tecnología**" */
 @utility text-gradient-brand {
   background-image: linear-gradient(135deg, var(--color-electric-blue) 0%, var(--color-mint-accent) 100%);
   background-clip: text;
@@ -123,14 +144,14 @@
   -webkit-text-fill-color: transparent;
 }
 
-/* Patrón de puntos sutil (firma visual de la marca, ver mockup tarjeta) */
+/* Patrón de puntos sutil (firma visual de la marca) */
 @utility bg-dot-grid {
   background-image: radial-gradient(circle, rgba(59, 130, 246, 0.15) 1px, transparent 1px);
   background-size: 24px 24px;
   background-position: 0 0;
 }
 
-/* Línea decorativa azul → verde (separador firma email del mockup) */
+/* Línea decorativa azul → verde */
 @utility divider-brand {
   background-image: linear-gradient(90deg, var(--color-electric-blue) 0%, var(--color-mint-accent) 100%);
   height: 2px;

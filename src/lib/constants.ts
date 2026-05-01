@@ -9,24 +9,64 @@
 export const SITE = {
   name: "Norte Software",
   legalName: "Norte Software S.A. de C.V.",
+  founderName: "Christian Noé Ramos López",
+  founderRole: "Founder & CTO",
   tagline: "Software confiable, hecho a la medida.",
   taglineSecondary:
     "Desarrollo y protección de datos en un mismo equipo. Aquí cuando lo construimos, y aquí cuando lo necesitas.",
   description:
     "Software a la medida con desarrollo y protección de datos en un mismo equipo. Especialización en salud privada en México.",
   url: "https://nortesoftware.dev",
-  contactEmail: "chris@nortesoftware.dev",
+
+  // Emails diferenciados — usar el correcto según contexto público vs privado
+  emails: {
+    /** Email principal del sitio (formularios, footer, contacto público). */
+    info: "info@nortesoftware.dev",
+    /** Email del fundador (sección "Nosotros", pitch personalizado, prensa). */
+    founder: "chris@nortesoftware.dev",
+    // Nota: nortesoftware@ es interno administrativo, NO se expone públicamente.
+  },
+
+  // Teléfono / WhatsApp
+  phone: {
+    /** Display formateado para humanos. */
+    display: "+52 967 145 6444",
+    /** Formato E.164 sin caracteres para tel: links. */
+    e164: "+529671456444",
+    /** Para wa.me (sin +, sin espacios). */
+    whatsapp: "529671456444",
+  },
+
   brandTagline: "El norte de tu tecnología.",
   brandSlogan: "Código que resiste. Dirección que guía.",
   brandPromise:
     "Construimos software con dirección clara y seguridad incluida desde el primer commit.",
+
+  // Dirección legal
+  address: {
+    city: "San Cristóbal de las Casas",
+    state: "Chiapas",
+    country: "México",
+    short: "San Cristóbal de las Casas, Chiapas, MX",
+  },
+
+  foundedYear: 2026,
 } as const;
 
 /**
- * Paleta oficial. Duplicada aquí para uso programático
- * (animaciones, charts, OG images). Los componentes usan
- * las clases de Tailwind generadas desde @theme en globals.css.
+ * Mensaje pre-llenado para el botón de WhatsApp.
+ * Codificado para URL para usar en wa.me/...?text=
  */
+export const WHATSAPP_PREFILL_MESSAGE = encodeURIComponent(
+  "Hola Norte Software, vengo del sitio web y me interesa platicar sobre un proyecto.",
+);
+
+/**
+ * URL completa de WhatsApp con mensaje pre-llenado.
+ * Calculada una sola vez para reusar en FAB, footer, /contacto.
+ */
+export const WHATSAPP_URL = `https://wa.me/${SITE.phone.whatsapp}?text=${WHATSAPP_PREFILL_MESSAGE}`;
+
 export const BRAND_COLORS = {
   navyDeep: "#0A1628",
   navyMid: "#0F2040",
@@ -58,9 +98,42 @@ export const SECONDARY_CTA = {
 } as const;
 
 /**
- * Industrias atendidas. La principal va primero y se destaca
- * visualmente en el componente de sección.
+ * Redes sociales del footer.
+ * Por ahora todas con href "#" placeholder hasta tener perfiles reales.
+ *
+ * Cuando crees los perfiles, edita el href acá y se actualiza
+ * automáticamente en el footer.
  */
+export const SOCIAL_LINKS = [
+  {
+    id: "facebook",
+    label: "Facebook",
+    href: "#", // TODO: https://facebook.com/nortesoftware
+    iconKey: "facebook",
+  },
+  {
+    id: "instagram",
+    label: "Instagram",
+    href: "#", // TODO: https://instagram.com/nortesoftware
+    iconKey: "instagram",
+  },
+  {
+    id: "whatsapp",
+    label: "WhatsApp Business",
+    href: WHATSAPP_URL,
+    iconKey: "whatsapp",
+  },
+] as const;
+
+/**
+ * Links legales del footer. Apuntan a páginas placeholder
+ * por ahora; se completan con texto legal real más adelante.
+ */
+export const LEGAL_LINKS = [
+  { label: "Aviso de Privacidad", href: "/privacidad" },
+  { label: "Términos y Condiciones", href: "/terminos" },
+] as const;
+
 export const INDUSTRIES = [
   {
     id: "salud",
@@ -113,9 +186,6 @@ export const INDUSTRIES = [
   },
 ] as const;
 
-/**
- * Servicios principales. Usados en home y página /servicios.
- */
 export const SERVICES = [
   {
     id: "desarrollo",
@@ -143,9 +213,6 @@ export const SERVICES = [
   },
 ] as const;
 
-/**
- * Cinco pilares de la marca. Comunican diferenciadores.
- */
 export const PILLARS = [
   {
     id: "direccion",
@@ -179,9 +246,6 @@ export const PILLARS = [
   },
 ] as const;
 
-/**
- * Stack y tecnologías que dominamos. Para sección "Tecnologías".
- */
 export const TECH_STACK = [
   "TypeScript",
   "Next.js",
