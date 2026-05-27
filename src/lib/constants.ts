@@ -106,22 +106,28 @@ export const SECONDARY_CTA = {
  */
 export const SOCIAL_LINKS = [
   {
-    id: "facebook",
-    label: "Facebook",
-    href: "#", // TODO: https://facebook.com/nortesoftware
-    iconKey: "facebook",
+    id: "linkedin",
+    label: "LinkedIn de Norte Software",
+    href: "https://www.linkedin.com/company/nortesoftware/",
+    iconKey: "linkedin" as const,
   },
   {
     id: "instagram",
-    label: "Instagram",
-    href: "#", // TODO: https://instagram.com/nortesoftware
-    iconKey: "instagram",
+    label: "Instagram de Norte Software",
+    href: "https://www.instagram.com/norte.software/",
+    iconKey: "instagram" as const,
+  },
+  {
+    id: "facebook",
+    label: "Facebook de Norte Software",
+    href: "https://www.facebook.com/61589451873526/",
+    iconKey: "facebook" as const,
   },
   {
     id: "whatsapp",
-    label: "WhatsApp Business",
-    href: WHATSAPP_URL,
-    iconKey: "whatsapp",
+    label: "WhatsApp de Norte Software",
+    href: "https://wa.me/529671456444",
+    iconKey: "whatsapp" as const,
   },
 ] as const;
 
