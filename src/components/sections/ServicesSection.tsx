@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import { Code2, ShieldAlert, Compass, Wrench, ArrowUpRight } from "lucide-react";
+import { Code2, ShieldAlert, Compass, Bot, ArrowUpRight } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Container } from "@/components/ui/Container";
@@ -10,10 +10,10 @@ import { SERVICES } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 const SERVICE_ICONS = {
-  desarrollo: Code2,
   ciberseguridad: ShieldAlert,
+  desarrollo: Code2,
+  "ia-agentes": Bot,
   consultoria: Compass,
-  mantenimiento: Wrench,
 } as const;
 
 /**
@@ -28,7 +28,7 @@ const SERVICE_ICONS = {
  *   - Ícono lineart en electric-blue
  *   - Título display grande
  *   - Descripción
- *   - Link "Ver más" → /servicios#id
+ *   - Link "Conocer más" → /servicios#id
  *
  * Hover: la card entera se eleva, glow sutil y la flecha del link
  * se mueve diagonal.

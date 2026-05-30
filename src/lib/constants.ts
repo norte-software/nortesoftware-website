@@ -82,6 +82,7 @@ export const BRAND_COLORS = {
 export const NAV_LINKS = [
   { label: "Inicio", href: "/" },
   { label: "Servicios", href: "/servicios" },
+  { label: "Productos", href: "/#productos" },
   { label: "Industrias", href: "/#industrias" },
   { label: "Nosotros", href: "/#nosotros" },
   { label: "Contacto", href: "/contacto" },
@@ -99,10 +100,6 @@ export const SECONDARY_CTA = {
 
 /**
  * Redes sociales del footer.
- * Por ahora todas con href "#" placeholder hasta tener perfiles reales.
- *
- * Cuando crees los perfiles, edita el href acá y se actualiza
- * automáticamente en el footer.
  */
 export const SOCIAL_LINKS = [
   {
@@ -132,13 +129,116 @@ export const SOCIAL_LINKS = [
 ] as const;
 
 /**
- * Links legales del footer. Apuntan a páginas placeholder
- * por ahora; se completan con texto legal real más adelante.
+ * Links legales del footer.
  */
 export const LEGAL_LINKS = [
   { label: "Aviso de Privacidad", href: "/privacidad" },
   { label: "Términos y Condiciones", href: "/terminos" },
 ] as const;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// PRODUCTOS
+// ─────────────────────────────────────────────────────────────────────────────
+
+/**
+ * Tipos exportados para narrowing en componentes.
+ * La discriminación se hace sobre el campo `available`.
+ */
+export interface AvailableProduct {
+  id: string;
+  name: string;
+  description: string;
+  available: true;
+  badge: string;
+  url: string;
+  cta: string;
+}
+
+export interface ComingSoonProduct {
+  id: string;
+  name: string;
+  description: string;
+  available: false;
+  badge: string;
+}
+
+export type Product = AvailableProduct | ComingSoonProduct;
+
+/**
+ * Catálogo de productos Norte Software.
+ * Orden: disponibles primero, después próximamente.
+ */
+export const PRODUCTS: readonly Product[] = [
+  {
+    id: "secagent",
+    name: "Norte SecAgent",
+    description:
+      "Análisis de amenazas de seguridad en tiempo real con inteligencia artificial. Detecta brute force, SQL injection, C2, exfiltración y más en segundos.",
+    available: true,
+    badge: "Disponible ahora",
+    url: "https://secagent.nortesoftware.dev",
+    cta: "Probar SecAgent",
+  },
+  {
+    id: "clinica",
+    name: "Norte Clínica",
+    description:
+      "Sistema SaaS para clínicas y consultorios. Agenda, expediente digital y facturación CFDI.",
+    available: false,
+    badge: "Próximamente",
+  },
+  {
+    id: "comercio",
+    name: "Norte Comercio",
+    description:
+      "Control de inventario y ventas para tiendas con múltiples sucursales.",
+    available: false,
+    badge: "Próximamente",
+  },
+  {
+    id: "taxis",
+    name: "Norte Taxis",
+    description:
+      "Plataforma para sitios de taxis. App pasajero, app taxista y panel de control.",
+    available: false,
+    badge: "Próximamente",
+  },
+];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SERVICIOS
+// ─────────────────────────────────────────────────────────────────────────────
+
+export const SERVICES = [
+  {
+    id: "ciberseguridad",
+    name: "Ciberseguridad y Pentesting",
+    description:
+      "Pruebas de penetración a aplicaciones web y APIs, auditorías de seguridad y reporte ejecutivo con hallazgos y remediación. Ideal para fintechs, hospitales y empresas con datos sensibles.",
+  },
+  {
+    id: "desarrollo",
+    name: "Desarrollo de Software a la Medida",
+    description:
+      "Sistemas web y móviles desde cero, con integraciones a sistemas existentes. Stack moderno: Python, TypeScript, Next.js, FastAPI. Metodología ágil con entregas incrementales.",
+  },
+  {
+    id: "ia-agentes",
+    name: "Inteligencia Artificial y Agentes",
+    description:
+      "Integración de IA en procesos de negocio, agentes inteligentes con Claude y OpenAI, automatización de flujos y chatbots especializados para empresas.",
+  },
+  {
+    id: "consultoria",
+    name: "Consultoría Técnica",
+    description:
+      "Auditoría de arquitectura de sistemas existentes, estrategia tech para empresas medianas y acompañamiento CTO as a Service.",
+  },
+] as const;
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CONTENIDO HOME
+// ─────────────────────────────────────────────────────────────────────────────
 
 export const INDUSTRIES = [
   {
@@ -192,33 +292,6 @@ export const INDUSTRIES = [
   },
 ] as const;
 
-export const SERVICES = [
-  {
-    id: "desarrollo",
-    name: "Desarrollo a la medida",
-    description:
-      "Aplicaciones web, móviles e integraciones construidas con criterios de calidad y mantenibilidad.",
-  },
-  {
-    id: "ciberseguridad",
-    name: "Auditoría y protección",
-    description:
-      "Análisis de seguridad, pruebas de penetración y revisión de código antes y después del despliegue.",
-  },
-  {
-    id: "consultoria",
-    name: "Consultoría tecnológica",
-    description:
-      "Acompañamiento en decisiones de arquitectura, stack y operación para equipos en crecimiento.",
-  },
-  {
-    id: "mantenimiento",
-    name: "Soporte y evolución",
-    description:
-      "Acompañamiento continuo después del lanzamiento. Tu software vive, nosotros lo cuidamos.",
-  },
-] as const;
-
 export const PILLARS = [
   {
     id: "direccion",
@@ -258,7 +331,9 @@ export const TECH_STACK = [
   "React",
   "Node.js",
   "Python",
+  "FastAPI",
   "PostgreSQL",
+  "Claude API",
   "AWS",
   "Cloudflare",
   "Docker",

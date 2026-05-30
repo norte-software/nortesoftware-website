@@ -4,7 +4,7 @@ import {
   Code2,
   ShieldAlert,
   Compass,
-  Wrench,
+  Bot,
   ArrowRight,
   Check,
 } from "lucide-react";
@@ -15,12 +15,12 @@ import { SITE, PRIMARY_CTA } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Servicios",
   description:
-    "Desarrollo de software a la medida, auditorías de ciberseguridad, consultoría tecnológica y soporte continuo. Especialistas en salud privada.",
+    "Ciberseguridad y pentesting, desarrollo de software a la medida, inteligencia artificial y agentes, consultoría técnica. Especialistas en salud privada en México.",
   alternates: { canonical: `${SITE.url}/servicios` },
   openGraph: {
     title: "Servicios · Norte Software",
     description:
-      "Desarrollo, ciberseguridad, consultoría y soporte. Construido y protegido por el mismo equipo.",
+      "Ciberseguridad, desarrollo, IA y consultoría. Construido y protegido por el mismo equipo.",
     url: `${SITE.url}/servicios`,
     type: "website",
   },
@@ -38,75 +38,76 @@ interface ServiceDetail {
 
 const SERVICES_DETAIL: ServiceDetail[] = [
   {
-    id: "desarrollo",
-    name: "Desarrollo de software",
-    icon: Code2,
-    tagline: "Aplicaciones a la medida que escalan con tu operación.",
+    id: "ciberseguridad",
+    name: "Ciberseguridad y Pentesting",
+    icon: ShieldAlert,
+    tagline: "Encontramos las vulnerabilidades antes que un atacante.",
     description:
-      "Construimos sistemas web, APIs, integraciones y dashboards adaptados a procesos específicos de tu negocio. Trabajamos con stacks modernos (TypeScript, Next.js, React, Node.js, Python, PostgreSQL) y entregamos código documentado, probado y listo para producción.",
+      "Auditamos aplicaciones web, APIs y arquitecturas en busca de fallos de seguridad. Detectamos vulnerabilidades OWASP Top 10, problemas de autenticación, lógica de negocio explotable y filtraciones. Entregamos reportes accionables con severidad CVSS y plan de remediación priorizado.",
+    capabilities: [
+      "Pruebas de penetración a aplicaciones web y APIs",
+      "Auditorías de seguridad y revisión de código fuente",
+      "Análisis de arquitectura y modelo de amenazas",
+      "Pruebas de IDOR, race conditions y lógica de negocio",
+      "Reporte ejecutivo con hallazgos y remediación priorizada",
+      "Revisión de cumplimiento (LFPDPPP, ISO 27001 base)",
+    ],
+    industries:
+      "Especialmente crítico en salud privada (datos personales sensibles), fintechs, hospitales y cualquier organización que maneje información regulada.",
+  },
+  {
+    id: "desarrollo",
+    name: "Desarrollo de Software a la Medida",
+    icon: Code2,
+    tagline: "Sistemas que escalan con tu operación desde el primer deploy.",
+    description:
+      "Construimos sistemas web, móviles e integraciones adaptados a procesos específicos de tu negocio. Stack moderno: Python, TypeScript, Next.js, Node.js, FastAPI, PostgreSQL. Metodología ágil con entregas incrementales y código documentado listo para producción.",
     capabilities: [
       "Aplicaciones web full-stack (front + back + base de datos)",
       "APIs REST y GraphQL con autenticación y rate limiting",
       "Integraciones con sistemas existentes (ERPs, CRMs, sistemas legacy)",
       "Dashboards de gestión y reportería en tiempo real",
-      "Migraciones de software heredado a arquitectura moderna",
       "Aplicaciones móviles híbridas (React Native)",
+      "Migraciones de software heredado a arquitectura moderna",
     ],
     industries:
       "Salud privada, fintech, logística, retail, educación, manufactura.",
   },
   {
-    id: "ciberseguridad",
-    name: "Ciberseguridad y auditoría",
-    icon: ShieldAlert,
-    tagline: "Encontramos las vulnerabilidades antes que un atacante.",
+    id: "ia-agentes",
+    name: "Inteligencia Artificial y Agentes",
+    icon: Bot,
+    tagline: "IA que trabaja dentro de tu operación, no como demo externa.",
     description:
-      "Auditamos aplicaciones web, APIs y arquitecturas en busca de fallos de seguridad. Detectamos vulnerabilidades comunes (OWASP Top 10), problemas de autenticación, lógica de negocio explotable, y filtraciones de datos. Entregamos reportes accionables con severidad CVSS y plan de remediación.",
+      "Integramos modelos de lenguaje y agentes de IA en procesos reales de negocio. Desde automatización de flujos administrativos hasta chatbots especializados con acceso a tu base de datos. Usamos Claude (Anthropic) y OpenAI con arquitectura responsable y auditable.",
     capabilities: [
-      "Pentesting de aplicaciones web y APIs",
-      "Auditoría de código fuente",
-      "Análisis de arquitectura y modelo de amenazas",
-      "Pruebas de IDOR, race conditions, lógica de negocio",
-      "Revisión de cumplimiento (LFPDPPP, ISO 27001 base)",
-      "Hardening de infraestructura cloud (AWS, Cloudflare)",
+      "Agentes inteligentes con acceso a APIs y bases de datos internas",
+      "Chatbots y asistentes para atención al cliente o equipos internos",
+      "Automatización de flujos: clasificación, resúmenes y extracción de datos",
+      "Integración con Claude API y OpenAI para casos de uso empresarial",
+      "Pipelines RAG sobre documentación interna de la empresa",
+      "Evaluación responsable de modelos para verticales específicas",
     ],
     industries:
-      "Especialmente crítico en salud privada (datos personales sensibles), fintech, y cualquier organización que maneje información regulada.",
+      "Salud privada (resúmenes de expedientes, asistentes clínicos), legal (revisión de contratos), retail (atención automatizada), fintech (análisis de riesgo).",
   },
   {
     id: "consultoria",
-    name: "Consultoría tecnológica",
+    name: "Consultoría Técnica",
     icon: Compass,
-    tagline: "Dirección clara antes de escribir una línea de código.",
+    tagline: "Dirección técnica antes de que el problema se vuelva caro.",
     description:
-      "Antes de construir, ayudamos a decidir qué construir. Analizamos procesos, evaluamos opciones técnicas, estimamos costos y plazos realistas. Si tu equipo interno construye, los acompañamos como asesor técnico externo. Si tercerizas, te ayudamos a seleccionar y supervisar al proveedor.",
+      "Auditamos arquitecturas existentes, diseñamos estrategias tech para empresas medianas y actuamos como CTO externo cuando necesitas visión técnica sin contratar un equipo completo. Llevamos el mapa cuando tu negocio crece más rápido que tu infraestructura.",
     capabilities: [
-      "Diagnóstico técnico de software existente",
-      "Diseño de arquitectura de sistemas nuevos",
-      "Estimaciones de alcance, plazos y costos (RFP, RFQ)",
-      "Selección y evaluación de proveedores",
-      "Acompañamiento en transformación digital",
-      "Capacitación a equipos internos",
-    ],
-    industries: "Cualquier organización que necesite tomar decisiones técnicas con certeza.",
-  },
-  {
-    id: "mantenimiento",
-    name: "Soporte y mantenimiento",
-    icon: Wrench,
-    tagline: "Aquí cuando lo construimos, y aquí cuando lo necesitas.",
-    description:
-      "El software que construimos sigue funcionando con el tiempo. Ofrecemos contratos de soporte continuo: monitoreo, actualizaciones de seguridad, corrección de bugs, mejoras incrementales, y disponibilidad para emergencias. Sin sorpresas, sin cargos por hora opacos.",
-    capabilities: [
-      "Monitoreo 24/7 con alertas configurables",
-      "Actualizaciones de seguridad y dependencias",
-      "Backups automáticos y plan de recuperación",
-      "Corrección de bugs reportados (SLA por severidad)",
-      "Mejoras y features incrementales mensuales",
-      "Soporte de emergencia con tiempo de respuesta garantizado",
+      "Auditoría de arquitectura de sistemas existentes",
+      "Estrategia tech y roadmap para empresas medianas",
+      "CTO as a Service: acompañamiento técnico mensual",
+      "Evaluación y selección de proveedores de software",
+      "Due diligence técnico para procesos de inversión o adquisición",
+      "Capacitación técnica a equipos internos",
     ],
     industries:
-      "Sistemas críticos donde el downtime cuesta dinero o reputación.",
+      "Empresas medianas en crecimiento, startups buscando escalar, organizaciones que necesitan visión técnica sin director de tecnología en nómina.",
   },
 ];
 
