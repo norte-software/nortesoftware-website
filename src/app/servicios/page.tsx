@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { SITE, PRIMARY_CTA } from "@/lib/constants";
+import { SITE, CONTACT_CTA } from "@/lib/constants";
 
 export const metadata: Metadata = {
   title: "Servicios",
@@ -215,7 +215,7 @@ export default function ServiciosPage() {
 
                       <div className="mt-8 pt-6 border-t border-ice-white/[0.08]">
                         <Link
-                          href={`${PRIMARY_CTA.href}?servicio=${service.id}`}
+                          href={`${CONTACT_CTA.href}?servicio=${service.id}`}
                           className="inline-flex items-center gap-2 text-sm font-medium text-mint-accent hover:gap-3 transition-all duration-300"
                         >
                           Cotizar este servicio
@@ -250,8 +250,8 @@ export default function ServiciosPage() {
               Si no podemos ayudarte, te decimos quién sí.
             </p>
 
-            <Button href={PRIMARY_CTA.href} variant="primary" size="lg">
-              {PRIMARY_CTA.label}
+            <Button href={CONTACT_CTA.href} variant="primary" size="lg">
+              {CONTACT_CTA.label}
               <ArrowRight className="size-4" aria-hidden />
             </Button>
           </div>

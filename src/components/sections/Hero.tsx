@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import { ArrowRight, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { SITE, PRIMARY_CTA, SECONDARY_CTA } from "@/lib/constants";
+import { SITE, PRIMARY_CTA } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 // Lazy load del globo: cobe usa WebGL → solo carga en cliente
@@ -31,7 +31,7 @@ const Globe = dynamic(
  *
  *   [subtítulo]
  *
- *   [CTA primary] [CTA ghost]
+ *   [CTA primary]
  *
  *                  [scroll hint]
  *
@@ -116,9 +116,6 @@ export function Hero() {
                 <Button href={PRIMARY_CTA.href} variant="primary" size="lg">
                   {PRIMARY_CTA.label}
                   <ArrowRight className="size-4" aria-hidden />
-                </Button>
-                <Button href={SECONDARY_CTA.href} variant="ghost" size="lg">
-                  {SECONDARY_CTA.label}
                 </Button>
               </motion.div>
             </motion.div>

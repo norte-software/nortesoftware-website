@@ -31,7 +31,6 @@ export function StackSection() {
             <span className="text-gradient-brand">decisiones honestas.</span>
           </>
         }
-        description="Elegimos herramientas por sus méritos, no por moda. Estas son algunas de las tecnologías con las que trabajamos diariamente."
         align="left"
       />
 

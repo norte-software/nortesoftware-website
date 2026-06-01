@@ -13,7 +13,7 @@ export const SITE = {
   founderRole: "Founder & CTO",
   tagline: "Software confiable, hecho a la medida.",
   taglineSecondary:
-    "Desarrollo y protección de datos en un mismo equipo. Aquí cuando lo construimos, y aquí cuando lo necesitas.",
+    "Desarrollamos y protegemos el software de tu empresa. Desde Chiapas para México.",
   description:
     "Software a la medida con desarrollo y protección de datos en un mismo equipo. Especialización en salud privada en México.",
   url: "https://nortesoftware.dev",
@@ -89,13 +89,18 @@ export const NAV_LINKS = [
 ] as const;
 
 export const PRIMARY_CTA = {
-  label: "Iniciar proyecto",
-  href: "/contacto",
+  label: "Ver productos",
+  href: "/#productos",
 } as const;
 
-export const SECONDARY_CTA = {
-  label: "Solicitar propuesta",
-  href: "/contacto?intent=propuesta",
+/**
+ * CTA de conversión a contacto. Se mantiene separado de PRIMARY_CTA
+ * (que ahora apunta a productos) para Header, menú móvil, footer,
+ * FinalCTA y la página de Servicios.
+ */
+export const CONTACT_CTA = {
+  label: "Iniciar proyecto",
+  href: "/contacto",
 } as const;
 
 /**
@@ -188,30 +193,6 @@ export const PRODUCTS: readonly Product[] = [
     badge: "Disponible ahora",
     url: "https://nortecampo.com",
     cta: "Ir a NorteCampo",
-  },
-  {
-    id: "clinica",
-    name: "Norte Clínica",
-    description:
-      "Sistema SaaS para clínicas y consultorios. Agenda, expediente digital y facturación CFDI.",
-    available: false,
-    badge: "Próximamente",
-  },
-  {
-    id: "comercio",
-    name: "Norte Comercio",
-    description:
-      "Control de inventario y ventas para tiendas con múltiples sucursales.",
-    available: false,
-    badge: "Próximamente",
-  },
-  {
-    id: "taxis",
-    name: "Norte Taxis",
-    description:
-      "Plataforma para sitios de taxis. App pasajero, app taxista y panel de control.",
-    available: false,
-    badge: "Próximamente",
   },
   {
     id: "norteprevent",
@@ -312,12 +293,6 @@ export const INDUSTRIES = [
 
 export const PILLARS = [
   {
-    id: "direccion",
-    name: "Dirección clara",
-    description:
-      "No improvisamos. Cada proyecto inicia con plan, alcance y hitos definidos.",
-  },
-  {
     id: "seguridad",
     name: "Seguridad integrada",
     description:
@@ -334,12 +309,6 @@ export const PILLARS = [
     name: "Continuidad",
     description:
       "Aquí cuando lo construimos. Aquí cuando lo necesitas. Cero abandono post-entrega.",
-  },
-  {
-    id: "especializacion",
-    name: "Especialización",
-    description:
-      "Conocemos las exigencias del sector salud privada y las aplicamos a cada cliente.",
   },
 ] as const;
 
