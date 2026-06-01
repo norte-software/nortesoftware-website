@@ -116,7 +116,7 @@ export function adminNotificationTemplate(
 
               <!-- CTA -->
               <div style="margin-top:32px;text-align:center;">
-                <a href="mailto:${escape(data.email)}?subject=Re: Tu mensaje en Norte Software" style="display:inline-block;padding:12px 24px;background:#34D399;color:#0A1628;text-decoration:none;font-weight:600;border-radius:6px;font-size:15px;">
+                <a href="mailto:${escape(data.email)}?subject=Re: Tu mensaje en Norte Software" style="display:inline-block;padding:12px 24px;background:#C8852A;color:#0A1628;text-decoration:none;font-weight:600;border-radius:6px;font-size:15px;">
                   Responder al cliente
                 </a>
               </div>

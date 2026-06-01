@@ -17,7 +17,7 @@ interface GlobeProps {
  *
  * - Sin sweep radar (eliminado el "dorito girando").
  *
- * - Markers en mint accent con halo + pulse expandiéndose.
+ * - Markers en ámbar con halo + pulse expandiéndose.
  *
  * - Rotación lenta del grid completo (1 vuelta cada 90 segundos)
  *   para sugerir vida sin distraer.
@@ -63,8 +63,8 @@ export function Globe({ className }: GlobeProps) {
           </radialGradient>
 
           <radialGradient id="marker-glow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#34D399" stopOpacity="0.7" />
-            <stop offset="100%" stopColor="#34D399" stopOpacity="0" />
+            <stop offset="0%" stopColor="#C8852A" stopOpacity="0.7" />
+            <stop offset="100%" stopColor="#C8852A" stopOpacity="0" />
           </radialGradient>
         </defs>
 
@@ -84,7 +84,7 @@ export function Globe({ className }: GlobeProps) {
             cy="200"
             r="160"
             fill="url(#sphere-bg)"
-            stroke="#3B82F6"
+            stroke="#2C5282"
             strokeOpacity="0.25"
             strokeWidth="1"
           />
@@ -98,7 +98,7 @@ export function Globe({ className }: GlobeProps) {
               rx={rx}
               ry="160"
               fill="none"
-              stroke="#3B82F6"
+              stroke="#2C5282"
               strokeOpacity="0.08"
               strokeWidth="0.7"
             />
@@ -116,7 +116,7 @@ export function Globe({ className }: GlobeProps) {
                 rx={rx}
                 ry={ry}
                 fill="none"
-                stroke="#3B82F6"
+                stroke="#2C5282"
                 strokeOpacity="0.08"
                 strokeWidth="0.7"
               />
@@ -130,7 +130,7 @@ export function Globe({ className }: GlobeProps) {
             rx="160"
             ry="14"
             fill="none"
-            stroke="#3B82F6"
+            stroke="#2C5282"
             strokeOpacity="0.14"
             strokeWidth="0.8"
           />
@@ -156,7 +156,7 @@ export function Globe({ className }: GlobeProps) {
               cx={marker.x}
               cy={marker.y}
               r={marker.primary ? 4.5 : 3.5}
-              fill="#34D399"
+              fill="#C8852A"
               stroke="#0A1628"
               strokeWidth="1.5"
             />
@@ -165,7 +165,7 @@ export function Globe({ className }: GlobeProps) {
               cy={marker.y}
               r={3}
               fill="none"
-              stroke="#34D399"
+              stroke="#C8852A"
               strokeWidth="1"
               animate={{
                 r: [3, marker.primary ? 18 : 14],
@@ -187,7 +187,7 @@ export function Globe({ className }: GlobeProps) {
           cy="200"
           r="170"
           fill="none"
-          stroke="#3B82F6"
+          stroke="#2C5282"
           strokeOpacity="0.12"
           strokeWidth="1"
           strokeDasharray="2 8"
@@ -197,7 +197,7 @@ export function Globe({ className }: GlobeProps) {
           cy="200"
           r="180"
           fill="none"
-          stroke="#34D399"
+          stroke="#C8852A"
           strokeOpacity="0.18"
           strokeWidth="0.5"
           strokeDasharray="1 6"
