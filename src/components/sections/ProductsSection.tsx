@@ -31,9 +31,10 @@ const PRODUCT_ICONS: Record<string, React.ComponentType<React.SVGProps<SVGSVGEle
  * Sección "Nuestros Productos".
  *
  * Layout:
- *   - Productos disponibles (SecAgent, NorteCampo): cards destacadas ancho
- *     completo, borde ámbar, badge "Disponible" norte-verde con pulso, CTA link externo
- *   - Productos próximamente (1): grid (hasta 3 cols), muted, sin link activo
+ *   - Productos disponibles: cards destacadas ancho completo. El acento
+ *     (badge con pulso + borde, ícono, CTA, línea decorativa) usa
+ *     product.badgeColor, o norte-verde por defecto, vía CSS var --card-accent.
+ *   - Productos próximamente: grid muted, sin link activo (vacío si no hay)
  *
  * Anchor: #productos (para nav link "Productos" → /#productos)
  */
@@ -72,8 +73,11 @@ export function ProductsSection() {
           {PRODUCTS.map((product) => {
             if (!product.available) return null;
 
-            // TypeScript: aquí product es AvailableProduct → .url y .cta existen
+            // TypeScript: aquí product es AvailableProduct → .url, .cta, .badgeColor
             const Icon = PRODUCT_ICONS[product.id];
+            // Acento de la card: badgeColor del producto o norte-verde por defecto.
+            // Se expone como CSS var para usarlo en badge y chrome (incl. hover/focus).
+            const accent = product.badgeColor ?? "var(--color-norte-verde)";
 
             return (
               <motion.div
@@ -91,40 +95,41 @@ export function ProductsSection() {
                   href={product.url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  style={{ "--card-accent": accent } as React.CSSProperties}
                   className={cn(
                     "group flex flex-col md:flex-row md:items-center gap-8",
                     "p-8 md:p-10 rounded-3xl relative overflow-hidden",
-                    "bg-navy-mid/40 border border-mint-accent/30",
-                    "hover:bg-navy-mid/60 hover:border-mint-accent/60",
+                    "bg-navy-mid/40 border border-[var(--card-accent)]/30",
+                    "hover:bg-navy-mid/60 hover:border-[var(--card-accent)]/60",
                     "transition-all duration-500 ease-out",
-                    "hover:shadow-[0_24px_64px_-16px_rgba(200,133,42,0.2)]",
+                    "hover:shadow-[0_24px_64px_-16px_color-mix(in_oklab,var(--card-accent)_20%,transparent)]",
                     "focus-visible:outline-none focus-visible:ring-2",
-                    "focus-visible:ring-mint-accent focus-visible:ring-offset-4",
+                    "focus-visible:ring-[var(--card-accent)] focus-visible:ring-offset-4",
                     "focus-visible:ring-offset-navy-deep",
                   )}
                 >
                   {/* Línea decorativa superior */}
                   <div
                     aria-hidden
-                    className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-mint-accent/70 to-transparent"
+                    className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[var(--card-accent)]/70 to-transparent"
                   />
 
                   {/* Contenido principal */}
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-6">
                       {Icon && (
-                        <div className="size-12 rounded-xl bg-mint-accent/10 border border-mint-accent/25 flex items-center justify-center">
+                        <div className="size-12 rounded-xl bg-[var(--card-accent)]/10 border border-[var(--card-accent)]/25 flex items-center justify-center">
                           <Icon
-                            className="size-5 text-mint-accent"
+                            className="size-5 text-[var(--card-accent)]"
                             strokeWidth={1.75}
                             aria-hidden
                           />
                         </div>
                       )}
-                      <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-norte-verde/15 text-norte-verde border border-norte-verde/25">
+                      <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-[var(--card-accent)]/15 text-[var(--card-accent)] border border-[var(--card-accent)]/25">
                         <span
                           aria-hidden
-                          className="size-1.5 rounded-full bg-norte-verde animate-pulse"
+                          className="size-1.5 rounded-full bg-[var(--card-accent)] animate-pulse"
                         />
                         {product.badge}
                       </span>
@@ -139,7 +144,7 @@ export function ProductsSection() {
                   </div>
 
                   {/* CTA */}
-                  <div className="shrink-0 flex items-center gap-2 text-sm font-semibold text-mint-accent group-hover:gap-3 transition-all duration-300 whitespace-nowrap">
+                  <div className="shrink-0 flex items-center gap-2 text-sm font-semibold text-[var(--card-accent)] group-hover:gap-3 transition-all duration-300 whitespace-nowrap">
                     {product.cta}
                     <ArrowUpRight
                       className="size-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"

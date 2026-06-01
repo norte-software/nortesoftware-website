@@ -158,6 +158,8 @@ export interface AvailableProduct {
   badge: string;
   url: string;
   cta: string;
+  /** Color de acento (hex) para badge y chrome de la card. Default: norte-verde. */
+  badgeColor?: string;
 }
 
 export interface ComingSoonProduct {
@@ -200,8 +202,11 @@ export const PRODUCTS: readonly Product[] = [
     name: "NortePrevent",
     description:
       "Sistema de detección temprana de incendios forestales y deforestación ilegal para gobiernos y organizaciones.",
-    available: false,
-    badge: "Próximamente",
+    available: true,
+    badge: "Live",
+    url: "https://norteprevent.com",
+    cta: "Ver NortePrevent",
+    badgeColor: "#D4A017",
   },
 ];
 
