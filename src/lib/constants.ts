@@ -40,7 +40,7 @@ export const SITE = {
   brandTagline: "El norte de tu tecnología.",
   brandSlogan: "Código que resiste. Dirección que guía.",
   brandPromise:
-    "Construimos software con dirección clara y seguridad incluida desde el primer commit.",
+    "Construimos con dirección. Entregamos lo que prometemos. Sin ruido.",
 
   // Dirección legal
   address: {
@@ -297,19 +297,19 @@ export const PILLARS = [
     id: "seguridad",
     name: "Seguridad integrada",
     description:
-      "Protección de datos desde la primera línea de código, no como parche al final.",
+      "Hacemos pentesting. Sabemos cómo se rompen las cosas. Por eso las construimos de otra manera desde el inicio.",
   },
   {
     id: "transparencia",
     name: "Transparencia",
     description:
-      "Reportes claros, accesos visibles, decisiones documentadas. Ves lo que hacemos.",
+      "Sin informes de 50 páginas que no dicen nada. Lo que importa, directo y documentado.",
   },
   {
     id: "continuidad",
     name: "Continuidad",
     description:
-      "Aquí cuando lo construimos. Aquí cuando lo necesitas. Cero abandono post-entrega.",
+      "No desaparecemos después del launch. Tu software vive — nosotros lo acompañamos.",
   },
 ] as const;
 

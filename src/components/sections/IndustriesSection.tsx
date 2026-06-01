@@ -66,7 +66,7 @@ export function IndustriesSection() {
       <SectionHeader
         eyebrow="Industrias"
         title="A quién servimos."
-        description="Nacimos en salud privada. Crecemos en cualquier industria que necesite tecnología seria."
+        description="De hospitales a campos de cultivo y salas de gobierno. Si el problema es real, Norte lo trabaja."
         align="left"
       />
 
@@ -106,13 +106,6 @@ export function IndustriesSection() {
             />
 
             <div className="relative">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-mint-accent/15 border border-mint-accent/30 mb-8">
-                <span className="size-1.5 rounded-full bg-mint-accent animate-pulse" />
-                <span className="text-xs font-medium text-mint-accent tracking-wide uppercase">
-                  Especialización principal
-                </span>
-              </div>
-
               {PrimaryIcon && (
                 <PrimaryIcon
                   className="size-12 text-mint-accent mb-6"
