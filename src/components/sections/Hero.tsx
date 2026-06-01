@@ -106,6 +106,9 @@ export function Hero() {
                   {PRIMARY_CTA.label}
                   <ArrowRight className="size-4" aria-hidden />
                 </Button>
+                <Button href="/servicios" variant="secondary" size="lg">
+                  Ver servicios
+                </Button>
               </motion.div>
             </motion.div>
           </div>
