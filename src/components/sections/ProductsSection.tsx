@@ -151,8 +151,8 @@ export function ProductsSection() {
             );
           })}
 
-          {/* ── Productos próximamente (grid 3 cols) ── */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+          {/* ── Productos próximamente (ancho completo, igual que disponibles) ── */}
+          <div className="grid grid-cols-1 gap-4 md:gap-6">
             {PRODUCTS.map((product, i) => {
               if (product.available) return null;
 
@@ -176,7 +176,7 @@ export function ProductsSection() {
                     },
                   }}
                   className={cn(
-                    "p-7 rounded-3xl",
+                    "p-8 md:p-10 rounded-3xl",
                     "bg-navy-mid/20 border border-ice-white/[0.06]",
                   )}
                 >
@@ -199,7 +199,7 @@ export function ProductsSection() {
                   <h3 className="font-display text-xl font-bold text-ice-white/45 mb-3">
                     {product.name}
                   </h3>
-                  <p className="text-ice-white/30 text-sm leading-relaxed text-pretty">
+                  <p className="text-ice-white/30 text-sm leading-relaxed text-pretty max-w-2xl">
                     {product.description}
                   </p>
                 </motion.div>
