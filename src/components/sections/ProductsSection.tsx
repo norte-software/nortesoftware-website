@@ -4,9 +4,11 @@ import { motion } from "motion/react";
 import Link from "next/link";
 import {
   ShieldAlert,
+  Sprout,
   Heart,
   ShoppingBag,
   Car,
+  Flame,
   ArrowUpRight,
   Clock,
 } from "lucide-react";
@@ -18,16 +20,20 @@ import { cn } from "@/lib/utils";
 
 /**
  * Mapa de íconos por producto.
- * secagent  → ShieldAlert (seguridad)
- * clinica   → Heart       (salud)
- * comercio  → ShoppingBag (retail)
- * taxis     → Car         (transporte)
+ * secagent     → ShieldAlert (seguridad)
+ * nortecampo   → Sprout      (agro)
+ * clinica      → Heart       (salud)
+ * comercio     → ShoppingBag (retail)
+ * taxis        → Car         (transporte)
+ * norteprevent → Flame       (incendios / prevención)
  */
 const PRODUCT_ICONS: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
   secagent: ShieldAlert,
+  nortecampo: Sprout,
   clinica: Heart,
   comercio: ShoppingBag,
   taxis: Car,
+  norteprevent: Flame,
 };
 
 /**
@@ -41,6 +47,10 @@ const PRODUCT_ICONS: Record<string, React.ComponentType<React.SVGProps<SVGSVGEle
  * Anchor: #productos (para nav link "Productos" → /#productos)
  */
 export function ProductsSection() {
+  // Productos disponibles que preceden al grupo "próximamente" en el array
+  // (van primero por convención). Sirve para reiniciar el stagger del grid en 0.
+  const availableCount = PRODUCTS.filter((product) => product.available).length;
+
   return (
     <Section anchor="productos">
       <SectionHeader
@@ -157,7 +167,7 @@ export function ProductsSection() {
 
               // TypeScript: aquí product es ComingSoonProduct → sin .url ni .cta
               const Icon = PRODUCT_ICONS[product.id];
-              const comingSoonIndex = i - 1; // offset por el primero disponible
+              const comingSoonIndex = i - availableCount; // offset por los disponibles
 
               return (
                 <motion.div

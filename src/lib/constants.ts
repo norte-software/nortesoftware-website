@@ -180,6 +180,16 @@ export const PRODUCTS: readonly Product[] = [
     cta: "Probar SecAgent",
   },
   {
+    id: "nortecampo",
+    name: "NorteCampo",
+    description:
+      "SaaS de monitoreo global agrícola para productores de México y LATAM. Analiza NDVI, clima, humedad del suelo y riesgo de incendio.",
+    available: true,
+    badge: "Disponible ahora",
+    url: "https://nortecampo.com",
+    cta: "Ir a NorteCampo",
+  },
+  {
     id: "clinica",
     name: "Norte Clínica",
     description:
@@ -200,6 +210,14 @@ export const PRODUCTS: readonly Product[] = [
     name: "Norte Taxis",
     description:
       "Plataforma para sitios de taxis. App pasajero, app taxista y panel de control.",
+    available: false,
+    badge: "Próximamente",
+  },
+  {
+    id: "norteprevent",
+    name: "NortePrevent",
+    description:
+      "Sistema de detección temprana de incendios forestales y deforestación ilegal para gobiernos y organizaciones.",
     available: false,
     badge: "Próximamente",
   },
