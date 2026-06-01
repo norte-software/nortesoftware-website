@@ -53,7 +53,7 @@ export function ProductsSection() {
             <span className="text-gradient-brand">disponible ahora.</span>
           </>
         }
-        description="Herramientas especializadas para industrias mexicanas. Construidas con el mismo estándar que aplicamos en cada proyecto de cliente."
+        description="No solo construimos para clientes. También construimos para México."
         align="left"
       />
 

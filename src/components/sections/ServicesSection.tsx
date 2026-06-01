@@ -45,7 +45,7 @@ export function ServicesSection() {
             <span className="text-gradient-brand">un mismo equipo.</span>
           </>
         }
-        description="Construimos, protegemos, asesoramos y acompañamos. Sin pasarte de proveedor en proveedor."
+        description="Un equipo para todo el ciclo. Sin intermediarios."
         align="left"
       />
 
