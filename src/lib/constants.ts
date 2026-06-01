@@ -11,11 +11,11 @@ export const SITE = {
   legalName: "Norte Software S.A. de C.V.",
   founderName: "Christian Noé Ramos López",
   founderRole: "Founder & CTO",
-  tagline: "Software confiable, hecho a la medida.",
+  tagline: "El norte de tu tecnología.",
   taglineSecondary:
-    "Desarrollamos y protegemos el software de tu empresa. Desde Chiapas para México.",
+    "Construimos software que resiste. Desde Chiapas para México y LATAM.",
   description:
-    "Software a la medida con desarrollo y protección de datos en un mismo equipo. Especialización en salud privada en México.",
+    "Norte Software construye productos y servicios de tecnología para industrias mexicanas. Ciberseguridad, desarrollo, IA y consultoría.",
   url: "https://nortesoftware.dev",
 
   // Emails diferenciados — usar el correcto según contexto público vs privado
@@ -71,8 +71,9 @@ export const BRAND_COLORS = {
   navyDeep: "#0A1628",
   navyMid: "#0F2040",
   norteBlue: "#1A4ABA",
-  electricBlue: "#3B82F6",
-  mintAccent: "#34D399",
+  electricBlue: "#2C5282",
+  mintAccent: "#C8852A",
+  norteVerde: "#2D6A4F",
   iceWhite: "#F0F4FF",
 } as const;
 

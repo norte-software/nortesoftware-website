@@ -25,7 +25,6 @@ const Globe = dynamic(
  *
  * Composición:
  *
- *   [eyebrow]
  *   HEADLINE GRANDE                    [GLOBO]
  *   con segunda línea en gradiente     terráqueo
  *
@@ -71,16 +70,6 @@ export function Hero() {
                 visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
               }}
             >
-              <motion.p
-                variants={{
-                  hidden: { opacity: 0, y: 12 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-                }}
-                className="font-display text-electric-blue text-sm md:text-base tracking-[0.3em] uppercase mb-6 md:mb-8"
-              >
-                {SITE.brandTagline}
-              </motion.p>
-
               <motion.h1
                 id="hero-title"
                 variants={{
@@ -89,10 +78,10 @@ export function Hero() {
                 }}
                 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.25rem] font-bold text-balance leading-[1.02] mb-6 md:mb-8"
               >
-                Software confiable,
+                El norte de tu
                 <br />
                 <span className="text-gradient-brand">
-                  hecho a la medida.
+                  tecnología.
                 </span>
               </motion.h1>
 

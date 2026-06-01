@@ -64,15 +64,9 @@ export function IndustriesSection() {
       />
 
       <SectionHeader
-        eyebrow="A quién servimos"
-        title={
-          <>
-            Especialistas en <span className="text-gradient-brand">salud privada</span>.
-            <br />
-            Versátiles para todo lo demás.
-          </>
-        }
-        description="Nuestro nicho principal son las clínicas y hospitales privados de México. Pero las reglas que aprendemos en salud nos hacen mejores en cualquier industria."
+        eyebrow="Industrias"
+        title="A quién servimos."
+        description="Nacimos en salud privada. Crecemos en cualquier industria que necesite tecnología seria."
         align="left"
       />
 
