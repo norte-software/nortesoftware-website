@@ -10,8 +10,9 @@
   --color-navy-deep: #0A1628;
   --color-navy-mid: #0F2040;
   --color-norte-blue: #1A4ABA;
-  --color-electric-blue: #3B82F6;
-  --color-mint-accent: #34D399;
+  --color-electric-blue: #2C5282; /* Norte Blue profundo */
+  --color-mint-accent: #C8852A; /* Norte Ámbar — acentos, hovers, CTAs secundarios */
+  --color-norte-verde: #2D6A4F; /* Verde — badges "Disponible / Live" */
   --color-ice-white: #F0F4FF;
 
   /* Tipografía */
@@ -19,9 +20,9 @@
   --font-sans: var(--font-sans), "DM Sans", system-ui, sans-serif;
 
   /* Sombras con glow azul (firma de marca) */
-  --shadow-glow-sm: 0 0 24px -4px rgba(59, 130, 246, 0.25);
-  --shadow-glow-md: 0 0 48px -8px rgba(59, 130, 246, 0.35);
-  --shadow-glow-lg: 0 0 96px -16px rgba(59, 130, 246, 0.45);
+  --shadow-glow-sm: 0 0 24px -4px rgba(44, 82, 130, 0.25);
+  --shadow-glow-md: 0 0 48px -8px rgba(44, 82, 130, 0.35);
+  --shadow-glow-lg: 0 0 96px -16px rgba(44, 82, 130, 0.45);
 
   /* Easings refinados */
   --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
@@ -146,7 +147,7 @@
 
 /* Patrón de puntos sutil (firma visual de la marca) */
 @utility bg-dot-grid {
-  background-image: radial-gradient(circle, rgba(59, 130, 246, 0.15) 1px, transparent 1px);
+  background-image: radial-gradient(circle, rgba(44, 82, 130, 0.15) 1px, transparent 1px);
   background-size: 24px 24px;
   background-position: 0 0;
 }

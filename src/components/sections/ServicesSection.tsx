@@ -83,7 +83,7 @@ export function ServicesSection() {
                     "bg-navy-mid/40 border border-ice-white/[0.06]",
                     "hover:bg-navy-mid/60 hover:border-mint-accent/30",
                     "transition-all duration-500 ease-out",
-                    "hover:shadow-[0_24px_64px_-16px_rgba(59,130,246,0.18)]",
+                    "hover:shadow-[0_24px_64px_-16px_rgba(44,82,130,0.18)]",
                     "focus-visible:outline-none focus-visible:ring-2",
                     "focus-visible:ring-mint-accent focus-visible:ring-offset-4",
                     "focus-visible:ring-offset-navy-deep",

@@ -32,7 +32,7 @@ const PRODUCT_ICONS: Record<string, React.ComponentType<React.SVGProps<SVGSVGEle
  *
  * Layout:
  *   - Productos disponibles (SecAgent, NorteCampo): cards destacadas ancho
- *     completo, borde mint-accent, badge con pulso, CTA link externo
+ *     completo, borde ámbar, badge "Disponible" norte-verde con pulso, CTA link externo
  *   - Productos próximamente (1): grid (hasta 3 cols), muted, sin link activo
  *
  * Anchor: #productos (para nav link "Productos" → /#productos)
@@ -97,7 +97,7 @@ export function ProductsSection() {
                     "bg-navy-mid/40 border border-mint-accent/30",
                     "hover:bg-navy-mid/60 hover:border-mint-accent/60",
                     "transition-all duration-500 ease-out",
-                    "hover:shadow-[0_24px_64px_-16px_rgba(52,211,153,0.2)]",
+                    "hover:shadow-[0_24px_64px_-16px_rgba(200,133,42,0.2)]",
                     "focus-visible:outline-none focus-visible:ring-2",
                     "focus-visible:ring-mint-accent focus-visible:ring-offset-4",
                     "focus-visible:ring-offset-navy-deep",
@@ -121,10 +121,10 @@ export function ProductsSection() {
                           />
                         </div>
                       )}
-                      <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-mint-accent/15 text-mint-accent border border-mint-accent/25">
+                      <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-norte-verde/15 text-norte-verde border border-norte-verde/25">
                         <span
                           aria-hidden
-                          className="size-1.5 rounded-full bg-mint-accent animate-pulse"
+                          className="size-1.5 rounded-full bg-norte-verde animate-pulse"
                         />
                         {product.badge}
                       </span>

@@ -43,13 +43,13 @@ type ButtonProps = ButtonAsButton | ButtonAsLink;
 const variantClasses: Record<Variant, string> = {
   primary: cn(
     "bg-mint-accent text-navy-deep font-semibold",
-    "hover:bg-mint-accent/90 hover:shadow-[0_0_32px_-8px_rgba(52,211,153,0.6)]",
+    "hover:bg-mint-accent/90 hover:shadow-[0_0_32px_-8px_rgba(200,133,42,0.6)]",
     "active:scale-[0.98]",
   ),
   secondary: cn(
     "border-2 border-mint-accent/80 text-mint-accent bg-transparent",
     "hover:bg-mint-accent hover:text-navy-deep",
-    "hover:shadow-[0_0_32px_-8px_rgba(52,211,153,0.4)]",
+    "hover:shadow-[0_0_32px_-8px_rgba(200,133,42,0.4)]",
     "active:scale-[0.98]",
   ),
   ghost: cn(

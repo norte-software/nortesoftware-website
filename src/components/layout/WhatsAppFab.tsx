@@ -13,14 +13,14 @@ import { WHATSAPP_URL, SITE } from "@/lib/constants";
  * - Aparece en TODAS las páginas (mounted en SiteShell, no en cada page)
  * - Animación de entrada después de 1.5s para no competir con el primer
  *   render del hero (delight, no intrusivo)
- * - Pulse halo verde sutil para llamar atención sin ser invasivo
+ * - Pulse halo ámbar sutil para llamar atención sin ser invasivo
  * - Tooltip "Escríbenos por WhatsApp" al hover (desktop)
  * - Respeta prefers-reduced-motion (no anima si el usuario lo desactiva)
  * - aria-label descriptivo + abre en nueva pestaña con noopener
  *
- * Estética: verde de WhatsApp (#25D366) NO se usa — eso choca con la
- * paleta de marca. En su lugar, mint-accent del sistema, que es muy
- * cercano y mantiene cohesión visual.
+ * Estética: usa mint-accent (Norte Ámbar tras el rebrand), el acento de
+ * marca para CTAs secundarios. No usa el verde de WhatsApp (#25D366) para
+ * mantener cohesión con la paleta.
  */
 export function WhatsAppFab() {
   const [isMounted, setIsMounted] = useState(false);
@@ -65,7 +65,7 @@ export function WhatsAppFab() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`Escribir a ${SITE.name} por WhatsApp al ${SITE.phone.display}`}
-            className="relative inline-flex items-center justify-center size-14 rounded-full bg-mint-accent text-navy-deep shadow-[0_8px_32px_-4px_rgba(52,211,153,0.45)] hover:shadow-[0_12px_48px_-4px_rgba(52,211,153,0.65)] hover:scale-105 active:scale-95 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint-accent focus-visible:ring-offset-2 focus-visible:ring-offset-navy-deep"
+            className="relative inline-flex items-center justify-center size-14 rounded-full bg-mint-accent text-navy-deep shadow-[0_8px_32px_-4px_rgba(200,133,42,0.45)] hover:shadow-[0_12px_48px_-4px_rgba(200,133,42,0.65)] hover:scale-105 active:scale-95 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-mint-accent focus-visible:ring-offset-2 focus-visible:ring-offset-navy-deep"
           >
             <SocialIcon iconKey="whatsapp" className="size-6" aria-hidden />
           </a>
