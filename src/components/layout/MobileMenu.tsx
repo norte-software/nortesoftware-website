@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { X } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
-import { NAV_LINKS, PRIMARY_CTA, SITE } from "@/lib/constants";
+import { NAV_LINKS, CONTACT_CTA, SITE } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
 interface MobileMenuProps {
@@ -170,13 +170,13 @@ export function MobileMenu({ isOpen, onClose, onNavigate }: MobileMenuProps) {
                 className="mt-10"
               >
                 <Button
-                  href={PRIMARY_CTA.href}
+                  href={CONTACT_CTA.href}
                   variant="primary"
                   size="md"
                   className="w-full"
                   onClick={onNavigate}
                 >
-                  {PRIMARY_CTA.label}
+                  {CONTACT_CTA.label}
                   <span aria-hidden>→</span>
                 </Button>
               </motion.div>

@@ -9,7 +9,7 @@ import {
   NAV_LINKS,
   LEGAL_LINKS,
   SOCIAL_LINKS,
-  PRIMARY_CTA,
+  CONTACT_CTA,
 } from "@/lib/constants";
 
 /**
@@ -140,10 +140,10 @@ export function Footer() {
             </ul>
 
             <Link
-              href={PRIMARY_CTA.href}
+              href={CONTACT_CTA.href}
               className="inline-flex items-center gap-2 mt-6 text-mint-accent text-sm font-medium hover:gap-3 transition-all duration-300"
             >
-              {PRIMARY_CTA.label}
+              {CONTACT_CTA.label}
               <span aria-hidden>→</span>
             </Link>
           </div>
@@ -152,11 +152,37 @@ export function Footer() {
         {/* Divider con gradiente de marca */}
         <div className="divider-brand mt-16 opacity-50" />
 
-        {/* Bottom strip: copyright + legal */}
+        {/* Bottom strip: copyright + productos live + legal */}
         <div className="mt-8 flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-4">
-          <p className="text-xs text-ice-white/45">
-            © {copyrightYear} {SITE.legalName}. Todos los derechos reservados.
-          </p>
+          <div className="flex flex-col gap-2">
+            <p className="text-xs text-ice-white/45">
+              © {copyrightYear} {SITE.legalName}. Todos los derechos reservados.
+            </p>
+
+            {/* Productos live de Norte Software */}
+            <ul className="flex items-center gap-4 text-xs">
+              <li>
+                <a
+                  href="https://nortecampo.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-ice-white/60 hover:text-mint-accent transition-colors duration-200"
+                >
+                  NorteCampo
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://secagent.nortesoftware.dev"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-ice-white/60 hover:text-mint-accent transition-colors duration-200"
+                >
+                  SecAgent
+                </a>
+              </li>
+            </ul>
+          </div>
 
           <ul className="flex items-center gap-6 text-xs">
             {LEGAL_LINKS.map((link) => (

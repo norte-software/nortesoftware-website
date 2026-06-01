@@ -5,9 +5,6 @@ import Link from "next/link";
 import {
   ShieldAlert,
   Sprout,
-  Heart,
-  ShoppingBag,
-  Car,
   Flame,
   ArrowUpRight,
   Clock,
@@ -22,17 +19,11 @@ import { cn } from "@/lib/utils";
  * Mapa de íconos por producto.
  * secagent     → ShieldAlert (seguridad)
  * nortecampo   → Sprout      (agro)
- * clinica      → Heart       (salud)
- * comercio     → ShoppingBag (retail)
- * taxis        → Car         (transporte)
  * norteprevent → Flame       (incendios / prevención)
  */
 const PRODUCT_ICONS: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
   secagent: ShieldAlert,
   nortecampo: Sprout,
-  clinica: Heart,
-  comercio: ShoppingBag,
-  taxis: Car,
   norteprevent: Flame,
 };
 
@@ -40,9 +31,9 @@ const PRODUCT_ICONS: Record<string, React.ComponentType<React.SVGProps<SVGSVGEle
  * Sección "Nuestros Productos".
  *
  * Layout:
- *   - Producto disponible (Norte SecAgent): card destacada ancho completo,
- *     borde mint-accent, badge con pulso, CTA link a secagent.nortesoftware.dev
- *   - Productos próximamente (3): grid 3 columnas, muted, sin link activo
+ *   - Productos disponibles (SecAgent, NorteCampo): cards destacadas ancho
+ *     completo, borde mint-accent, badge con pulso, CTA link externo
+ *   - Productos próximamente (1): grid (hasta 3 cols), muted, sin link activo
  *
  * Anchor: #productos (para nav link "Productos" → /#productos)
  */

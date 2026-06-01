@@ -2,11 +2,9 @@
 
 import { motion } from "motion/react";
 import {
-  Compass,
   ShieldCheck,
   Eye,
   Infinity as InfinityIcon,
-  Crosshair,
 } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
@@ -17,18 +15,14 @@ import { cn } from "@/lib/utils";
 /**
  * Mapa de pilar.id → ícono.
  * Los íconos refuerzan el concepto de cada pilar:
- *   - Compass: dirección clara
  *   - ShieldCheck: seguridad
  *   - Eye: transparencia
  *   - Infinity: continuidad
- *   - Crosshair: especialización
  */
 const PILLAR_ICONS = {
-  direccion: Compass,
   seguridad: ShieldCheck,
   transparencia: Eye,
   continuidad: InfinityIcon,
-  especializacion: Crosshair,
 } as const;
 
 /**
@@ -37,7 +31,7 @@ const PILLAR_ICONS = {
  * Composición:
  *   header asimétrico izquierda
  *   ↓
- *   grid 5 cards (md: 5 cols, mobile: 1 col)
+ *   grid 3 cards (lg: 3 cols, mobile: 1 col)
  *
  * Cada card:
  *   - Número grande "01" en electric-blue (firma editorial)
@@ -54,12 +48,11 @@ export function PillarsSection() {
         eyebrow="Cómo trabajamos"
         title={
           <>
-            Cinco pilares
+            Tres pilares
             <br />
             <span className="text-gradient-brand">que nos definen.</span>
           </>
         }
-        description="No prometemos lo que no podemos cumplir. Estos son los principios con los que arrancamos cada proyecto."
         align="left"
       />
 
@@ -72,7 +65,7 @@ export function PillarsSection() {
             hidden: {},
             visible: { transition: { staggerChildren: 0.08 } },
           }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-px bg-ice-white/[0.04] rounded-3xl overflow-hidden border border-ice-white/[0.04]"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-ice-white/[0.04] rounded-3xl overflow-hidden border border-ice-white/[0.04]"
         >
           {PILLARS.map((pillar, i) => {
             const Icon = PILLAR_ICONS[pillar.id as keyof typeof PILLAR_ICONS];

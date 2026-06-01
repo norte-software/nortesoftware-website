@@ -8,7 +8,7 @@ import { Menu } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { NAV_LINKS, PRIMARY_CTA } from "@/lib/constants";
+import { NAV_LINKS, CONTACT_CTA } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { MobileMenu } from "./MobileMenu";
 
@@ -100,12 +100,12 @@ export function Header() {
 
             <div className="flex items-center gap-3">
               <Button
-                href={PRIMARY_CTA.href}
+                href={CONTACT_CTA.href}
                 variant="secondary"
                 size="sm"
                 className="hidden md:inline-flex"
               >
-                {PRIMARY_CTA.label}
+                {CONTACT_CTA.label}
                 <span aria-hidden>→</span>
               </Button>
 

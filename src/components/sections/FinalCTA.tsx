@@ -6,8 +6,7 @@ import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import {
-  PRIMARY_CTA,
-  SECONDARY_CTA,
+  CONTACT_CTA,
   WHATSAPP_URL,
   SITE,
 } from "@/lib/constants";
@@ -20,7 +19,7 @@ import {
  *   ↓
  *   eyebrow + headline grande + subtítulo
  *   ↓
- *   3 acciones: primary + secondary + WhatsApp
+ *   2 acciones: contacto + WhatsApp
  *
  * Esta es la última oportunidad antes del footer para convertir
  * un visitante en lead. El diseño es deliberadamente diferente
@@ -66,13 +65,9 @@ export function FinalCTA() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center flex-wrap">
-              <Button href={PRIMARY_CTA.href} variant="primary" size="lg">
-                {PRIMARY_CTA.label}
+              <Button href={CONTACT_CTA.href} variant="primary" size="lg">
+                {CONTACT_CTA.label}
                 <ArrowRight className="size-4" aria-hidden />
-              </Button>
-
-              <Button href={SECONDARY_CTA.href} variant="secondary" size="lg">
-                {SECONDARY_CTA.label}
               </Button>
 
               <Button
