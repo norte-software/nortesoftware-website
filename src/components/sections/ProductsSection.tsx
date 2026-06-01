@@ -42,6 +42,9 @@ export function ProductsSection() {
   // Productos disponibles que preceden al grupo "próximamente" en el array
   // (van primero por convención). Sirve para reiniciar el stagger del grid en 0.
   const availableCount = PRODUCTS.filter((product) => product.available).length;
+  // Bloque "próximamente": solo se renderiza si existe al menos un producto
+  // con available: false.
+  const comingSoonProducts = PRODUCTS.filter((product) => !product.available);
 
   return (
     <Section anchor="productos">
@@ -156,7 +159,8 @@ export function ProductsSection() {
             );
           })}
 
-          {/* ── Productos próximamente (ancho completo, igual que disponibles) ── */}
+          {/* ── Productos próximamente: solo se renderiza si hay alguno ── */}
+          {comingSoonProducts.length > 0 && (
           <div className="grid grid-cols-1 gap-4 md:gap-6">
             {PRODUCTS.map((product, i) => {
               if (product.available) return null;
@@ -211,6 +215,7 @@ export function ProductsSection() {
               );
             })}
           </div>
+          )}
         </motion.div>
       </Container>
     </Section>
