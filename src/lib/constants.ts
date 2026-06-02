@@ -199,14 +199,10 @@ export const PRODUCTS: readonly Product[] = [
   },
   {
     id: "norteprevent",
-    name: "NortePrevent",
-    description:
-      "Sistema de detección temprana de incendios forestales y deforestación ilegal para gobiernos y organizaciones.",
-    available: true,
-    badge: "Live",
-    url: "https://norteprevent.com",
-    cta: "Ver NortePrevent",
-    badgeColor: "#D4A017",
+    name: "En desarrollo",
+    description: "Próximo producto Norte.",
+    available: false,
+    badge: "Próximamente",
   },
 ];
 
