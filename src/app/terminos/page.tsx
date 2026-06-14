@@ -21,16 +21,16 @@ export default function TerminosPage() {
   return (
     <section className="py-20 md:py-28">
       <Container size="narrow">
-        <p className="font-display text-electric-blue text-sm tracking-[0.3em] uppercase mb-4">
+        <p className="font-display text-gold text-sm tracking-[0.3em] uppercase mb-4">
           Información legal
         </p>
         <h1 className="font-display text-4xl md:text-5xl font-bold text-balance mb-6">
           Términos y Condiciones
         </h1>
 
-        <div className="my-8 p-5 rounded-lg border border-electric-blue/30 bg-electric-blue/5">
-          <p className="text-sm text-ice-white/80 leading-relaxed">
-            <span className="font-semibold text-electric-blue">
+        <div className="my-8 p-5 rounded-lg border border-gold/30 bg-gold/5">
+          <p className="text-sm text-cream/80 leading-relaxed">
+            <span className="font-semibold text-gold">
               Documento en redacción.
             </span>{" "}
             Estos términos y condiciones serán publicados en su versión
@@ -43,7 +43,7 @@ export default function TerminosPage() {
           <h2 className="font-display text-2xl font-semibold mt-10 mb-4">
             Uso del sitio
           </h2>
-          <p className="text-ice-white/75 leading-relaxed">
+          <p className="text-cream/75 leading-relaxed">
             El acceso y navegación de este sitio web es gratuito. La
             información publicada tiene carácter informativo sobre los
             servicios de {SITE.legalName}, no constituye una oferta
@@ -53,7 +53,7 @@ export default function TerminosPage() {
           <h2 className="font-display text-2xl font-semibold mt-10 mb-4">
             Propiedad intelectual
           </h2>
-          <p className="text-ice-white/75 leading-relaxed">
+          <p className="text-cream/75 leading-relaxed">
             Todos los contenidos del sitio (textos, imágenes, logotipos,
             código) son propiedad de {SITE.legalName} o se utilizan bajo
             licencia. La reproducción total o parcial requiere autorización
@@ -63,7 +63,7 @@ export default function TerminosPage() {
           <h2 className="font-display text-2xl font-semibold mt-10 mb-4">
             Limitación de responsabilidad
           </h2>
-          <p className="text-ice-white/75 leading-relaxed">
+          <p className="text-cream/75 leading-relaxed">
             La información del sitio se proporciona &quot;tal cual&quot;.
             {SITE.legalName} no se hace responsable por decisiones tomadas
             con base exclusiva en la información publicada sin consulta
@@ -73,7 +73,7 @@ export default function TerminosPage() {
           <h2 className="font-display text-2xl font-semibold mt-10 mb-4">
             Jurisdicción
           </h2>
-          <p className="text-ice-white/75 leading-relaxed">
+          <p className="text-cream/75 leading-relaxed">
             Cualquier controversia derivada del uso de este sitio se
             resolverá ante los tribunales competentes de{" "}
             {SITE.address.city}, {SITE.address.state}, México.
@@ -82,11 +82,11 @@ export default function TerminosPage() {
           <h2 className="font-display text-2xl font-semibold mt-10 mb-4">
             Contacto
           </h2>
-          <p className="text-ice-white/75 leading-relaxed">
+          <p className="text-cream/75 leading-relaxed">
             Para preguntas sobre estos términos, escríbenos a{" "}
             <a
               href={`mailto:${SITE.emails.info}`}
-              className="text-mint-accent hover:underline"
+              className="text-gold hover:underline"
             >
               {SITE.emails.info}
             </a>

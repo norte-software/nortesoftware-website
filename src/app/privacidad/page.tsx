@@ -26,16 +26,16 @@ export default function PrivacidadPage() {
   return (
     <section className="py-20 md:py-28">
       <Container size="narrow">
-        <p className="font-display text-electric-blue text-sm tracking-[0.3em] uppercase mb-4">
+        <p className="font-display text-gold text-sm tracking-[0.3em] uppercase mb-4">
           Información legal
         </p>
         <h1 className="font-display text-4xl md:text-5xl font-bold text-balance mb-6">
           Aviso de Privacidad
         </h1>
 
-        <div className="my-8 p-5 rounded-lg border border-electric-blue/30 bg-electric-blue/5">
-          <p className="text-sm text-ice-white/80 leading-relaxed">
-            <span className="font-semibold text-electric-blue">
+        <div className="my-8 p-5 rounded-lg border border-gold/30 bg-gold/5">
+          <p className="text-sm text-cream/80 leading-relaxed">
+            <span className="font-semibold text-gold">
               Documento en redacción.
             </span>{" "}
             Este aviso de privacidad será publicado en su versión definitiva
@@ -51,7 +51,7 @@ export default function PrivacidadPage() {
           <h2 className="font-display text-2xl font-semibold mt-10 mb-4">
             Responsable del tratamiento de datos
           </h2>
-          <p className="text-ice-white/75 leading-relaxed">
+          <p className="text-cream/75 leading-relaxed">
             <strong>{SITE.legalName}</strong>, con domicilio en{" "}
             {SITE.address.short}, es responsable del tratamiento de los datos
             personales que se recaban a través de este sitio web.
@@ -60,7 +60,7 @@ export default function PrivacidadPage() {
           <h2 className="font-display text-2xl font-semibold mt-10 mb-4">
             Datos que recabamos
           </h2>
-          <p className="text-ice-white/75 leading-relaxed">
+          <p className="text-cream/75 leading-relaxed">
             A través del formulario de contacto y los canales habilitados en
             el sitio, recabamos: nombre, correo electrónico, teléfono (si lo
             proporcionas) y el contenido del mensaje. No utilizamos cookies
@@ -70,7 +70,7 @@ export default function PrivacidadPage() {
           <h2 className="font-display text-2xl font-semibold mt-10 mb-4">
             Finalidades
           </h2>
-          <p className="text-ice-white/75 leading-relaxed">
+          <p className="text-cream/75 leading-relaxed">
             Los datos se utilizan únicamente para: responder a la consulta o
             solicitud de cotización, dar seguimiento comercial cuando es
             solicitado, y atender obligaciones legales y fiscales. No
@@ -81,13 +81,13 @@ export default function PrivacidadPage() {
           <h2 className="font-display text-2xl font-semibold mt-10 mb-4">
             Tus derechos ARCO
           </h2>
-          <p className="text-ice-white/75 leading-relaxed">
+          <p className="text-cream/75 leading-relaxed">
             Tienes derecho a Acceder, Rectificar, Cancelar u Oponerte al
             tratamiento de tus datos personales. Para ejercer estos
             derechos, escríbenos a{" "}
             <a
               href={`mailto:${SITE.emails.info}`}
-              className="text-mint-accent hover:underline"
+              className="text-gold hover:underline"
             >
               {SITE.emails.info}
             </a>{" "}

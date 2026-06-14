@@ -1,221 +1,197 @@
 "use client";
 
+import type { ComponentType, CSSProperties, SVGProps } from "react";
 import { motion } from "motion/react";
-import Link from "next/link";
-import {
-  ShieldAlert,
-  Sprout,
-  Flame,
-  ArrowUpRight,
-  Clock,
-} from "lucide-react";
+import { ShieldAlert, Sprout, Flame, ArrowUpRight } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Container } from "@/components/ui/Container";
+import { Accent } from "@/components/ui/Accent";
 import { PRODUCTS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-/**
- * Mapa de íconos por producto.
- * secagent     → ShieldAlert (seguridad)
- * nortecampo   → Sprout      (agro)
- * norteprevent → Flame       (incendios / prevención)
- */
-const PRODUCT_ICONS: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>> = {
+const PRODUCT_ICONS = {
   secagent: ShieldAlert,
   nortecampo: Sprout,
   norteprevent: Flame,
+} as const;
+
+type ProductIconKey = keyof typeof PRODUCT_ICONS;
+
+/** Dato corto y concreto por producto (sub-línea). */
+const PRODUCT_SPEC: Record<string, string> = {
+  secagent: "Detección de amenazas con IA · 24/7",
+  nortecampo: "Monitoreo satelital · NDVI y clima",
 };
 
+/** Verbo + destino para el CTA. */
+const PRODUCT_CTA: Record<string, string> = {
+  secagent: "Abrir SecAgent",
+  nortecampo: "Abrir NorteCampo",
+};
+
+const reveal = {
+  hidden: { opacity: 0, y: 8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.19, 1, 0.22, 1] as const },
+  },
+};
+
+const isProductIconKey = (id: string): id is ProductIconKey =>
+  id in PRODUCT_ICONS;
+
+const getIcon = (
+  id: string,
+): ComponentType<SVGProps<SVGSVGElement>> | null =>
+  isProductIconKey(id) ? PRODUCT_ICONS[id] : null;
+
 /**
- * Sección "Nuestros Productos".
- *
- * Layout:
- *   - Productos disponibles: cards destacadas ancho completo. El acento
- *     (badge con pulso + borde, ícono, CTA, línea decorativa) usa
- *     product.badgeColor, o norte-verde por defecto, vía CSS var --card-accent.
- *   - Productos próximamente: grid muted, sin link activo (vacío si no hay)
- *
- * Anchor: #productos (para nav link "Productos" → /#productos)
+ * Productos — fichas de catálogo. Panel verde con bisel superior, estado con
+ * punto de señal (sin "LIVE" de terminal), nombre display, dato concreto y
+ * CTA verbo+destino. Productos reales = prueba de capacidad, no promesas.
  */
 export function ProductsSection() {
-  // Productos disponibles que preceden al grupo "próximamente" en el array
-  // (van primero por convención). Sirve para reiniciar el stagger del grid en 0.
-  const availableCount = PRODUCTS.filter((product) => product.available).length;
-  // Bloque "próximamente": solo se renderiza si existe al menos un producto
-  // con available: false.
   const comingSoonProducts = PRODUCTS.filter((product) => !product.available);
 
   return (
     <Section anchor="productos">
       <SectionHeader
-        eyebrow="Nuestros Productos"
+        eyebrow="Nuestros productos"
         title={
           <>
-            Software construido por Norte,
-            <br />
-            <span className="text-gradient-brand">disponible ahora.</span>
+            No solo construimos para clientes.{" "}
+            <Accent>También para México</Accent>.
           </>
         }
-        description="No solo construimos para clientes. También construimos para México."
-        align="left"
+        description="Productos propios de Norte, en producción hoy. La mejor prueba de lo que podemos construir para ti."
       />
 
-      <Container size="wide" className="mt-16 md:mt-20">
+      <Container size="wide" className="mt-14 md:mt-20">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.1 } },
-          }}
-          className="flex flex-col gap-4 md:gap-6"
+          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+          className="flex flex-col gap-5 md:gap-6"
         >
-          {/* ── Productos disponibles (featured) ── */}
           {PRODUCTS.map((product) => {
             if (!product.available) return null;
 
-            // TypeScript: aquí product es AvailableProduct → .url, .cta, .badgeColor
-            const Icon = PRODUCT_ICONS[product.id];
-            // Acento de la card: badgeColor del producto o norte-verde por defecto.
-            // Se expone como CSS var para usarlo en badge y chrome (incl. hover/focus).
-            const accent = product.badgeColor ?? "var(--color-norte-verde)";
+            const Icon = getIcon(product.id);
+            const accent = product.badgeColor ?? "var(--color-gold)";
+            const spec = PRODUCT_SPEC[product.id];
+            const cta = PRODUCT_CTA[product.id] ?? product.cta;
 
             return (
-              <motion.div
+              <motion.a
                 key={product.id}
-                variants={{
-                  hidden: { opacity: 0, y: 24 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.6, ease: [0.19, 1, 0.22, 1] },
-                  },
-                }}
+                href={product.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${cta} (abre en una pestaña nueva)`}
+                variants={reveal}
+                style={{ "--card-accent": accent } as CSSProperties}
+                className={cn(
+                  "group relative grid gap-8 rounded-2xl border border-hairline bg-green-panel p-8",
+                  "border-t-[1px] [border-top-color:var(--color-hairline-strong)]",
+                  "transition-colors duration-300 hover:bg-green-700 hover:border-[color-mix(in_oklab,var(--card-accent)_45%,var(--color-hairline-strong))]",
+                  "md:grid-cols-12 md:gap-10 md:p-10",
+                )}
               >
-                <Link
-                  href={product.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{ "--card-accent": accent } as React.CSSProperties}
-                  className={cn(
-                    "group flex flex-col md:flex-row md:items-center gap-8",
-                    "p-8 md:p-10 rounded-3xl relative overflow-hidden",
-                    "bg-navy-mid/40 border border-[var(--card-accent)]/30",
-                    "hover:bg-navy-mid/60 hover:border-[var(--card-accent)]/60",
-                    "transition-all duration-500 ease-out",
-                    "hover:shadow-[0_24px_64px_-16px_color-mix(in_oklab,var(--card-accent)_20%,transparent)]",
-                    "focus-visible:outline-none focus-visible:ring-2",
-                    "focus-visible:ring-[var(--card-accent)] focus-visible:ring-offset-4",
-                    "focus-visible:ring-offset-navy-deep",
-                  )}
-                >
-                  {/* Línea decorativa superior */}
-                  <div
-                    aria-hidden
-                    className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-[var(--card-accent)]/70 to-transparent"
-                  />
-
-                  {/* Contenido principal */}
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-6">
-                      {Icon && (
-                        <div className="size-12 rounded-xl bg-[var(--card-accent)]/10 border border-[var(--card-accent)]/25 flex items-center justify-center">
-                          <Icon
-                            className="size-5 text-[var(--card-accent)]"
-                            strokeWidth={1.75}
-                            aria-hidden
-                          />
-                        </div>
-                      )}
-                      <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-[var(--card-accent)]/15 text-[var(--card-accent)] border border-[var(--card-accent)]/25">
-                        <span
-                          aria-hidden
-                          className="size-1.5 rounded-full bg-[var(--card-accent)] animate-pulse"
-                        />
-                        {product.badge}
-                      </span>
-                    </div>
-
-                    <h3 className="font-display text-3xl md:text-4xl font-bold text-ice-white mb-3">
-                      {product.name}
-                    </h3>
-                    <p className="text-ice-white/65 leading-relaxed text-pretty max-w-2xl">
-                      {product.description}
-                    </p>
-                  </div>
-
-                  {/* CTA */}
-                  <div className="shrink-0 flex items-center gap-2 text-sm font-semibold text-[var(--card-accent)] group-hover:gap-3 transition-all duration-300 whitespace-nowrap">
-                    {product.cta}
-                    <ArrowUpRight
-                      className="size-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300"
+                {/* Identidad + estado */}
+                <div className="md:col-span-5">
+                  <div className="flex items-center gap-2.5">
+                    <span
                       aria-hidden
+                      className="size-2 shrink-0 rounded-full bg-[var(--card-accent)]"
                     />
-                  </div>
-                </Link>
-              </motion.div>
-            );
-          })}
-
-          {/* ── Productos próximamente: solo se renderiza si hay alguno ── */}
-          {comingSoonProducts.length > 0 && (
-          <div className="grid grid-cols-1 gap-4 md:gap-6">
-            {PRODUCTS.map((product, i) => {
-              if (product.available) return null;
-
-              // TypeScript: aquí product es ComingSoonProduct → sin .url ni .cta
-              const Icon = PRODUCT_ICONS[product.id];
-              const comingSoonIndex = i - availableCount; // offset por los disponibles
-
-              return (
-                <motion.div
-                  key={product.id}
-                  variants={{
-                    hidden: { opacity: 0, y: 24 },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      transition: {
-                        duration: 0.6,
-                        ease: [0.19, 1, 0.22, 1],
-                        delay: Math.max(0, comingSoonIndex) * 0.08,
-                      },
-                    },
-                  }}
-                  className={cn(
-                    "p-8 md:p-10 rounded-3xl",
-                    "bg-navy-mid/20 border border-ice-white/[0.06]",
-                  )}
-                >
-                  <div className="flex items-start justify-between gap-4 mb-5">
-                    {Icon && (
-                      <div className="size-11 rounded-xl bg-ice-white/[0.04] border border-ice-white/[0.08] flex items-center justify-center">
-                        <Icon
-                          className="size-5 text-ice-white/25"
-                          strokeWidth={1.75}
-                          aria-hidden
-                        />
-                      </div>
-                    )}
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-ice-white/[0.04] text-ice-white/35 border border-ice-white/[0.08]">
-                      <Clock className="size-3" aria-hidden />
+                    <span className="text-xs font-semibold uppercase tracking-[0.15em] text-cream/55">
                       {product.badge}
                     </span>
                   </div>
 
-                  <h3 className="font-display text-xl font-bold text-ice-white/45 mb-3">
+                  <h3 className="mt-6 flex items-start gap-4 font-display text-3xl font-bold leading-[0.98] tracking-[-0.02em] text-cream md:text-4xl">
                     {product.name}
+                    {Icon && (
+                      <Icon
+                        className="mt-1 size-6 shrink-0 text-[var(--card-accent)]"
+                        strokeWidth={1.5}
+                        aria-hidden
+                      />
+                    )}
                   </h3>
-                  <p className="text-ice-white/30 text-sm leading-relaxed text-pretty max-w-2xl">
+
+                  {spec && (
+                    <p className="mt-4 text-sm text-cream/55">{spec}</p>
+                  )}
+                </div>
+
+                {/* Descripción + CTA */}
+                <div className="flex flex-col justify-between gap-8 md:col-span-7 md:pt-1">
+                  <p className="max-w-2xl text-cream/72 leading-relaxed text-pretty">
                     {product.description}
                   </p>
+
+                  <div className="flex items-center gap-4">
+                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-gold">
+                      {cta}
+                      <ArrowUpRight
+                        className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                        aria-hidden
+                      />
+                    </span>
+                    <span
+                      aria-hidden
+                      className="block h-px w-12 bg-hairline-strong transition-all duration-300 group-hover:w-24 group-hover:bg-[var(--card-accent)]"
+                    />
+                  </div>
+                </div>
+              </motion.a>
+            );
+          })}
+
+          {comingSoonProducts.length > 0 &&
+            PRODUCTS.map((product) => {
+              if (product.available) return null;
+
+              const Icon = getIcon(product.id);
+
+              return (
+                <motion.div
+                  key={product.id}
+                  variants={reveal}
+                  className={cn(
+                    "grid gap-6 rounded-2xl border border-hairline bg-green-panel/40 p-8",
+                    "md:grid-cols-12 md:gap-10 md:p-10",
+                  )}
+                >
+                  <div className="md:col-span-5">
+                    <span className="text-xs font-semibold uppercase tracking-[0.15em] text-cream/40">
+                      Próximamente
+                    </span>
+
+                    <h3 className="mt-6 flex items-start gap-4 font-display text-2xl font-bold leading-[1] tracking-[-0.02em] text-cream/45 md:text-3xl">
+                      {product.name}
+                      {Icon && (
+                        <Icon
+                          className="mt-1 size-5 shrink-0 text-cream/40"
+                          strokeWidth={1.5}
+                          aria-hidden
+                        />
+                      )}
+                    </h3>
+                  </div>
+
+                  <div className="md:col-span-7 md:pt-1">
+                    <p className="max-w-2xl text-cream/45 leading-relaxed text-pretty">
+                      {product.description}
+                    </p>
+                  </div>
                 </motion.div>
               );
             })}
-          </div>
-          )}
         </motion.div>
       </Container>
     </Section>

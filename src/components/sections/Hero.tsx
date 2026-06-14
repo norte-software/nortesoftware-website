@@ -1,150 +1,101 @@
 "use client";
 
 import { motion } from "motion/react";
-import dynamic from "next/dynamic";
-import { ArrowRight, ArrowDown } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
-import { SITE, PRIMARY_CTA } from "@/lib/constants";
-import { cn } from "@/lib/utils";
-
-// Lazy load del globo: cobe usa WebGL → solo carga en cliente
-// Sin SSR para evitar errores de "document is not defined"
-const Globe = dynamic(
-  () => import("@/components/visuals/Globe").then((m) => m.Globe),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="aspect-square w-full bg-electric-blue/5 rounded-full animate-pulse" />
-    ),
-  },
-);
+import { Accent } from "@/components/ui/Accent";
+import { Compass } from "@/components/visuals/Compass";
+import { CONTACT_CTA } from "@/lib/constants";
 
 /**
- * Hero del home.
+ * Hero — sobrio e institucional, paleta "Latón del Norte".
  *
- * Composición:
- *
- *   HEADLINE GRANDE                    [GLOBO]
- *   con segunda línea en gradiente     terráqueo
- *
- *   [subtítulo]
- *
- *   [CTA primary]
- *
- *                  [scroll hint]
- *
- * Asimetría: el globo ocupa la mitad derecha en desktop, pero en mobile
- * va arriba del texto (orden visual ajustado con flex-col-reverse).
- *
- * Animaciones: stagger en cascada al cargar la página.
- * El globo se muestra después con fade in (delay 200ms tras montar).
+ * Tipografía protagonista, etiqueta limpia en oro, una promesa específica
+ * (el diferenciador real de Norte: construir y auditar con el mismo equipo)
+ * y la brújula de latón como pieza-firma. Sin folios de código ni
+ * telemetría: serio, no "cyberpunk".
  */
+const reveal = {
+  hidden: { opacity: 0, y: 8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.19, 1, 0.22, 1] as const },
+  },
+};
+
 export function Hero() {
   return (
     <section
-      className="relative min-h-svh flex flex-col justify-center overflow-hidden pt-20 md:pt-24 pb-16"
+      className="relative flex min-h-[calc(100svh-5rem)] flex-col justify-center overflow-hidden py-12 md:py-16"
       aria-labelledby="hero-title"
     >
-      {/* Glow ambiental atrás del globo */}
       <div
         aria-hidden
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/4 w-[800px] h-[800px] rounded-full bg-electric-blue/[0.07] blur-[120px] pointer-events-none"
+        className="pointer-events-none absolute inset-0 bg-grain opacity-70"
       />
-
-      {/* Patrón de puntos sutil sobre el fondo */}
-      <div
-        aria-hidden
-        className="absolute inset-0 bg-dot-grid opacity-40 pointer-events-none"
-      />
-
-      <Container size="wide" className="relative z-10">
-        <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <Container size="wide" className="relative">
+        <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-12">
           {/* Texto */}
-          <div className="lg:col-span-7 order-2 lg:order-1">
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={{
-                hidden: {},
-                visible: { transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
-              }}
-            >
-              <motion.h1
-                id="hero-title"
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.7 } },
-                }}
-                className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-[5.25rem] font-bold text-balance leading-[1.02] mb-6 md:mb-8"
-              >
-                El norte de tu
-                <br />
-                <span className="text-gradient-brand">
-                  tecnología.
-                </span>
-              </motion.h1>
-
-              <motion.p
-                variants={{
-                  hidden: { opacity: 0, y: 12 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-                }}
-                className="text-ice-white/70 text-base md:text-lg lg:text-xl text-pretty max-w-xl mb-10 md:mb-12"
-              >
-                {SITE.taglineSecondary}
-              </motion.p>
-
-              <motion.div
-                variants={{
-                  hidden: { opacity: 0, y: 12 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-                }}
-                className="flex flex-col sm:flex-row gap-4 sm:items-center"
-              >
-                <Button href={PRIMARY_CTA.href} variant="primary" size="lg">
-                  {PRIMARY_CTA.label}
-                  <ArrowRight className="size-4" aria-hidden />
-                </Button>
-                <Button href="/servicios" variant="secondary" size="lg">
-                  Ver servicios
-                </Button>
-              </motion.div>
-            </motion.div>
-          </div>
-
-          {/* Globo */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.19, 1, 0.22, 1] }}
-            className={cn(
-              "lg:col-span-5 order-1 lg:order-2",
-              "max-w-md mx-auto lg:max-w-none w-full",
-            )}
+            initial="hidden"
+            animate="visible"
+            variants={{ visible: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } } }}
+            className="order-2 lg:order-1 lg:col-span-7"
           >
-            <Globe />
+            <motion.div variants={reveal} className="flex items-center gap-3">
+              <span aria-hidden className="h-px w-8 bg-gold" />
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+                Software · Ciberseguridad · IA
+              </span>
+            </motion.div>
+
+            <motion.h1
+              id="hero-title"
+              variants={reveal}
+              className="mt-6 font-display text-[clamp(3rem,8vw,6.5rem)] font-bold leading-[0.94] tracking-[-0.03em] text-balance"
+            >
+              El norte de tu
+              <br />
+              <Accent>tecnología</Accent>
+              <span className="text-gold">.</span>
+            </motion.h1>
+
+            <motion.p
+              variants={reveal}
+              className="mt-8 max-w-[46ch] text-lg text-cream/72 leading-relaxed text-pretty md:text-xl"
+            >
+              Construimos el software que mueve a tu empresa y lo ponemos a
+              prueba como lo haría un atacante. Un solo equipo para todo el
+              ciclo —del diseño al pentest—, en México y LATAM.
+            </motion.p>
+
+            <motion.div
+              variants={reveal}
+              className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-4"
+            >
+              <Button href={CONTACT_CTA.href} variant="primary" size="lg">
+                {CONTACT_CTA.label}
+                <ArrowRight className="size-4" aria-hidden />
+              </Button>
+              <Button href="/servicios" variant="ghost" size="lg">
+                Ver servicios
+              </Button>
+            </motion.div>
+          </motion.div>
+
+          {/* Brújula */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="relative order-1 mx-auto w-full max-w-[280px] lg:order-2 lg:col-span-5 lg:max-w-none"
+          >
+            <Compass />
           </motion.div>
         </div>
       </Container>
-
-      {/* Scroll hint */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.4, duration: 0.6 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 z-10"
-      >
-        <span className="text-xs text-ice-white/40 tracking-widest uppercase">
-          Conoce más
-        </span>
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ArrowDown className="size-4 text-ice-white/40" aria-hidden />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }

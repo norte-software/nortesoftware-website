@@ -12,10 +12,6 @@ import {
   CONTACT_CTA,
 } from "@/lib/constants";
 
-/**
- * Estilos sr-only inline (en vez de class) para garantizar
- * que oculten visualmente sin depender de utilities Tailwind v4.
- */
 const srOnly: React.CSSProperties = {
   position: "absolute",
   width: 1,
@@ -28,6 +24,10 @@ const srOnly: React.CSSProperties = {
   borderWidth: 0,
 };
 
+/**
+ * Footer / colofón — sobrio, sobre la capa más hundida (green-900).
+ * Regla con tick en oro, hovers en oro, sin notación de código.
+ */
 export function Footer() {
   const currentYear = new Date().getFullYear();
   const copyrightYear =
@@ -37,7 +37,7 @@ export function Footer() {
 
   return (
     <footer
-      className="relative bg-navy-mid/40 border-t border-ice-white/[0.06]"
+      className="relative border-t border-hairline bg-green-900"
       aria-labelledby="footer-heading"
     >
       <h2 id="footer-heading" style={srOnly}>
@@ -45,18 +45,17 @@ export function Footer() {
       </h2>
 
       <Container size="wide" className="py-16 md:py-20">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-12 md:gap-8">
           {/* Brand block */}
           <div className="md:col-span-5">
             <Logo variant="full" />
-            <p className="mt-6 text-ice-white/60 text-sm leading-relaxed max-w-md">
+            <p className="mt-6 max-w-md text-sm leading-relaxed text-cream/60">
               {SITE.brandPromise}
             </p>
-            <p className="mt-6 font-display text-electric-blue text-xs tracking-[0.3em] uppercase">
+            <p className="mt-5 text-sm font-medium text-gold">
               {SITE.brandTagline}
             </p>
 
-            {/* Redes sociales */}
             <ul className="mt-8 flex items-center gap-3">
               {SOCIAL_LINKS.map((social) => (
                 <li key={social.id}>
@@ -69,7 +68,7 @@ export function Footer() {
                         ? "noopener noreferrer"
                         : undefined
                     }
-                    className="inline-flex items-center justify-center size-10 rounded-full border border-ice-white/10 bg-ice-white/[0.02] text-ice-white/70 hover:text-mint-accent hover:border-mint-accent/40 hover:bg-mint-accent/5 transition-all duration-200"
+                    className="inline-flex size-10 items-center justify-center rounded-lg border border-hairline text-cream/70 transition-colors duration-200 hover:border-gold/40 hover:text-gold"
                   >
                     <SocialIcon iconKey={social.iconKey} className="size-4" />
                   </a>
@@ -80,7 +79,7 @@ export function Footer() {
 
           {/* Navegación */}
           <div className="md:col-span-3">
-            <h3 className="font-display text-xs tracking-[0.25em] uppercase text-ice-white/40 mb-4">
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-cream/42">
               Sitio
             </h3>
             <ul className="flex flex-col gap-2.5">
@@ -88,7 +87,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-ice-white/75 hover:text-mint-accent transition-colors duration-200"
+                    className="text-sm text-cream/75 transition-colors duration-200 hover:text-gold"
                   >
                     {link.label}
                   </Link>
@@ -99,38 +98,29 @@ export function Footer() {
 
           {/* Contacto */}
           <div className="md:col-span-4">
-            <h3 className="font-display text-xs tracking-[0.25em] uppercase text-ice-white/40 mb-4">
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-cream/42">
               Contacto
             </h3>
             <ul className="flex flex-col gap-3 text-sm">
               <li className="flex items-center gap-2.5">
-                <Mail
-                  className="size-4 text-electric-blue/80 shrink-0"
-                  aria-hidden
-                />
+                <Mail className="size-4 shrink-0 text-gold" aria-hidden />
                 <ObfuscatedContact
                   type="email"
                   value={SITE.emails.info}
-                  className="text-ice-white/75 hover:text-mint-accent transition-colors duration-200 break-all"
+                  className="break-all text-cream/75 transition-colors duration-200 hover:text-gold"
                 />
               </li>
               <li className="flex items-center gap-2.5">
-                <Phone
-                  className="size-4 text-electric-blue/80 shrink-0"
-                  aria-hidden
-                />
+                <Phone className="size-4 shrink-0 text-gold" aria-hidden />
                 <ObfuscatedContact
                   type="phone"
                   value={SITE.phone.display}
                   href={SITE.phone.e164}
-                  className="text-ice-white/75 hover:text-mint-accent transition-colors duration-200"
+                  className="text-cream/75 transition-colors duration-200 hover:text-gold"
                 />
               </li>
-              <li className="flex items-start gap-2.5 text-ice-white/75">
-                <MapPin
-                  className="size-4 text-electric-blue/80 mt-0.5 shrink-0"
-                  aria-hidden
-                />
+              <li className="flex items-start gap-2.5 text-cream/75">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
                 <span>
                   {SITE.address.city},
                   <br />
@@ -141,7 +131,7 @@ export function Footer() {
 
             <Link
               href={CONTACT_CTA.href}
-              className="inline-flex items-center gap-2 mt-6 text-mint-accent text-sm font-medium hover:gap-3 transition-all duration-300"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-gold transition-all duration-300 hover:gap-3"
             >
               {CONTACT_CTA.label}
               <span aria-hidden>→</span>
@@ -149,24 +139,27 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Divider con gradiente de marca */}
-        <div className="divider-brand mt-16 opacity-50" />
+        {/* Regla con tick en oro */}
+        <div className="relative mt-16 border-t border-hairline">
+          <span
+            aria-hidden
+            className="absolute left-0 top-0 h-0.5 w-10 -translate-y-px bg-gold"
+          />
+        </div>
 
-        {/* Bottom strip: copyright + productos live + legal */}
-        <div className="mt-8 flex flex-col-reverse md:flex-row md:items-center md:justify-between gap-4">
-          <div className="flex flex-col gap-2">
-            <p className="text-xs text-ice-white/45">
-              © {copyrightYear} {SITE.legalName}. Todos los derechos reservados.
+        {/* Colofón */}
+        <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div className="flex flex-col gap-3">
+            <p className="text-sm text-cream/55">
+              Construido en Chiapas. Compilado para México y LATAM.
             </p>
-
-            {/* Productos live de Norte Software */}
             <ul className="flex items-center gap-4 text-xs">
               <li>
                 <a
                   href="https://nortecampo.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-ice-white/60 hover:text-mint-accent transition-colors duration-200"
+                  className="text-cream/60 transition-colors duration-200 hover:text-gold"
                 >
                   NorteCampo
                 </a>
@@ -176,7 +169,7 @@ export function Footer() {
                   href="https://secagent.nortesoftware.dev"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-ice-white/60 hover:text-mint-accent transition-colors duration-200"
+                  className="text-cream/60 transition-colors duration-200 hover:text-gold"
                 >
                   SecAgent
                 </a>
@@ -184,18 +177,23 @@ export function Footer() {
             </ul>
           </div>
 
-          <ul className="flex items-center gap-6 text-xs">
-            {LEGAL_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-ice-white/60 hover:text-mint-accent transition-colors duration-200"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="flex flex-col gap-3 lg:items-end">
+            <ul className="flex items-center gap-6 text-xs">
+              {LEGAL_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-cream/60 transition-colors duration-200 hover:text-gold"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <p className="text-xs text-cream/45">
+              © {copyrightYear} {SITE.legalName}. Todos los derechos reservados.
+            </p>
+          </div>
         </div>
       </Container>
     </footer>

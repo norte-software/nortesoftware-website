@@ -5,70 +5,55 @@ import { Container } from "@/components/ui/Container";
 import { cn } from "@/lib/utils";
 
 interface SectionHeaderProps {
-  /** Texto pequeño arriba del título (en azul eléctrico, uppercase, tracking) */
+  /** Etiqueta corta (uppercase, oro). Seria, sin notación de código. */
   eyebrow: string;
-  /** Título principal de la sección */
+  /** Título principal (usa <Accent> para la palabra-acento). */
   title: string | React.ReactNode;
-  /** Descripción opcional debajo */
+  /** Descripción opcional debajo. */
   description?: string;
-  /** Alineación: "left" para asimétrico (mockups), "center" para clásico */
-  align?: "left" | "center";
   className?: string;
 }
 
 /**
- * Encabezado consistente para cada sección.
+ * Encabezado de sección — sobrio e institucional.
  *
- * Anima al entrar al viewport con stagger:
- *   eyebrow → title → description
- *
- * Respeta prefers-reduced-motion gracias a configuración global
- * de Motion + nuestro CSS reset.
+ * Etiqueta limpia en oro con un filete corto + título display. Sin folios
+ * de código, sin coordenadas: serio, no "cyberpunk". Reveal por opacidad.
  */
 export function SectionHeader({
   eyebrow,
   title,
   description,
-  align = "left",
   className,
 }: SectionHeaderProps) {
-  const alignClasses = {
-    left: "text-left items-start",
-    center: "text-center items-center mx-auto",
-  };
-
   return (
-    <Container size="default">
+    <Container size="wide">
       <motion.div
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-80px" }}
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.12 } },
-        }}
-        className={cn(
-          "flex flex-col max-w-2xl",
-          alignClasses[align],
-          className,
-        )}
+        variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+        className={cn("max-w-3xl", className)}
       >
-        <motion.p
+        <motion.div
           variants={{
-            hidden: { opacity: 0, y: 12 },
+            hidden: { opacity: 0, y: 6 },
             visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
           }}
-          className="font-display text-electric-blue text-xs md:text-sm tracking-[0.3em] uppercase mb-4 md:mb-6"
+          className="flex items-center gap-3"
         >
-          {eyebrow}
-        </motion.p>
+          <span aria-hidden className="h-px w-8 bg-gold" />
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+            {eyebrow}
+          </span>
+        </motion.div>
 
         <motion.h2
           variants={{
-            hidden: { opacity: 0, y: 16 },
+            hidden: { opacity: 0, y: 8 },
             visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
           }}
-          className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-balance leading-[1.05]"
+          className="mt-6 font-display text-[clamp(2.25rem,6vw,4.25rem)] font-bold leading-[0.98] tracking-[-0.025em] text-balance"
         >
           {title}
         </motion.h2>
@@ -76,10 +61,10 @@ export function SectionHeader({
         {description && (
           <motion.p
             variants={{
-              hidden: { opacity: 0, y: 12 },
+              hidden: { opacity: 0, y: 6 },
               visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
             }}
-            className="mt-6 md:mt-8 text-ice-white/65 text-base md:text-lg text-pretty max-w-xl"
+            className="mt-7 max-w-xl text-cream/72 text-base md:text-lg leading-relaxed text-pretty"
           >
             {description}
           </motion.p>

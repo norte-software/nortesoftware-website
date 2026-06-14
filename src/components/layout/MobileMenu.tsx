@@ -74,7 +74,7 @@ export function MobileMenu({ isOpen, onClose, onNavigate }: MobileMenuProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
             onClick={onClose}
-            className="fixed inset-0 z-50 bg-navy-deep/70 backdrop-blur-sm lg:hidden"
+            className="fixed inset-0 z-50 bg-green-deep/70 backdrop-blur-sm lg:hidden"
             aria-hidden
           />
 
@@ -95,13 +95,13 @@ export function MobileMenu({ isOpen, onClose, onNavigate }: MobileMenuProps) {
             aria-label="Menú de navegación"
             className={cn(
               "fixed inset-y-0 right-0 z-50 w-[85%] max-w-sm lg:hidden",
-              "bg-navy-mid border-l border-ice-white/10",
+              "bg-green-panel border-l border-cream/10",
               "flex flex-col",
               "shadow-[-24px_0_64px_-16px_rgba(0,0,0,0.5)]",
             )}
           >
             {/* Header del drawer */}
-            <div className="flex items-center justify-between px-6 h-16 md:h-20 border-b border-ice-white/[0.06]">
+            <div className="flex items-center justify-between px-6 h-16 md:h-20 border-b border-cream/[0.06]">
               <Logo variant="full" />
               <button
                 ref={closeButtonRef}
@@ -110,12 +110,12 @@ export function MobileMenu({ isOpen, onClose, onNavigate }: MobileMenuProps) {
                 aria-label="Cerrar menú"
                 className={cn(
                   "size-10 rounded-full inline-flex items-center justify-center",
-                  "border border-ice-white/10 bg-ice-white/[0.02]",
-                  "text-ice-white/80 hover:text-mint-accent hover:border-mint-accent/40",
+                  "border border-cream/10 bg-cream/[0.02]",
+                  "text-cream/80 hover:text-gold hover:border-gold/40",
                   "transition-colors duration-200",
                   "focus-visible:outline-none focus-visible:ring-2",
-                  "focus-visible:ring-mint-accent focus-visible:ring-offset-2",
-                  "focus-visible:ring-offset-navy-mid",
+                  "focus-visible:ring-gold focus-visible:ring-offset-2",
+                  "focus-visible:ring-offset-green-panel",
                 )}
               >
                 <X className="size-5" aria-hidden />
@@ -149,8 +149,8 @@ export function MobileMenu({ isOpen, onClose, onNavigate }: MobileMenuProps) {
                           "block py-3 font-display text-2xl font-semibold",
                           "transition-colors duration-200",
                           isActive
-                            ? "text-mint-accent"
-                            : "text-ice-white/85 hover:text-mint-accent",
+                            ? "text-gold"
+                            : "text-cream/85 hover:text-gold",
                         )}
                       >
                         {link.label}
@@ -183,8 +183,8 @@ export function MobileMenu({ isOpen, onClose, onNavigate }: MobileMenuProps) {
             </nav>
 
             {/* Footer del drawer con tagline de marca */}
-            <div className="px-6 py-6 border-t border-ice-white/[0.06]">
-              <p className="text-xs text-ice-white/40 tracking-widest uppercase">
+            <div className="px-6 py-6 border-t border-cream/[0.06]">
+              <p className="text-xs text-cream/40 tracking-widest uppercase">
                 {SITE.brandTagline}
               </p>
             </div>

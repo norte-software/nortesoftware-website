@@ -1,18 +1,16 @@
-import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { SITE } from "@/lib/constants";
+import { Isotipo } from "./Isotipo";
 
 interface LogoProps {
-  /** "full" muestra logo + texto. "isotipo" solo el escudo-brújula. */
+  /** "full" muestra isotipo + wordmark. "isotipo" solo el escudo-brújula. */
   variant?: "full" | "isotipo";
   /** Si está dentro de un link, desactiva wrapping interno. */
   asLink?: boolean;
-  /** Clase para ajustar tamaño en cada uso. */
+  /** Clase para ajustar tamaño/espaciado en cada uso. */
   className?: string;
 }
-
-const ISOTIPO_SRC = "/images/isotipo-claro.png";
 
 export function Logo({
   variant = "full",
@@ -21,29 +19,16 @@ export function Logo({
 }: LogoProps) {
   const content =
     variant === "full" ? (
-      <span className={cn("inline-flex items-center gap-3", className)}>
-        <Image
-          src={ISOTIPO_SRC}
-          alt=""
-          width={36}
-          height={36}
-          priority
-          className="size-9 object-contain"
-          aria-hidden
-        />
-        <span className="font-display font-bold text-ice-white text-lg leading-none">
-          NORTE{" "}
-          <span className="text-electric-blue">SOFTWARE</span>
+      <span className={cn("inline-flex items-center gap-2.5", className)}>
+        <Isotipo className="h-9 w-auto shrink-0" />
+        <span className="font-display font-bold text-cream text-lg leading-none tracking-tight">
+          NORTE <span className="text-gold">SOFTWARE</span>
         </span>
       </span>
     ) : (
-      <Image
-        src={ISOTIPO_SRC}
-        alt={`${SITE.name}`}
-        width={48}
-        height={48}
-        priority
-        className={cn("size-10 object-contain", className)}
+      <Isotipo
+        title={SITE.name}
+        className={cn("h-10 w-auto", className)}
       />
     );
 

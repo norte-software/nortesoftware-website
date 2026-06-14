@@ -38,11 +38,11 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         <div className="flex items-center justify-between gap-2">
           <label
             htmlFor={inputId}
-            className="text-sm font-medium text-ice-white/85 flex items-center gap-2"
+            className="text-sm font-medium text-cream/85 flex items-center gap-2"
           >
             {label}
             {optional && (
-              <span className="text-xs text-ice-white/40 font-normal">
+              <span className="text-xs text-cream/40 font-normal">
                 (opcional)
               </span>
             )}
@@ -53,8 +53,8 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
               className={cn(
                 "text-xs",
                 currentLength > maxLength * 0.9
-                  ? "text-amber-400"
-                  : "text-ice-white/40",
+                  ? "text-gold"
+                  : "text-cream/40",
               )}
             >
               {currentLength}/{maxLength}
@@ -71,12 +71,12 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
             [errorId, hintId].filter(Boolean).join(" ") || undefined
           }
           className={cn(
-            "w-full px-4 py-3 rounded-lg bg-navy-mid/40 text-ice-white",
-            "border border-ice-white/10",
-            "placeholder:text-ice-white/30",
+            "w-full px-4 py-3 rounded-lg bg-green-panel/40 text-cream",
+            "border border-cream/10",
+            "placeholder:text-cream/30",
             "transition-colors duration-200 resize-y min-h-[120px]",
-            "focus:outline-none focus:border-mint-accent/60 focus:bg-navy-mid/60",
-            "focus:ring-2 focus:ring-mint-accent/20",
+            "focus:outline-none focus:border-gold/60 focus:bg-green-panel/60",
+            "focus:ring-2 focus:ring-gold/20",
             "disabled:opacity-50 disabled:cursor-not-allowed",
             error &&
               "border-red-500/60 focus:border-red-500 focus:ring-red-500/20",
@@ -86,7 +86,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         />
 
         {hint && !error && (
-          <p id={hintId} className="text-xs text-ice-white/45">
+          <p id={hintId} className="text-xs text-cream/45">
             {hint}
           </p>
         )}

@@ -50,6 +50,17 @@ export const SITE = {
     short: "San Cristóbal de las Casas, Chiapas, MX",
   },
 
+  /**
+   * Coordenadas reales de San Cristóbal de las Casas, Chiapas.
+   * Sello geográfico verificable de la marca (sistema "Meridiano del Norte").
+   * Se usan en hero, divisores de sección y colofón del footer — en mono.
+   */
+  coordinates: {
+    lat: "16.7370°N",
+    lng: "92.6376°W",
+    full: "16.7370°N 92.6376°W",
+  },
+
   foundedYear: 2026,
 } as const;
 
@@ -68,13 +79,12 @@ export const WHATSAPP_PREFILL_MESSAGE = encodeURIComponent(
 export const WHATSAPP_URL = `https://wa.me/${SITE.phone.whatsapp}?text=${WHATSAPP_PREFILL_MESSAGE}`;
 
 export const BRAND_COLORS = {
-  navyDeep: "#0A1628",
-  navyMid: "#0F2040",
-  norteBlue: "#1A4ABA",
-  electricBlue: "#2C5282",
-  mintAccent: "#C8852A",
-  norteVerde: "#2D6A4F",
-  iceWhite: "#F0F4FF",
+  greenDeep: "#0C2A22",
+  greenPanel: "#123A2E",
+  gold: "#C69B3C",
+  goldDeep: "#A8843A",
+  cream: "#F4EADE",
+  slate: "#8FA39B",
 } as const;
 
 /**
@@ -158,7 +168,7 @@ export interface AvailableProduct {
   badge: string;
   url: string;
   cta: string;
-  /** Color de acento (hex) para badge y chrome de la card. Default: norte-verde. */
+  /** Color de acento (hex) para badge y chrome de la card. Default: gold. */
   badgeColor?: string;
 }
 

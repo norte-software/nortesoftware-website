@@ -2,12 +2,12 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import { Code2, ShieldAlert, Compass, Bot, ArrowUpRight } from "lucide-react";
+import { ShieldAlert, Code2, Bot, Compass, ArrowRight } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Container } from "@/components/ui/Container";
+import { Accent } from "@/components/ui/Accent";
 import { SERVICES } from "@/lib/constants";
-import { cn } from "@/lib/utils";
 
 const SERVICE_ICONS = {
   ciberseguridad: ShieldAlert,
@@ -16,22 +16,26 @@ const SERVICE_ICONS = {
   consultoria: Compass,
 } as const;
 
+const SERVICE_VERBS = {
+  ciberseguridad: "Ver pentesting",
+  desarrollo: "Ver desarrollo",
+  "ia-agentes": "Ver IA aplicada",
+  consultoria: "Ver consultoría",
+} as const;
+
+const reveal = {
+  hidden: { opacity: 0, y: 8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.19, 1, 0.22, 1] as const },
+  },
+};
+
 /**
- * Sección "Qué hacemos" / Servicios.
- *
- * Composición:
- *   header
- *   ↓
- *   grid 2x2 de cards grandes (mobile: 1 col)
- *
- * Cada card:
- *   - Ícono lineart en electric-blue
- *   - Título display grande
- *   - Descripción
- *   - Link "Conocer más" → /servicios#id
- *
- * Hover: la card entera se eleva, glow sutil y la flecha del link
- * se mueve diagonal.
+ * Qué hacemos — lista editorial sobria de cuatro disciplinas.
+ * Número + ícono + nombre a la izquierda, descripción al centro, verbo a la
+ * derecha. Hover sutil (sube la fila). Sin notación de código ni mono.
  */
 export function ServicesSection() {
   return (
@@ -40,99 +44,69 @@ export function ServicesSection() {
         eyebrow="Qué hacemos"
         title={
           <>
-            Cuatro disciplinas,
-            <br />
-            <span className="text-gradient-brand">un mismo equipo.</span>
+            Cuatro disciplinas, <Accent>un mismo equipo</Accent>.
           </>
         }
-        description="Un equipo para todo el ciclo. Sin intermediarios."
-        align="left"
+        description="Diseño, construcción, seguridad y operación bajo un mismo techo. Sin saltar de proveedor en proveedor, sin perder contexto entre etapas."
       />
 
-      <Container size="wide" className="mt-16 md:mt-20">
-        <motion.ul
+      <Container size="wide" className="mt-14 md:mt-20">
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.1 } },
-          }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"
+          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+          className="border-b border-hairline"
         >
-          {SERVICES.map((service) => {
-            const Icon = SERVICE_ICONS[service.id as keyof typeof SERVICE_ICONS];
+          {SERVICES.map((service, i) => {
+            const Icon =
+              SERVICE_ICONS[service.id as keyof typeof SERVICE_ICONS];
+            const verb =
+              SERVICE_VERBS[service.id as keyof typeof SERVICE_VERBS];
 
             return (
-              <motion.li
-                key={service.id}
-                variants={{
-                  hidden: { opacity: 0, y: 24 },
-                  visible: {
-                    opacity: 1,
-                    y: 0,
-                    transition: { duration: 0.6, ease: [0.19, 1, 0.22, 1] },
-                  },
-                }}
-                className="group relative"
-              >
+              <motion.div key={service.id} variants={reveal}>
                 <Link
                   href={`/servicios#${service.id}`}
-                  className={cn(
-                    "block relative h-full p-8 md:p-10 rounded-3xl",
-                    "bg-navy-mid/40 border border-ice-white/[0.06]",
-                    "hover:bg-navy-mid/60 hover:border-mint-accent/30",
-                    "transition-all duration-500 ease-out",
-                    "hover:shadow-[0_24px_64px_-16px_rgba(44,82,130,0.18)]",
-                    "focus-visible:outline-none focus-visible:ring-2",
-                    "focus-visible:ring-mint-accent focus-visible:ring-offset-4",
-                    "focus-visible:ring-offset-navy-deep",
-                  )}
+                  className="group -mx-4 grid gap-5 border-t border-hairline px-4 py-9 transition-colors duration-300 hover:bg-green-700 focus-visible:bg-green-700 focus-visible:outline-none md:py-12 lg:grid-cols-12 lg:items-baseline lg:gap-10"
                 >
-                  {/* Decorative line top — gradiente al hover */}
-                  <div
-                    aria-hidden
-                    className="absolute top-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-mint-accent/0 to-transparent group-hover:via-mint-accent/60 transition-all duration-500"
-                  />
-
-                  <div className="flex items-start justify-between gap-6">
-                    {/* Ícono */}
+                  <div className="flex items-center gap-4 lg:col-span-5">
+                    <span className="font-display text-base font-semibold text-slate/50 transition-colors duration-300 group-hover:text-gold">
+                      0{i + 1}
+                    </span>
                     {Icon && (
-                      <div className="shrink-0 size-14 rounded-2xl bg-electric-blue/10 border border-electric-blue/20 flex items-center justify-center group-hover:bg-electric-blue/15 group-hover:border-electric-blue/40 transition-all duration-300">
-                        <Icon
-                          className="size-6 text-electric-blue"
-                          strokeWidth={1.75}
-                          aria-hidden
-                        />
-                      </div>
+                      <Icon
+                        className="size-5 shrink-0 text-gold"
+                        strokeWidth={1.75}
+                        aria-hidden
+                      />
                     )}
-
-                    {/* Flecha externa */}
-                    <ArrowUpRight
-                      className="size-5 text-ice-white/30 group-hover:text-mint-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300"
-                      aria-hidden
-                    />
+                    <h3 className="font-display text-2xl font-semibold leading-tight text-cream transition-transform duration-300 group-hover:translate-x-1 md:text-[1.75rem]">
+                      {service.name}
+                    </h3>
                   </div>
 
-                  <h3 className="mt-8 font-display text-2xl md:text-3xl font-bold text-ice-white leading-tight">
-                    {service.name}
-                  </h3>
+                  <div className="lg:col-span-5">
+                    <p className="max-w-[56ch] text-cream/72 leading-relaxed text-pretty">
+                      {service.description}
+                    </p>
+                  </div>
 
-                  <p className="mt-4 text-ice-white/65 leading-relaxed text-pretty">
-                    {service.description}
-                  </p>
-
-                  <span className="mt-8 inline-flex items-center gap-1.5 text-sm font-medium text-mint-accent/80 group-hover:text-mint-accent transition-colors">
-                    Conocer más
-                    <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
-                      →
+                  <div className="lg:col-span-2 lg:justify-self-end lg:text-right">
+                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-gold">
+                      {verb}
+                      <ArrowRight
+                        className="size-4 transition-transform duration-300 group-hover:translate-x-1"
+                        strokeWidth={1.75}
+                        aria-hidden
+                      />
                     </span>
-                  </span>
+                  </div>
                 </Link>
-              </motion.li>
+              </motion.div>
             );
           })}
-        </motion.ul>
+        </motion.div>
       </Container>
     </Section>
   );

@@ -5,69 +5,70 @@ import { ArrowRight } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import {
-  CONTACT_CTA,
-  WHATSAPP_URL,
-  SITE,
-} from "@/lib/constants";
+import { Accent } from "@/components/ui/Accent";
+import { Isotipo } from "@/components/ui/Isotipo";
+import { CONTACT_CTA, WHATSAPP_URL, SITE } from "@/lib/constants";
+
+const reveal = {
+  hidden: { opacity: 0, y: 8 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: [0.19, 1, 0.22, 1] as const },
+  },
+} as const;
 
 /**
- * CTA final antes del footer.
- *
- * Composición:
- *   bloque grande con borde gradiente
- *   ↓
- *   eyebrow + headline grande + subtítulo
- *   ↓
- *   2 acciones: contacto + WhatsApp
- *
- * Esta es la última oportunidad antes del footer para convertir
- * un visitante en lead. El diseño es deliberadamente diferente
- * al hero — aquí la energía es de cierre, no de bienvenida.
+ * Cierre — sobre la capa más hundida (green-900). Frase descomunal con una
+ * palabra-acento en oro, el isotipo en filigrana detrás, un CTA y un colofón
+ * limpio. Energía de cierre, sin adornos de telemetría.
  */
 export function FinalCTA() {
   return (
-    <Section padding="loose">
-      <Container size="default">
+    <Section anchor="contacto" padding="loose">
+      <Container size="wide">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.19, 1, 0.22, 1] }}
-          className="relative overflow-hidden rounded-3xl border border-ice-white/[0.08] bg-gradient-to-br from-navy-mid/60 via-navy-deep to-navy-mid/40 px-8 py-16 md:p-20"
+          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+          className="relative overflow-hidden rounded-2xl border border-hairline border-t-hairline-strong bg-green-900 px-6 py-20 md:px-16 md:py-28"
         >
-          {/* Glow de fondo */}
-          <div
-            aria-hidden
-            className="absolute -top-1/2 left-1/2 -translate-x-1/2 w-[800px] h-[800px] rounded-full bg-electric-blue/[0.08] blur-[120px] pointer-events-none"
-          />
+          <Isotipo className="pointer-events-none absolute left-1/2 top-1/2 h-auto w-[clamp(20rem,55vw,40rem)] -translate-x-1/2 -translate-y-1/2 opacity-[0.05]" />
 
-          {/* Patrón de puntos */}
-          <div
-            aria-hidden
-            className="absolute inset-0 bg-dot-grid opacity-30 pointer-events-none"
-          />
+          <div className="relative mx-auto max-w-3xl text-center">
+            <motion.div
+              variants={reveal}
+              className="flex items-center justify-center gap-3"
+            >
+              <span aria-hidden className="h-px w-8 bg-gold" />
+              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+                Empecemos
+              </span>
+            </motion.div>
 
-          <div className="relative max-w-3xl mx-auto text-center">
-            <p className="font-display text-electric-blue text-xs md:text-sm tracking-[0.3em] uppercase mb-6">
-              ¿Listo para empezar?
-            </p>
+            <motion.h2
+              variants={reveal}
+              className="mt-8 font-display font-bold leading-[1.02] text-balance text-cream text-[clamp(2.25rem,6vw,4rem)] tracking-[-0.025em]"
+            >
+              Construyamos algo que <Accent>resista</Accent>.
+            </motion.h2>
 
-            <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-balance leading-[1.05] mb-6">
-              Construyamos algo
-              <br />
-              <span className="text-gradient-brand">que resista.</span>
-            </h2>
+            <motion.p
+              variants={reveal}
+              className="mx-auto mt-8 max-w-xl text-pretty leading-relaxed text-cream/72 md:text-lg"
+            >
+              Cuéntanos del proyecto. Respondemos en menos de 48 horas con
+              alcance, tiempos y costo — sin rodeos.
+            </motion.p>
 
-            <p className="text-ice-white/70 text-base md:text-lg text-pretty max-w-xl mx-auto mb-10 md:mb-12">
-              Cuéntanos del proyecto. Te respondemos con claridad sobre
-              alcance, tiempos y costos en menos de 48 horas.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center flex-wrap">
+            <motion.div
+              variants={reveal}
+              className="mt-12 flex flex-col items-center justify-center gap-x-8 gap-y-5 sm:flex-row"
+            >
               <Button href={CONTACT_CTA.href} variant="primary" size="lg">
                 {CONTACT_CTA.label}
-                <ArrowRight className="size-4" aria-hidden />
+                <ArrowRight className="size-4" strokeWidth={1.5} aria-hidden />
               </Button>
 
               <Button
@@ -79,8 +80,15 @@ export function FinalCTA() {
               >
                 Escribir por WhatsApp
               </Button>
-            </div>
+            </motion.div>
           </div>
+
+          <motion.p
+            variants={reveal}
+            className="relative mx-auto mt-16 max-w-3xl border-t border-hairline pt-8 text-center text-sm text-cream/45"
+          >
+            Construido en Chiapas. Compilado para México y LATAM.
+          </motion.p>
         </motion.div>
       </Container>
     </Section>

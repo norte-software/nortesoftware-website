@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { League_Spartan, DM_Sans } from "next/font/google";
+import { League_Spartan, DM_Sans, JetBrains_Mono } from "next/font/google";
 import { SITE } from "@/lib/constants";
 import { SiteShell } from "@/components/layout/SiteShell";
 import "./globals.css";
@@ -18,11 +18,19 @@ const dmSans = DM_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
+// Voz instrumental de Norte: eyebrows, coordenadas, versiones, estados.
+const jetBrainsMono = JetBrains_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["400", "500"],
+});
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#0A1628",
+  themeColor: "#0C2A22",
   colorScheme: "dark",
 };
 
@@ -132,10 +140,10 @@ export default function RootLayout({
   return (
     <html
       lang="es-MX"
-      className={`${leagueSpartan.variable} ${dmSans.variable}`}
+      className={`${leagueSpartan.variable} ${dmSans.variable} ${jetBrainsMono.variable}`}
       suppressHydrationWarning
     >
-      <body className="bg-navy-deep text-ice-white antialiased min-h-svh font-sans">
+      <body className="bg-green-deep text-cream antialiased min-h-svh font-sans">
         <a
           href="#main"
           className="skip-link focus:not-skip-link"

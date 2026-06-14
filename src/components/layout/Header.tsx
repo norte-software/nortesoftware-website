@@ -60,7 +60,7 @@ export function Header() {
           "fixed top-0 inset-x-0 z-50",
           "transition-[background-color,backdrop-filter,border-color] duration-300",
           isScrolled
-            ? "bg-navy-deep/70 backdrop-blur-xl border-b border-ice-white/[0.08]"
+            ? "bg-green-deep/70 backdrop-blur-xl border-b border-cream/[0.08]"
             : "bg-transparent border-b border-transparent",
         )}
       >
@@ -84,12 +84,12 @@ export function Header() {
                       "relative px-4 py-2 text-sm font-medium",
                       "transition-colors duration-200",
                       "after:content-[''] after:absolute after:left-4 after:right-4",
-                      "after:bottom-1 after:h-px after:bg-mint-accent",
+                      "after:bottom-1 after:h-px after:bg-gold",
                       "after:scale-x-0 after:origin-center after:transition-transform after:duration-300",
                       "hover:after:scale-x-100",
                       isActive
-                        ? "text-mint-accent after:scale-x-100"
-                        : "text-ice-white/70 hover:text-ice-white",
+                        ? "text-gold after:scale-x-100"
+                        : "text-cream/70 hover:text-cream",
                     )}
                   >
                     {link.label}
@@ -116,12 +116,12 @@ export function Header() {
                 className={cn(
                   "lg:hidden inline-flex items-center justify-center",
                   "size-10 rounded-full",
-                  "border border-ice-white/10 bg-ice-white/[0.02]",
-                  "text-ice-white/80 hover:text-mint-accent hover:border-mint-accent/40",
+                  "border border-cream/10 bg-cream/[0.02]",
+                  "text-cream/80 hover:text-gold hover:border-gold/40",
                   "transition-colors duration-200",
                   "focus-visible:outline-none focus-visible:ring-2",
-                  "focus-visible:ring-mint-accent focus-visible:ring-offset-2",
-                  "focus-visible:ring-offset-navy-deep",
+                  "focus-visible:ring-gold focus-visible:ring-offset-2",
+                  "focus-visible:ring-offset-green-deep",
                 )}
                 aria-label="Abrir menú"
                 aria-expanded={isMobileOpen}

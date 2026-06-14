@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { Accent } from "@/components/ui/Accent";
 import { SITE, CONTACT_CTA } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -114,26 +115,23 @@ const SERVICES_DETAIL: ServiceDetail[] = [
 export default function ServiciosPage() {
   return (
     <main id="main" className="pt-24 md:pt-32 pb-24">
-      {/* Glow ambiental */}
-      <div
-        aria-hidden
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-electric-blue/[0.06] blur-[100px] pointer-events-none"
-      />
-
       <Container size="wide" className="relative">
         {/* Header */}
         <div className="max-w-3xl mb-20 md:mb-24">
-          <p className="font-display text-electric-blue text-xs md:text-sm tracking-[0.3em] uppercase mb-4 md:mb-6">
-            Servicios
-          </p>
+          <div className="mb-6 flex items-center gap-3">
+            <span aria-hidden className="h-px w-8 bg-gold" />
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+              Servicios
+            </span>
+          </div>
 
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-balance leading-[1.05] mb-6">
+          <h1 className="mb-6 font-display text-[clamp(2.5rem,6vw,4.25rem)] font-bold leading-[0.98] tracking-[-0.025em] text-balance">
             Cuatro disciplinas,
             <br />
-            <span className="text-gradient-brand">un mismo equipo.</span>
+            <Accent>un mismo equipo</Accent>.
           </h1>
 
-          <p className="text-ice-white/70 text-base md:text-lg leading-relaxed text-pretty">
+          <p className="text-cream/70 text-base md:text-lg leading-relaxed text-pretty">
             Construimos, protegemos, asesoramos y acompañamos. Sin pasarte
             de proveedor en proveedor, sin perder contexto entre etapas.
           </p>
@@ -156,32 +154,32 @@ export default function ServiciosPage() {
                   <header
                     className={`lg:col-span-5 ${isReversed ? "lg:order-2" : ""}`}
                   >
-                    <div className="inline-flex items-center justify-center size-14 rounded-2xl bg-electric-blue/10 border border-electric-blue/20 mb-6">
+                    <div className="inline-flex items-center justify-center size-14 rounded-2xl bg-gold/10 border border-gold/20 mb-6">
                       <Icon
-                        className="size-6 text-electric-blue"
+                        className="size-6 text-gold"
                         strokeWidth={1.75}
                         aria-hidden
                       />
                     </div>
 
-                    <p className="font-display text-electric-blue text-xs tracking-[0.25em] uppercase mb-3">
+                    <p className="mb-3 font-display text-sm font-semibold text-slate/50">
                       0{index + 1}
                     </p>
 
-                    <h2 className="font-display text-3xl md:text-4xl font-bold text-ice-white leading-tight mb-4">
+                    <h2 className="font-display text-3xl md:text-4xl font-bold text-cream leading-tight mb-4">
                       {service.name}
                     </h2>
 
-                    <p className="text-mint-accent text-lg font-medium mb-6 text-balance">
+                    <p className="text-gold text-lg font-medium mb-6 text-balance">
                       {service.tagline}
                     </p>
 
-                    <p className="text-ice-white/65 text-base leading-relaxed text-pretty">
+                    <p className="text-cream/65 text-base leading-relaxed text-pretty">
                       {service.description}
                     </p>
 
-                    <p className="mt-6 text-sm text-ice-white/50">
-                      <span className="font-medium text-ice-white/70">
+                    <p className="mt-6 text-sm text-cream/50">
+                      <span className="font-medium text-cream/70">
                         Industrias:
                       </span>{" "}
                       {service.industries}
@@ -192,8 +190,8 @@ export default function ServiciosPage() {
                   <div
                     className={`lg:col-span-7 ${isReversed ? "lg:order-1" : ""}`}
                   >
-                    <div className="rounded-2xl border border-ice-white/[0.08] bg-navy-mid/30 p-6 md:p-8">
-                      <h3 className="text-xs uppercase tracking-wider text-ice-white/45 mb-4">
+                    <div className="rounded-2xl border border-cream/[0.08] bg-green-panel/30 p-6 md:p-8">
+                      <h3 className="text-xs uppercase tracking-wider text-cream/45 mb-4">
                         Qué incluye
                       </h3>
 
@@ -201,10 +199,10 @@ export default function ServiciosPage() {
                         {service.capabilities.map((capability) => (
                           <li
                             key={capability}
-                            className="flex items-start gap-3 text-sm md:text-base text-ice-white/85"
+                            className="flex items-start gap-3 text-sm md:text-base text-cream/85"
                           >
                             <Check
-                              className="shrink-0 size-5 text-mint-accent mt-0.5"
+                              className="shrink-0 size-5 text-gold mt-0.5"
                               strokeWidth={2}
                               aria-hidden
                             />
@@ -213,10 +211,10 @@ export default function ServiciosPage() {
                         ))}
                       </ul>
 
-                      <div className="mt-8 pt-6 border-t border-ice-white/[0.08]">
+                      <div className="mt-8 pt-6 border-t border-cream/[0.08]">
                         <Link
                           href={`${CONTACT_CTA.href}?servicio=${service.id}`}
-                          className="inline-flex items-center gap-2 text-sm font-medium text-mint-accent hover:gap-3 transition-all duration-300"
+                          className="inline-flex items-center gap-2 text-sm font-medium text-gold hover:gap-3 transition-all duration-300"
                         >
                           Cotizar este servicio
                           <ArrowRight
@@ -234,18 +232,13 @@ export default function ServiciosPage() {
         </div>
 
         {/* CTA final */}
-        <div className="mt-24 md:mt-32 rounded-3xl border border-ice-white/[0.08] bg-gradient-to-br from-navy-mid/60 via-navy-deep to-navy-mid/40 p-8 md:p-16 text-center relative overflow-hidden">
-          <div
-            aria-hidden
-            className="absolute -top-1/2 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full bg-electric-blue/[0.08] blur-[100px] pointer-events-none"
-          />
-
+        <div className="mt-24 md:mt-32 rounded-2xl border border-hairline bg-green-900 p-8 md:p-16 text-center relative overflow-hidden">
           <div className="relative max-w-2xl mx-auto">
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-balance leading-[1.05] mb-6">
               ¿No sabes por dónde empezar?
             </h2>
 
-            <p className="text-ice-white/65 text-base md:text-lg mb-8 text-pretty">
+            <p className="text-cream/65 text-base md:text-lg mb-8 text-pretty">
               Cuéntanos del proyecto en una llamada de 30 minutos sin compromiso.
               Si no podemos ayudarte, te decimos quién sí.
             </p>

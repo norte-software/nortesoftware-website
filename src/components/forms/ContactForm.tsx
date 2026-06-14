@@ -121,22 +121,22 @@ export function ContactForm({ turnstileSiteKey }: ContactFormProps) {
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="rounded-2xl border border-mint-accent/30 bg-mint-accent/5 p-8 md:p-12 text-center"
+        className="rounded-2xl border border-gold/30 bg-gold/5 p-8 md:p-12 text-center"
       >
-        <div className="inline-flex items-center justify-center size-16 rounded-full bg-mint-accent/15 mb-6">
-          <CheckCircle2 className="size-8 text-mint-accent" strokeWidth={1.75} />
+        <div className="inline-flex items-center justify-center size-16 rounded-full bg-gold/15 mb-6">
+          <CheckCircle2 className="size-8 text-gold" strokeWidth={1.75} />
         </div>
 
-        <h3 className="font-display text-2xl md:text-3xl font-bold text-ice-white mb-3">
+        <h3 className="font-display text-2xl md:text-3xl font-bold text-cream mb-3">
           Mensaje enviado
         </h3>
 
-        <p className="text-ice-white/70 text-base md:text-lg max-w-md mx-auto mb-6">
+        <p className="text-cream/70 text-base md:text-lg max-w-md mx-auto mb-6">
           Recibimos tu solicitud. Te responderemos en un máximo de
           48 horas hábiles.
         </p>
 
-        <p className="text-xs text-ice-white/45">
+        <p className="text-xs text-cream/45">
           También te enviamos una confirmación a tu correo. Si no la ves,
           revisa tu carpeta de spam.
         </p>
@@ -264,12 +264,12 @@ export function ContactForm({ turnstileSiteKey }: ContactFormProps) {
         )}
       </Button>
 
-      <p className="text-xs text-ice-white/45">
+      <p className="text-xs text-cream/45">
         Al enviar este formulario aceptas que tratemos tu información de acuerdo
         con nuestro{" "}
         <a
           href="/privacidad"
-          className="text-mint-accent/80 hover:text-mint-accent underline underline-offset-2"
+          className="text-gold/80 hover:text-gold underline underline-offset-2"
         >
           Aviso de Privacidad
         </a>

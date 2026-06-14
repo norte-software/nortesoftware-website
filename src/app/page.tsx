@@ -1,9 +1,9 @@
 import { Hero } from "@/components/sections/Hero";
 import { PillarsSection } from "@/components/sections/PillarsSection";
+import { OriginBand } from "@/components/sections/OriginBand";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { ProductsSection } from "@/components/sections/ProductsSection";
 import { IndustriesSection } from "@/components/sections/IndustriesSection";
-import { StackSection } from "@/components/sections/StackSection";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 
 /**
@@ -29,10 +29,10 @@ export default function HomePage() {
     <>
       <Hero />
       <PillarsSection />
+      <OriginBand />
       <ServicesSection />
       <ProductsSection />
       <IndustriesSection />
-      <StackSection />
       <FinalCTA />
     </>
   );

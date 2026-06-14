@@ -1,5 +1,6 @@
-import Link from "next/link";
 import type { Metadata } from "next";
+import { Button } from "@/components/ui/Button";
+import { Accent } from "@/components/ui/Accent";
 import { SITE } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -9,25 +10,22 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <main className="min-h-svh grid place-items-center px-6 bg-dot-grid">
-      <div className="text-center max-w-xl">
-        <p className="font-display text-electric-blue text-sm tracking-[0.3em] uppercase mb-6">
+    <main className="grid min-h-svh place-items-center px-6">
+      <div className="max-w-xl text-center">
+        <p className="mb-6 text-xs font-semibold uppercase tracking-[0.2em] text-gold">
           Error 404
         </p>
-        <h1 className="font-display text-5xl md:text-7xl font-bold text-balance mb-6">
-          Te perdiste del <span className="text-gradient-brand">norte</span>.
+        <h1 className="mb-6 font-display text-5xl font-bold tracking-[-0.025em] text-balance md:text-7xl">
+          Te perdiste del <Accent>norte</Accent>.
         </h1>
-        <p className="text-ice-white/70 text-lg mb-10 text-pretty">
-          Esta ruta no existe en {SITE.name}. Vuelve al inicio
-          y te orientamos desde ahí.
+        <p className="mb-10 text-lg text-cream/72 text-pretty">
+          Esta ruta no existe en {SITE.name}. Vuelve al inicio y te orientamos
+          desde ahí.
         </p>
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 px-6 py-3 border border-mint-accent text-mint-accent rounded-full font-medium hover:bg-mint-accent hover:text-navy-deep transition-colors duration-300"
-        >
+        <Button href="/" variant="primary" size="lg">
           Volver al inicio
           <span aria-hidden>→</span>
-        </Link>
+        </Button>
       </div>
     </main>
   );

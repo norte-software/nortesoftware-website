@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { Accent } from "@/components/ui/Accent";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { ObfuscatedContact } from "@/components/ui/ObfuscatedContact";
 import { SITE, WHATSAPP_URL } from "@/lib/constants";
@@ -23,25 +24,21 @@ export const metadata: Metadata = {
 export default function ContactoPage() {
   return (
     <main id="main" className="pt-24 md:pt-32 pb-16 md:pb-24">
-      {/* Glow ambiental */}
-      <div
-        aria-hidden
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full bg-electric-blue/[0.06] blur-[100px] pointer-events-none"
-      />
-
       <Container size="default" className="relative">
         {/* Header */}
         <div className="max-w-2xl mb-16 md:mb-20">
-          <p className="font-display text-electric-blue text-xs md:text-sm tracking-[0.3em] uppercase mb-4 md:mb-6">
-            Contacto
-          </p>
+          <div className="mb-6 flex items-center gap-3">
+            <span aria-hidden className="h-px w-8 bg-gold" />
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+              Contacto
+            </span>
+          </div>
 
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-balance leading-[1.05] mb-6">
-            Hablemos de tu{" "}
-            <span className="text-gradient-brand">proyecto.</span>
+          <h1 className="mb-6 font-display text-[clamp(2.5rem,6vw,4.25rem)] font-bold leading-[0.98] tracking-[-0.025em] text-balance">
+            Hablemos de tu <Accent>proyecto</Accent>.
           </h1>
 
-          <p className="text-ice-white/70 text-base md:text-lg leading-relaxed text-pretty">
+          <p className="text-cream/70 text-base md:text-lg leading-relaxed text-pretty">
             Cuéntanos qué tienes en mente. Respondemos en menos de
             48 horas hábiles con propuesta clara sobre alcance,
             tiempos y costos.
@@ -59,70 +56,70 @@ export default function ContactoPage() {
 
           {/* Info de contacto */}
           <aside className="lg:col-span-5 order-1 lg:order-2 lg:sticky lg:top-24">
-            <div className="rounded-2xl border border-ice-white/[0.08] bg-navy-mid/30 p-8">
-              <h2 className="font-display text-lg font-semibold text-ice-white mb-6">
+            <div className="rounded-2xl border border-cream/[0.08] bg-green-panel/30 p-8">
+              <h2 className="font-display text-lg font-semibold text-cream mb-6">
                 Otras formas de contacto
               </h2>
 
               <ul className="flex flex-col gap-5">
                 <li className="flex items-start gap-3">
-                  <div className="shrink-0 size-10 rounded-lg bg-electric-blue/10 border border-electric-blue/20 flex items-center justify-center">
+                  <div className="shrink-0 size-10 rounded-lg bg-gold/10 border border-gold/20 flex items-center justify-center">
                     <Mail
-                      className="size-4 text-electric-blue"
+                      className="size-4 text-gold"
                       strokeWidth={1.75}
                       aria-hidden
                     />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs uppercase tracking-wider text-ice-white/45 mb-1">
+                    <p className="text-xs uppercase tracking-wider text-cream/45 mb-1">
                       Correo
                     </p>
                     <ObfuscatedContact
                       type="email"
                       value={SITE.emails.info}
-                      className="text-sm text-ice-white/85 hover:text-mint-accent transition-colors break-all"
+                      className="text-sm text-cream/85 hover:text-gold transition-colors break-all"
                     />
                   </div>
                 </li>
 
                 <li className="flex items-start gap-3">
-                  <div className="shrink-0 size-10 rounded-lg bg-electric-blue/10 border border-electric-blue/20 flex items-center justify-center">
+                  <div className="shrink-0 size-10 rounded-lg bg-gold/10 border border-gold/20 flex items-center justify-center">
                     <Phone
-                      className="size-4 text-electric-blue"
+                      className="size-4 text-gold"
                       strokeWidth={1.75}
                       aria-hidden
                     />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs uppercase tracking-wider text-ice-white/45 mb-1">
+                    <p className="text-xs uppercase tracking-wider text-cream/45 mb-1">
                       Teléfono
                     </p>
                     <ObfuscatedContact
                       type="phone"
                       value={SITE.phone.display}
                       href={SITE.phone.e164}
-                      className="text-sm text-ice-white/85 hover:text-mint-accent transition-colors"
+                      className="text-sm text-cream/85 hover:text-gold transition-colors"
                     />
                   </div>
                 </li>
 
                 <li className="flex items-start gap-3">
-                  <div className="shrink-0 size-10 rounded-lg bg-mint-accent/10 border border-mint-accent/20 flex items-center justify-center">
+                  <div className="shrink-0 size-10 rounded-lg bg-gold/10 border border-gold/20 flex items-center justify-center">
                     <MessageCircle
-                      className="size-4 text-mint-accent"
+                      className="size-4 text-gold"
                       strokeWidth={1.75}
                       aria-hidden
                     />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs uppercase tracking-wider text-ice-white/45 mb-1">
+                    <p className="text-xs uppercase tracking-wider text-cream/45 mb-1">
                       WhatsApp
                     </p>
                     <a
                       href={WHATSAPP_URL}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-sm text-ice-white/85 hover:text-mint-accent transition-colors"
+                      className="text-sm text-cream/85 hover:text-gold transition-colors"
                     >
                       Escríbenos directo →
                     </a>
@@ -130,18 +127,18 @@ export default function ContactoPage() {
                 </li>
 
                 <li className="flex items-start gap-3">
-                  <div className="shrink-0 size-10 rounded-lg bg-electric-blue/10 border border-electric-blue/20 flex items-center justify-center">
+                  <div className="shrink-0 size-10 rounded-lg bg-gold/10 border border-gold/20 flex items-center justify-center">
                     <MapPin
-                      className="size-4 text-electric-blue"
+                      className="size-4 text-gold"
                       strokeWidth={1.75}
                       aria-hidden
                     />
                   </div>
                   <div className="min-w-0">
-                    <p className="text-xs uppercase tracking-wider text-ice-white/45 mb-1">
+                    <p className="text-xs uppercase tracking-wider text-cream/45 mb-1">
                       Ubicación
                     </p>
-                    <p className="text-sm text-ice-white/85">
+                    <p className="text-sm text-cream/85">
                       {SITE.address.city},
                       <br />
                       {SITE.address.state}, {SITE.address.country}
@@ -150,9 +147,14 @@ export default function ContactoPage() {
                 </li>
               </ul>
 
-              <div className="divider-brand mt-8 opacity-30" />
+              <div className="relative mt-8 border-t border-hairline">
+                <span
+                  aria-hidden
+                  className="absolute left-0 top-0 h-0.5 w-10 -translate-y-px bg-gold"
+                />
+              </div>
 
-              <p className="text-xs text-ice-white/45 mt-6 leading-relaxed">
+              <p className="text-xs text-cream/45 mt-6 leading-relaxed">
                 Operamos remotamente para clientes en todo México.
                 Reuniones presenciales en SCLC bajo previa cita.
               </p>
