@@ -32,7 +32,7 @@ export function autoReplyTemplate(nombreCliente: string): string {
         <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
           <!-- Header con marca -->
           <tr>
-            <td style="background:linear-gradient(135deg,#0A1628 0%,#1A4ABA 100%);padding:40px 32px;color:#ffffff;text-align:center;">
+            <td style="background:linear-gradient(135deg,#0C2A22 0%,#16493A 100%);padding:40px 32px;color:#ffffff;text-align:center;">
               <p style="margin:0;font-size:11px;letter-spacing:0.3em;text-transform:uppercase;opacity:0.6;">Norte Software</p>
               <h1 style="margin:12px 0 0 0;font-size:26px;font-weight:700;letter-spacing:-0.01em;">Recibimos tu mensaje</h1>
               <p style="margin:8px 0 0 0;font-size:14px;opacity:0.7;letter-spacing:0.2em;text-transform:uppercase;">El norte de tu tecnología</p>
@@ -67,7 +67,7 @@ export function autoReplyTemplate(nombreCliente: string): string {
 
               <!-- Firma -->
               <p style="margin:0;font-size:14px;color:#1a1a1a;line-height:1.6;">
-                <strong style="color:#0A1628;">Christian Noé Ramos López</strong><br>
+                <strong style="color:#0C2A22;">Christian Noé Ramos López</strong><br>
                 <span style="color:#6b7280;">Founder &amp; CTO · Norte Software S.A. de C.V.</span>
               </p>
             </td>
@@ -77,8 +77,8 @@ export function autoReplyTemplate(nombreCliente: string): string {
           <tr>
             <td style="padding:24px 32px;background:#f7f8fa;border-top:1px solid #e5e7eb;text-align:center;">
               <p style="margin:0 0 8px 0;font-size:12px;color:#6b7280;">
-                <a href="https://nortesoftware.dev" style="color:#1A4ABA;text-decoration:none;">nortesoftware.dev</a> ·
-                <a href="mailto:info@nortesoftware.dev" style="color:#1A4ABA;text-decoration:none;">info@nortesoftware.dev</a> ·
+                <a href="https://nortesoftware.dev" style="color:#A8843A;text-decoration:none;">nortesoftware.dev</a> ·
+                <a href="mailto:info@nortesoftware.dev" style="color:#A8843A;text-decoration:none;">info@nortesoftware.dev</a> ·
                 +52 967 145 6444
               </p>
               <p style="margin:0;font-size:11px;color:#9ca3af;">

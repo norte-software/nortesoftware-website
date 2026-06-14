@@ -53,7 +53,7 @@ export function adminNotificationTemplate(
         <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="600" style="max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
           <!-- Header -->
           <tr>
-            <td style="background:linear-gradient(135deg,#0A1628 0%,#1A4ABA 100%);padding:32px;color:#ffffff;">
+            <td style="background:linear-gradient(135deg,#0C2A22 0%,#16493A 100%);padding:32px;color:#ffffff;">
               <p style="margin:0;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.7;">Norte Software</p>
               <h1 style="margin:8px 0 0 0;font-size:22px;font-weight:700;">Nueva solicitud de contacto</h1>
             </td>
@@ -63,7 +63,7 @@ export function adminNotificationTemplate(
           <tr>
             <td style="padding:32px;">
               <p style="margin:0 0 24px 0;font-size:15px;color:#4a5568;">
-                Recibiste una nueva solicitud desde el formulario de <a href="https://nortesoftware.dev/contacto" style="color:#1A4ABA;text-decoration:none;">nortesoftware.dev</a>.
+                Recibiste una nueva solicitud desde el formulario de <a href="https://nortesoftware.dev/contacto" style="color:#A8843A;text-decoration:none;">nortesoftware.dev</a>.
               </p>
 
               <!-- Datos del lead -->
@@ -77,7 +77,7 @@ export function adminNotificationTemplate(
                 <tr>
                   <td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
                     <strong style="color:#6b7280;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">Email</strong><br>
-                    <a href="mailto:${escape(data.email)}" style="font-size:16px;color:#1A4ABA;text-decoration:none;">${escape(data.email)}</a>
+                    <a href="mailto:${escape(data.email)}" style="font-size:16px;color:#A8843A;text-decoration:none;">${escape(data.email)}</a>
                   </td>
                 </tr>
                 ${
@@ -95,7 +95,7 @@ export function adminNotificationTemplate(
                     ? `<tr>
                   <td style="padding:12px 0;border-bottom:1px solid #e5e7eb;">
                     <strong style="color:#6b7280;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">Teléfono</strong><br>
-                    <a href="tel:${escape(data.telefono)}" style="font-size:16px;color:#1A4ABA;text-decoration:none;">${escape(data.telefono)}</a>
+                    <a href="tel:${escape(data.telefono)}" style="font-size:16px;color:#A8843A;text-decoration:none;">${escape(data.telefono)}</a>
                   </td>
                 </tr>`
                     : ""
@@ -109,14 +109,14 @@ export function adminNotificationTemplate(
               </table>
 
               <!-- Mensaje -->
-              <div style="margin-top:24px;padding:20px;background:#f7f8fa;border-left:3px solid #1A4ABA;border-radius:4px;">
+              <div style="margin-top:24px;padding:20px;background:#f7f8fa;border-left:3px solid #C69B3C;border-radius:4px;">
                 <strong style="color:#6b7280;font-size:12px;text-transform:uppercase;letter-spacing:0.05em;">Mensaje</strong>
                 <p style="margin:8px 0 0 0;font-size:15px;line-height:1.6;color:#1a1a1a;white-space:pre-wrap;">${mensajeHtml}</p>
               </div>
 
               <!-- CTA -->
               <div style="margin-top:32px;text-align:center;">
-                <a href="mailto:${escape(data.email)}?subject=Re: Tu mensaje en Norte Software" style="display:inline-block;padding:12px 24px;background:#C8852A;color:#0A1628;text-decoration:none;font-weight:600;border-radius:6px;font-size:15px;">
+                <a href="mailto:${escape(data.email)}?subject=Re: Tu mensaje en Norte Software" style="display:inline-block;padding:12px 24px;background:#C69B3C;color:#0C2A22;text-decoration:none;font-weight:600;border-radius:6px;font-size:15px;">
                   Responder al cliente
                 </a>
               </div>
