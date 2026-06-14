@@ -87,7 +87,7 @@ export function FinalCTA() {
             variants={reveal}
             className="relative mx-auto mt-16 max-w-3xl border-t border-hairline pt-8 text-center text-sm text-cream/45"
           >
-            Construido en Chiapas. Compilado para México y LATAM.
+            Construido en Chiapas. Compilado para México y el mundo.
           </motion.p>
         </motion.div>
       </Container>

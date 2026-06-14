@@ -53,7 +53,7 @@ export function OriginBand() {
               Es una <Accent>dirección</Accent>.
             </h2>
             <p className="mt-6 max-w-md text-cream/80 leading-relaxed text-pretty">
-              Operamos desde San Cristóbal de las Casas para todo México y LATAM.
+              Operamos desde San Cristóbal de las Casas para todo México y el mundo.
               Software construido en el sur, con estándar global.
             </p>
           </motion.div>

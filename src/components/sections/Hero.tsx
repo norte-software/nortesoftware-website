@@ -68,7 +68,7 @@ export function Hero() {
             >
               Construimos el software que mueve a tu empresa y lo ponemos a
               prueba como lo haría un atacante. Un solo equipo para todo el
-              ciclo —del diseño al pentest—, en México y LATAM.
+              ciclo —del diseño al pentest—, en México y el mundo.
             </motion.p>
 
             <motion.div

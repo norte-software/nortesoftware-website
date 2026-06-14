@@ -22,12 +22,14 @@ type ProductIconKey = keyof typeof PRODUCT_ICONS;
 const PRODUCT_SPEC: Record<string, string> = {
   secagent: "Detección de amenazas con IA · 24/7",
   nortecampo: "Monitoreo satelital · NDVI y clima",
+  norteprevent: "Antes del fuego.",
 };
 
 /** Verbo + destino para el CTA. */
 const PRODUCT_CTA: Record<string, string> = {
   secagent: "Abrir SecAgent",
   nortecampo: "Abrir NorteCampo",
+  norteprevent: "Abrir NortePrevent",
 };
 
 const reveal = {

@@ -151,7 +151,7 @@ export function Footer() {
         <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <div className="flex flex-col gap-3">
             <p className="text-sm text-cream/55">
-              Construido en Chiapas. Compilado para México y LATAM.
+              Construido en Chiapas. Compilado para México y el mundo.
             </p>
             <ul className="flex items-center gap-4 text-xs">
               <li>

@@ -13,7 +13,7 @@ export const SITE = {
   founderRole: "Founder & CTO",
   tagline: "El norte de tu tecnología.",
   taglineSecondary:
-    "Construimos software que resiste. Desde Chiapas para México y LATAM.",
+    "Construimos software que resiste. Desde Chiapas para México y el mundo.",
   description:
     "Norte Software construye productos y servicios de tecnología para industrias mexicanas. Ciberseguridad, desarrollo, IA y consultoría.",
   url: "https://nortesoftware.dev",
@@ -201,7 +201,7 @@ export const PRODUCTS: readonly Product[] = [
     id: "nortecampo",
     name: "NorteCampo",
     description:
-      "SaaS de monitoreo global agrícola para productores de México y LATAM. Analiza NDVI, clima, humedad del suelo y riesgo de incendio.",
+      "SaaS de monitoreo global agrícola para productores de México y el mundo. Analiza NDVI, clima, humedad del suelo y riesgo de incendio.",
     available: true,
     badge: "Disponible ahora",
     url: "https://nortecampo.com",
@@ -209,10 +209,13 @@ export const PRODUCTS: readonly Product[] = [
   },
   {
     id: "norteprevent",
-    name: "En desarrollo",
-    description: "Próximo producto Norte.",
-    available: false,
-    badge: "Próximamente",
+    name: "NortePrevent",
+    description:
+      "Sistema de detección temprana de incendios forestales y deforestación para México y el mundo.",
+    available: true,
+    badge: "Disponible ahora",
+    url: "https://norteprevent.com",
+    cta: "Abrir NortePrevent",
   },
 ];
 
