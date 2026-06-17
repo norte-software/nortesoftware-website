@@ -52,7 +52,7 @@ export const SITE = {
 
   /**
    * Coordenadas reales de San Cristóbal de las Casas, Chiapas.
-   * Sello geográfico verificable de la marca (sistema "Meridiano del Norte").
+   * Sello geográfico verificable de la marca (sistema "Latón del Norte").
    * Se usan en hero, divisores de sección y colofón del footer — en mono.
    */
   coordinates: {
@@ -79,9 +79,11 @@ export const WHATSAPP_PREFILL_MESSAGE = encodeURIComponent(
 export const WHATSAPP_URL = `https://wa.me/${SITE.phone.whatsapp}?text=${WHATSAPP_PREFILL_MESSAGE}`;
 
 export const BRAND_COLORS = {
+  green900: "#07211A",
   greenDeep: "#0C2A22",
   greenPanel: "#123A2E",
   gold: "#C69B3C",
+  goldSoft: "#D8BE7A",
   goldDeep: "#A8843A",
   cream: "#F4EADE",
   slate: "#8FA39B",

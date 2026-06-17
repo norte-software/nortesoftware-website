@@ -8,7 +8,7 @@ import { WHATSAPP_URL, SITE } from "@/lib/constants";
 /**
  * Floating Action Button de WhatsApp.
  *
- * Sistema "Meridiano": verde esmeralda de marca, SIN halo pulsante ni glow
+ * Sistema "Latón del Norte": el oro de marca, SIN halo pulsante ni glow
  * (la quietud comunica solidez). Entra una vez con spring; tooltip al hover.
  * Respeta prefers-reduced-motion.
  */

@@ -112,6 +112,26 @@
     background-color: var(--color-gold);
     color: var(--color-green-deep);
   }
+
+  /* Skip link — fuera de pantalla, visible al recibir foco (accesibilidad) */
+  .skip-link {
+    position: fixed;
+    top: -120px;
+    left: 1rem;
+    z-index: 100;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background-color: var(--color-gold);
+    color: var(--color-green-deep);
+    font-weight: 600;
+    text-decoration: none;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 1rem;
+    outline: 2px solid var(--color-cream);
+    outline-offset: 2px;
+  }
 }
 
 /* ============================================================

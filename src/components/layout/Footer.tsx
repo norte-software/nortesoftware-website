@@ -79,7 +79,7 @@ export function Footer() {
 
           {/* Navegación */}
           <div className="md:col-span-3">
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-cream/42">
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-cream/60">
               Sitio
             </h3>
             <ul className="flex flex-col gap-2.5">
@@ -98,7 +98,7 @@ export function Footer() {
 
           {/* Contacto */}
           <div className="md:col-span-4">
-            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-cream/42">
+            <h3 className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-cream/60">
               Contacto
             </h3>
             <ul className="flex flex-col gap-3 text-sm">

@@ -117,23 +117,6 @@ const organizationJsonLd = {
   ],
 };
 
-/**
- * Skip link como CSS-in-JS inline para garantizar que funciona
- * sin depender de utilities de Tailwind. Se oculta visualmente pero
- * sigue siendo accesible para screen readers, y aparece al recibir foco.
- */
-const skipLinkStyle: React.CSSProperties = {
-  position: "absolute",
-  width: 1,
-  height: 1,
-  padding: 0,
-  margin: -1,
-  overflow: "hidden",
-  clip: "rect(0, 0, 0, 0)",
-  whiteSpace: "nowrap",
-  borderWidth: 0,
-};
-
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -144,11 +127,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="bg-green-deep text-cream antialiased min-h-svh font-sans">
-        <a
-          href="#main"
-          className="skip-link focus:not-skip-link"
-          style={skipLinkStyle}
-        >
+        <a href="#main" className="skip-link">
           Saltar al contenido principal
         </a>
 

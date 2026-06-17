@@ -30,9 +30,9 @@ const BEARINGS: { label: string; angle: number; north?: boolean }[] = [
  * Brújula tipográfica — el "átomo visual" de Norte (reemplaza el globo).
  *
  * - Anillos que se dibujan con pathLength al montar.
- * - Aguja-norte azul / sur plata: se asienta en el norte con un spring
+ * - Aguja-norte oro/latón / sur slate: se asienta en el norte con un spring
  *   (gesto de calibración, una sola vez).
- * - Hub esmeralda que respira: ÚNICO movimiento perpetuo del sitio.
+ * - Hub de latón que respira: ÚNICO movimiento perpetuo del sitio.
  * - prefers-reduced-motion: todo cae a su estado final, sin bucles.
  *
  * 100% SVG + motion/react. Sin WebGL, sin dependencias.
@@ -98,7 +98,7 @@ export function Compass({ className }: CompassProps) {
           })}
         </motion.g>
 
-        {/* Rumbos cardinales en mono — N destacada en azul */}
+        {/* Rumbos cardinales en mono — N destacada en oro */}
         <motion.g
           initial={reduce ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -142,7 +142,7 @@ export function Compass({ className }: CompassProps) {
           <path d={`M${C} ${C + 64} L${C + 9} ${C} L${C - 9} ${C} Z`} fill="#8FA39B" />
         </motion.g>
 
-        {/* Hub esmeralda que respira — único loop perpetuo */}
+        {/* Hub de latón que respira — único loop perpetuo */}
         <motion.g
           style={{ transformOrigin: `${C}px ${C}px` }}
           animate={reduce ? undefined : { scale: [1, 1.06, 1], opacity: [0.9, 1, 0.9] }}

@@ -72,7 +72,7 @@ export function IndustriesSection() {
                 className="group relative flex flex-col bg-green-deep p-6 transition-colors duration-300 hover:bg-green-700 md:p-7"
               >
                 <div className="flex items-center justify-between">
-                  <span className="font-display text-sm font-semibold text-slate/45">
+                  <span className="font-display text-sm font-semibold text-slate">
                     0{i + 1}
                   </span>
                   {Icon && (

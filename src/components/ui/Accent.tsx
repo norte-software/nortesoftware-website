@@ -6,11 +6,10 @@ interface AccentProps {
 }
 
 /**
- * Palabra-acento de los titulares — sistema "Meridiano".
+ * Palabra-acento de los titulares — sistema "Latón del Norte".
  *
- * Verde esmeralda SÓLIDO (la señal que "orienta") + filete azul de 2px
- * debajo (detalle de imprenta). Reemplaza al antiguo gradiente de texto
- * azul→ámbar. Una sola por titular: el verde es señal escasa.
+ * Oro/latón SÓLIDO (la señal que "orienta") + filete de oro de 2px debajo
+ * (detalle de imprenta). Una sola por titular: el oro es señal escasa.
  */
 export function Accent({ children, className }: AccentProps) {
   return (

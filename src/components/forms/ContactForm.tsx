@@ -122,6 +122,8 @@ export function ContactForm({ turnstileSiteKey }: ContactFormProps) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
         className="rounded-2xl border border-gold/30 bg-gold/5 p-8 md:p-12 text-center"
+        role="status"
+        aria-live="polite"
       >
         <div className="inline-flex items-center justify-center size-16 rounded-full bg-gold/15 mb-6">
           <CheckCircle2 className="size-8 text-gold" strokeWidth={1.75} />
@@ -136,7 +138,7 @@ export function ContactForm({ turnstileSiteKey }: ContactFormProps) {
           48 horas hábiles.
         </p>
 
-        <p className="text-xs text-cream/45">
+        <p className="text-xs text-cream/60">
           También te enviamos una confirmación a tu correo. Si no la ves,
           revisa tu carpeta de spam.
         </p>

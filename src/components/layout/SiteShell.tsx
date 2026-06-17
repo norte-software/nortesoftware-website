@@ -10,7 +10,7 @@ interface SiteShellProps {
 /**
  * Wrapper de layout: Header, main, Footer y FAB de WhatsApp.
  *
- * Firma estructural "Meridiano del Norte": un EJE NORTE — hairline vertical
+ * Firma estructural "Latón del Norte": un EJE NORTE — hairline vertical
  * anclado al borde izquierdo del contenido (max-w-7xl) — recorre todo el
  * main como una regla cartográfica. Reemplaza al antiguo dot-grid; la
  * brújula se vuelve la columna vertebral del documento. Solo en ≥md.

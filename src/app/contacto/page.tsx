@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 
 export default function ContactoPage() {
   return (
-    <main id="main" className="pt-24 md:pt-32 pb-16 md:pb-24">
+    <div className="pt-24 md:pt-32 pb-16 md:pb-24">
       <Container size="default" className="relative">
         {/* Header */}
         <div className="max-w-2xl mb-16 md:mb-20">
@@ -162,6 +162,6 @@ export default function ContactoPage() {
           </aside>
         </div>
       </Container>
-    </main>
+    </div>
   );
 }

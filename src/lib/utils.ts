@@ -8,7 +8,7 @@ import { twMerge } from "tailwind-merge";
  * (resuelve conflictos: si pasas `px-4 px-6`, se queda solo con `px-6`).
  *
  * Uso:
- *   cn("px-4 py-2", isActive && "bg-blue-500", className)
+ *   cn("px-4 py-2", isActive && "bg-gold", className)
  */
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

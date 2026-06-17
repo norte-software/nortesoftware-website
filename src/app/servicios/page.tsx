@@ -114,7 +114,7 @@ const SERVICES_DETAIL: ServiceDetail[] = [
 
 export default function ServiciosPage() {
   return (
-    <main id="main" className="pt-24 md:pt-32 pb-24">
+    <div className="pt-24 md:pt-32 pb-24">
       <Container size="wide" className="relative">
         {/* Header */}
         <div className="max-w-3xl mb-20 md:mb-24">
@@ -250,6 +250,6 @@ export default function ServiciosPage() {
           </div>
         </div>
       </Container>
-    </main>
+    </div>
   );
 }

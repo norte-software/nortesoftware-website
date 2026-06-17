@@ -29,15 +29,15 @@ type ButtonAsLink = BaseProps &
 type ButtonProps = ButtonAsButton | ButtonAsLink;
 
 /**
- * Variantes — sistema "Meridiano" (azul = estructura/acción).
+ * Variantes — sistema "Latón del Norte" (oro = acción escasa).
  *
- * - primary: relleno azul eléctrico rectangular (radio 8px). CTA principal.
+ * - primary: relleno de oro/latón rectangular (radio 8px). CTA principal.
  *   Sin sombra de color; el peso lo da el contraste. Máx. 1 por vista.
  *
- * - secondary: borde hairline, texto ice. CTA secundario (header, etc.).
- *   Al hover el borde sube a azul. Sin relleno.
+ * - secondary: borde hairline, texto crema. CTA secundario (header, etc.).
+ *   Al hover el borde sube a oro. Sin relleno.
  *
- * - ghost: texto sin borde, con filete azul que se dibuja al hover.
+ * - ghost: texto sin borde, con filete de oro que se dibuja al hover.
  *   Para acciones terciarias (WhatsApp en cierre, "ver más", etc.).
  */
 const variantClasses: Record<Variant, string> = {
