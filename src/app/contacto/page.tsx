@@ -3,7 +3,6 @@ import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Accent } from "@/components/ui/Accent";
 import { ContactForm } from "@/components/forms/ContactForm";
-import { ObfuscatedContact } from "@/components/ui/ObfuscatedContact";
 import { SITE, WHATSAPP_URL } from "@/lib/constants";
 import { env } from "@/lib/env";
 
@@ -74,11 +73,12 @@ export default function ContactoPage() {
                     <p className="text-xs uppercase tracking-wider text-cream/45 mb-1">
                       Correo
                     </p>
-                    <ObfuscatedContact
-                      type="email"
-                      value={SITE.emails.info}
+                    <a
+                      href={`mailto:${SITE.emails.info}`}
                       className="text-sm text-cream/85 hover:text-gold transition-colors break-all"
-                    />
+                    >
+                      {SITE.emails.info}
+                    </a>
                   </div>
                 </li>
 
@@ -94,12 +94,12 @@ export default function ContactoPage() {
                     <p className="text-xs uppercase tracking-wider text-cream/45 mb-1">
                       Teléfono
                     </p>
-                    <ObfuscatedContact
-                      type="phone"
-                      value={SITE.phone.display}
-                      href={SITE.phone.e164}
+                    <a
+                      href={`tel:${SITE.phone.e164}`}
                       className="text-sm text-cream/85 hover:text-gold transition-colors"
-                    />
+                    >
+                      {SITE.phone.display}
+                    </a>
                   </div>
                 </li>
 

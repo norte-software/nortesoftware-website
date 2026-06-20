@@ -72,3 +72,6 @@ Thumbs.db
 # Build artifacts
 *.log
 .cache/
+
+# Capturas originales sin optimizar (las versiones webp viven en /public/images/products)
+/Captura de pantalla*.png

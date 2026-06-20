@@ -90,31 +90,45 @@ export const BRAND_COLORS = {
 } as const;
 
 /**
- * Navegación principal. El orden importa.
+ * Navegación principal. El orden importa — prueba primero.
  */
 export const NAV_LINKS = [
   { label: "Inicio", href: "/" },
-  { label: "Servicios", href: "/servicios" },
   { label: "Productos", href: "/#productos" },
-  { label: "Industrias", href: "/#industrias" },
+  { label: "Seguridad", href: "/#seguridad" },
+  { label: "Servicios", href: "/servicios" },
   { label: "Nosotros", href: "/#nosotros" },
   { label: "Contacto", href: "/contacto" },
 ] as const;
 
 export const PRIMARY_CTA = {
-  label: "Ver productos",
+  label: "Ver lo que construimos",
   href: "/#productos",
 } as const;
 
 /**
  * CTA de conversión a contacto. Se mantiene separado de PRIMARY_CTA
- * (que ahora apunta a productos) para Header, menú móvil, footer,
+ * (que apunta a la prueba/productos) para Header, menú móvil, footer,
  * FinalCTA y la página de Servicios.
  */
 export const CONTACT_CTA = {
   label: "Iniciar proyecto",
   href: "/contacto",
 } as const;
+
+/**
+ * StatBar bajo el hero — prueba en seco (brief §4.1).
+ * Números REALES, confirmados por Christian como publicables y verificables
+ * (2026-06-20). Regla dura: NO inventar — un dato inflado que un cliente
+ * cache mata el "peso pesado". El "7" es el conteo de productos vivos
+ * (el muro muestra 3 con captura; el resto existen en producción).
+ */
+export const STATS = [
+  { value: "7", label: "Productos en producción" },
+  { value: "Tesla · Odoo · Dstny", label: "Reportes reconocidos" },
+  { value: "< 48 h", label: "Tiempo de respuesta" },
+  { value: "Chiapas", label: "Base · escala global" },
+] as const;
 
 /**
  * Redes sociales del footer.
@@ -169,8 +183,13 @@ export interface AvailableProduct {
   available: true;
   badge: string;
   url: string;
+  /** Dominio en vivo, mostrado en mono bajo el nombre. */
+  domain: string;
   cta: string;
-  /** Color de acento (hex) para badge y chrome de la card. Default: gold. */
+  /** Captura real del producto (WebP optimizado en /public/images/products). */
+  image: string;
+  imageAlt: string;
+  /** Color de acento (hex) para chrome de la card. Default: gold. */
   badgeColor?: string;
 }
 
@@ -185,39 +204,50 @@ export interface ComingSoonProduct {
 export type Product = AvailableProduct | ComingSoonProduct;
 
 /**
- * Catálogo de productos Norte Software.
- * Orden: disponibles primero, después próximamente.
+ * Muro de prueba — 3 productos propios de Norte, vivos hoy (brief §4.2).
+ * Calidad sobre cantidad: 3 fuertes con captura real, outcome en humano y
+ * sin jerga técnica. SecAgent, Cenit y NorteVision NO van como card
+ * (SecAgent se menciona en la sección de Seguridad).
  */
 export const PRODUCTS: readonly Product[] = [
   {
-    id: "secagent",
-    name: "Norte SecAgent",
-    description:
-      "Análisis de amenazas de seguridad en tiempo real con inteligencia artificial. Detecta brute force, SQL injection, C2, exfiltración y más en segundos.",
-    available: true,
-    badge: "Disponible ahora",
-    url: "https://secagent.nortesoftware.dev",
-    cta: "Probar SecAgent",
-  },
-  {
     id: "nortecampo",
     name: "NorteCampo",
-    description:
-      "SaaS de monitoreo global agrícola para productores de México y el mundo. Analiza NDVI, clima, humedad del suelo y riesgo de incendio.",
+    description: "Mira qué pasa en tu campo sin estar ahí.",
     available: true,
-    badge: "Disponible ahora",
+    badge: "En vivo",
     url: "https://nortecampo.com",
-    cta: "Ir a NorteCampo",
+    domain: "nortecampo.com",
+    cta: "Abrir",
+    image: "/images/products/nortecampo.webp",
+    imageAlt:
+      "NorteCampo en producción: monitoreo satelital de parcelas agrícolas.",
   },
   {
     id: "norteprevent",
     name: "NortePrevent",
-    description:
-      "Sistema de detección temprana de incendios forestales y deforestación para México y el mundo.",
+    description: "Detecta el incendio y la tala antes de que crezcan.",
     available: true,
-    badge: "Disponible ahora",
+    badge: "En vivo",
     url: "https://norteprevent.com",
-    cta: "Abrir NortePrevent",
+    domain: "norteprevent.com",
+    cta: "Abrir",
+    image: "/images/products/norteprevent.webp",
+    imageAlt:
+      "NortePrevent en producción: detección temprana de incendios y deforestación.",
+  },
+  {
+    id: "ollin",
+    name: "Ollin",
+    description: "Datos sísmicos reales, en vivo. Cero pánico.",
+    available: true,
+    badge: "En vivo",
+    url: "https://ollin.lat",
+    domain: "ollin.lat",
+    cta: "Abrir",
+    image: "/images/products/ollin.webp",
+    imageAlt:
+      "Ollin en producción: red abierta de sensores sísmicos y clima espacial.",
   },
 ];
 
@@ -225,30 +255,34 @@ export const PRODUCTS: readonly Product[] = [
 // SERVICIOS
 // ─────────────────────────────────────────────────────────────────────────────
 
+/**
+ * Servicios — desde la autoridad ya ganada por la prueba (brief §4.4).
+ * Cuatro disciplinas, en seco, con la seguridad como hilo. No es menú.
+ */
 export const SERVICES = [
   {
     id: "ciberseguridad",
-    name: "Ciberseguridad y Pentesting",
+    name: "Seguridad ofensiva",
     description:
-      "Pruebas de penetración a aplicaciones web y APIs, auditorías de seguridad y reporte ejecutivo con hallazgos y remediación. Ideal para fintechs, hospitales y empresas con datos sensibles.",
+      "Pentest de aplicaciones y APIs. Reporte ejecutivo accionable: qué se rompe, cómo y en qué orden arreglarlo. Lo que entregamos, lo atacamos primero.",
   },
   {
     id: "desarrollo",
-    name: "Desarrollo de Software a la Medida",
+    name: "Software a la medida",
     description:
-      "Sistemas web y móviles desde cero, con integraciones a sistemas existentes. Stack moderno: Python, TypeScript, Next.js, FastAPI. Metodología ágil con entregas incrementales.",
+      "Sistemas web y móviles que nacen endurecidos, no parchados después. Python, TypeScript, Next.js y FastAPI, integrados a lo que ya tienes.",
   },
   {
     id: "ia-agentes",
-    name: "Inteligencia Artificial y Agentes",
+    name: "IA aplicada",
     description:
-      "Integración de IA en procesos de negocio, agentes inteligentes con Claude y OpenAI, automatización de flujos y chatbots especializados para empresas.",
+      "Modelos y agentes metidos en procesos reales —donde quitan trabajo, no donde suenan bien. Una herramienta más del stack.",
   },
   {
     id: "consultoria",
-    name: "Consultoría Técnica",
+    name: "Consultoría y CTO-as-a-Service",
     description:
-      "Auditoría de arquitectura de sistemas existentes, estrategia tech para empresas medianas y acompañamiento CTO as a Service.",
+      "Dirección técnica para decidir bien: arquitectura, seguridad y rumbo, sin tener que montar un equipo entero.",
   },
 ] as const;
 
@@ -256,90 +290,21 @@ export const SERVICES = [
 // CONTENIDO HOME
 // ─────────────────────────────────────────────────────────────────────────────
 
+/**
+ * Industrias — contexto, no menú (brief §4.6). Dos sectores donde el
+ * software es crítico; mata la rejilla de 8.
+ */
 export const INDUSTRIES = [
   {
     id: "salud",
     name: "Salud privada",
     description:
-      "Sistemas para clínicas, hospitales y consultorios. Manejo seguro de expedientes y cumplimiento normativo.",
-    isPrimary: true,
-  },
-  {
-    id: "logistica",
-    name: "Logística y transporte",
-    description: "Plataformas de seguimiento, ruteo y operación logística.",
-    isPrimary: false,
+      "Expedientes, citas y operación clínica. Un dato filtrado no es opción.",
   },
   {
     id: "fintech",
     name: "Fintech",
-    description: "Aplicaciones financieras con auditoría de seguridad continua.",
-    isPrimary: false,
-  },
-  {
-    id: "retail",
-    name: "Retail y e-commerce",
-    description: "Tiendas en línea y back-office para comercios en crecimiento.",
-    isPrimary: false,
-  },
-  {
-    id: "educacion",
-    name: "Educación",
-    description: "Plataformas educativas y sistemas administrativos escolares.",
-    isPrimary: false,
-  },
-  {
-    id: "legal",
-    name: "Legal",
-    description: "Herramientas para despachos: gestión de casos y documentos.",
-    isPrimary: false,
-  },
-  {
-    id: "manufactura",
-    name: "Manufactura",
-    description: "Sistemas de control de producción, inventarios y trazabilidad.",
-    isPrimary: false,
-  },
-  {
-    id: "otros",
-    name: "Otros sectores",
-    description: "Cada industria tiene reglas distintas. Las aprendemos contigo.",
-    isPrimary: false,
-  },
-] as const;
-
-export const PILLARS = [
-  {
-    id: "seguridad",
-    name: "Seguridad integrada",
     description:
-      "Hacemos pentesting. Sabemos cómo se rompen las cosas. Por eso las construimos de otra manera desde el inicio.",
+      "Dinero y datos sensibles en movimiento. Un sistema caído no es opción.",
   },
-  {
-    id: "transparencia",
-    name: "Transparencia",
-    description:
-      "Sin informes de 50 páginas que no dicen nada. Lo que importa, directo y documentado.",
-  },
-  {
-    id: "continuidad",
-    name: "Continuidad",
-    description:
-      "No desaparecemos después del launch. Tu software vive — nosotros lo acompañamos.",
-  },
-] as const;
-
-export const TECH_STACK = [
-  "TypeScript",
-  "Next.js",
-  "React",
-  "Node.js",
-  "Python",
-  "FastAPI",
-  "PostgreSQL",
-  "Claude API",
-  "AWS",
-  "Cloudflare",
-  "Docker",
-  "Kubernetes",
 ] as const;

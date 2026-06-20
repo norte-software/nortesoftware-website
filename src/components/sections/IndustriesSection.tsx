@@ -1,16 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import {
-  Heart,
-  Truck,
-  Wallet,
-  ShoppingBag,
-  GraduationCap,
-  Scale,
-  Factory,
-  Sparkles,
-} from "lucide-react";
+import { HeartPulse, Landmark } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Container } from "@/components/ui/Container";
@@ -18,14 +9,8 @@ import { Accent } from "@/components/ui/Accent";
 import { INDUSTRIES } from "@/lib/constants";
 
 const INDUSTRY_ICONS = {
-  salud: Heart,
-  logistica: Truck,
-  fintech: Wallet,
-  retail: ShoppingBag,
-  educacion: GraduationCap,
-  legal: Scale,
-  manufactura: Factory,
-  otros: Sparkles,
+  salud: HeartPulse,
+  fintech: Landmark,
 } as const;
 
 const reveal = {
@@ -38,55 +23,47 @@ const reveal = {
 };
 
 /**
- * Industrias — matriz sobria (4×2). Cobertura amplia: la densidad ordenada
- * comunica alcance. Sin destacar una sola industria.
+ * Industrias — contexto, no menú (brief §4.6). Una línea + dos sectores
+ * donde el software es crítico. Sin la rejilla de 8 (que decía "todo" =
+ * decía nada).
  */
 export function IndustriesSection() {
   return (
-    <Section anchor="industrias">
+    <Section anchor="industrias" padding="tight">
       <SectionHeader
         eyebrow="Industrias"
         title={
           <>
-            A quién <Accent>servimos</Accent>.
+            Donde el software es <Accent>crítico</Accent>.
           </>
         }
-        description="De salud y fintech a logística, retail, educación y gobierno. Trabajamos donde el software es crítico, en cualquier industria."
+        description="Salud privada y fintech: sistemas donde un dato filtrado o un sistema caído no son opción."
       />
 
-      <Container size="wide" className="mt-14 md:mt-20">
+      <Container size="wide" className="mt-12 md:mt-16">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          variants={{ visible: { transition: { staggerChildren: 0.06 } } }}
-          className="grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-hairline bg-hairline lg:grid-cols-4"
+          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
+          className="grid gap-5 sm:grid-cols-2 md:gap-6"
         >
-          {INDUSTRIES.map((industry, i) => {
+          {INDUSTRIES.map((industry) => {
             const Icon =
               INDUSTRY_ICONS[industry.id as keyof typeof INDUSTRY_ICONS];
             return (
               <motion.article
                 key={industry.id}
                 variants={reveal}
-                className="group relative flex flex-col bg-green-deep p-6 transition-colors duration-300 hover:bg-green-700 md:p-7"
+                className="rounded-2xl border border-hairline bg-green-panel/40 p-7 transition-colors duration-300 hover:border-gold/30 md:p-8"
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-display text-sm font-semibold text-slate">
-                    0{i + 1}
-                  </span>
-                  {Icon && (
-                    <Icon
-                      className="size-5 text-gold"
-                      strokeWidth={1.5}
-                      aria-hidden
-                    />
-                  )}
-                </div>
-                <h3 className="mt-6 font-display text-base font-semibold leading-tight text-cream md:text-lg">
+                {Icon && (
+                  <Icon className="size-6 text-gold" strokeWidth={1.5} aria-hidden />
+                )}
+                <h3 className="mt-5 font-display text-xl font-semibold leading-tight text-cream md:text-2xl">
                   {industry.name}
                 </h3>
-                <p className="mt-2 text-sm text-cream/60 leading-relaxed text-pretty">
+                <p className="mt-3 leading-relaxed text-cream/65 text-pretty">
                   {industry.description}
                 </p>
               </motion.article>

@@ -12,10 +12,13 @@ const R_RING = 110;
 const R_INNER = 100;
 const R_TICK = 96;
 
-/** Punto sobre la circunferencia. Ángulo 0 = norte (arriba), horario. */
+/** Punto sobre la circunferencia. Ángulo 0 = norte (arriba), horario.
+ *  Redondeado a 3 decimales para que servidor y cliente serialicen el
+ *  mismo string en el SVG (evita el hydration mismatch; sin cambio visual). */
 function polar(angleDeg: number, radius: number) {
   const rad = ((angleDeg - 90) * Math.PI) / 180;
-  return { x: C + radius * Math.cos(rad), y: C + radius * Math.sin(rad) };
+  const round = (n: number) => Math.round(n * 1000) / 1000;
+  return { x: round(C + radius * Math.cos(rad)), y: round(C + radius * Math.sin(rad)) };
 }
 
 const TICKS = Array.from({ length: 24 }, (_, i) => i * 15);

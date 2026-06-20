@@ -3,7 +3,6 @@ import { Mail, Phone, MapPin } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
 import { SocialIcon } from "@/components/ui/SocialIcon";
-import { ObfuscatedContact } from "@/components/ui/ObfuscatedContact";
 import {
   SITE,
   NAV_LINKS,
@@ -24,9 +23,17 @@ const srOnly: React.CSSProperties = {
   borderWidth: 0,
 };
 
+/** Familia de productos en vivo — para el colofón. */
+const FOOTER_PRODUCTS = [
+  { label: "NorteCampo", href: "https://nortecampo.com" },
+  { label: "NortePrevent", href: "https://norteprevent.com" },
+  { label: "Ollin", href: "https://ollin.lat" },
+] as const;
+
 /**
  * Footer / colofón — sobrio, sobre la capa más hundida (green-900).
  * Regla con tick en oro, hovers en oro, sin notación de código.
+ * Correo y teléfono en claro: clickeables y legibles (mailto:/tel:).
  */
 export function Footer() {
   const currentYear = new Date().getFullYear();
@@ -104,20 +111,21 @@ export function Footer() {
             <ul className="flex flex-col gap-3 text-sm">
               <li className="flex items-center gap-2.5">
                 <Mail className="size-4 shrink-0 text-gold" aria-hidden />
-                <ObfuscatedContact
-                  type="email"
-                  value={SITE.emails.info}
+                <a
+                  href={`mailto:${SITE.emails.info}`}
                   className="break-all text-cream/75 transition-colors duration-200 hover:text-gold"
-                />
+                >
+                  {SITE.emails.info}
+                </a>
               </li>
               <li className="flex items-center gap-2.5">
                 <Phone className="size-4 shrink-0 text-gold" aria-hidden />
-                <ObfuscatedContact
-                  type="phone"
-                  value={SITE.phone.display}
-                  href={SITE.phone.e164}
+                <a
+                  href={`tel:${SITE.phone.e164}`}
                   className="text-cream/75 transition-colors duration-200 hover:text-gold"
-                />
+                >
+                  {SITE.phone.display}
+                </a>
               </li>
               <li className="flex items-start gap-2.5 text-cream/75">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-gold" aria-hidden />
@@ -153,27 +161,19 @@ export function Footer() {
             <p className="text-sm text-cream/55">
               Construido en Chiapas. Compilado para México y el mundo.
             </p>
-            <ul className="flex items-center gap-4 text-xs">
-              <li>
-                <a
-                  href="https://nortecampo.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-cream/60 transition-colors duration-200 hover:text-gold"
-                >
-                  NorteCampo
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://secagent.nortesoftware.dev"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-cream/60 transition-colors duration-200 hover:text-gold"
-                >
-                  SecAgent
-                </a>
-              </li>
+            <ul className="flex flex-wrap items-center gap-4 text-xs">
+              {FOOTER_PRODUCTS.map((product) => (
+                <li key={product.href}>
+                  <a
+                    href={product.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-cream/60 transition-colors duration-200 hover:text-gold"
+                  >
+                    {product.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 

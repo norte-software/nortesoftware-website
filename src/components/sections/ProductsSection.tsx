@@ -1,8 +1,8 @@
 "use client";
 
-import type { ComponentType, CSSProperties, SVGProps } from "react";
+import Image from "next/image";
 import { motion } from "motion/react";
-import { ShieldAlert, Sprout, Flame, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Container } from "@/components/ui/Container";
@@ -10,30 +10,8 @@ import { Accent } from "@/components/ui/Accent";
 import { PRODUCTS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 
-const PRODUCT_ICONS = {
-  secagent: ShieldAlert,
-  nortecampo: Sprout,
-  norteprevent: Flame,
-} as const;
-
-type ProductIconKey = keyof typeof PRODUCT_ICONS;
-
-/** Dato corto y concreto por producto (sub-línea). */
-const PRODUCT_SPEC: Record<string, string> = {
-  secagent: "Detección de amenazas con IA · 24/7",
-  nortecampo: "Monitoreo satelital · NDVI y clima",
-  norteprevent: "Antes del fuego.",
-};
-
-/** Verbo + destino para el CTA. */
-const PRODUCT_CTA: Record<string, string> = {
-  secagent: "Abrir SecAgent",
-  nortecampo: "Abrir NorteCampo",
-  norteprevent: "Abrir NortePrevent",
-};
-
 const reveal = {
-  hidden: { opacity: 0, y: 8 },
+  hidden: { opacity: 0, y: 12 },
   visible: {
     opacity: 1,
     y: 0,
@@ -41,33 +19,23 @@ const reveal = {
   },
 };
 
-const isProductIconKey = (id: string): id is ProductIconKey =>
-  id in PRODUCT_ICONS;
-
-const getIcon = (
-  id: string,
-): ComponentType<SVGProps<SVGSVGElement>> | null =>
-  isProductIconKey(id) ? PRODUCT_ICONS[id] : null;
-
 /**
- * Productos — fichas de catálogo. Panel verde con bisel superior, estado con
- * punto de señal (sin "LIVE" de terminal), nombre display, dato concreto y
- * CTA verbo+destino. Productos reales = prueba de capacidad, no promesas.
+ * PRUEBA — el corazón del sitio (brief §4.2). "Demostrar, no proclamar":
+ * tres productos propios, vivos hoy, con captura real en marco de browser.
+ * Outcome en humano (sin jerga), estado ● En vivo, dominio en mono y un
+ * único "Abrir →". Tarjetas alternadas, hover con lift + borde oro.
  */
 export function ProductsSection() {
-  const comingSoonProducts = PRODUCTS.filter((product) => !product.available);
-
   return (
     <Section anchor="productos">
       <SectionHeader
-        eyebrow="Nuestros productos"
+        eyebrow="Prueba"
         title={
           <>
-            No solo construimos para clientes.{" "}
-            <Accent>También para México</Accent>.
+            No lo decimos. <Accent>Está en producción</Accent>.
           </>
         }
-        description="Productos propios de Norte, en producción hoy. La mejor prueba de lo que podemos construir para ti."
+        description="Productos propios de Norte, vivos hoy. La mejor muestra de lo que construimos para alguien más."
       />
 
       <Container size="wide" className="mt-14 md:mt-20">
@@ -75,16 +43,12 @@ export function ProductsSection() {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-80px" }}
-          variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-          className="flex flex-col gap-5 md:gap-6"
+          variants={{ visible: { transition: { staggerChildren: 0.12 } } }}
+          className="flex flex-col gap-6 md:gap-8"
         >
-          {PRODUCTS.map((product) => {
+          {PRODUCTS.map((product, i) => {
             if (!product.available) return null;
-
-            const Icon = getIcon(product.id);
-            const accent = product.badgeColor ?? "var(--color-gold)";
-            const spec = PRODUCT_SPEC[product.id];
-            const cta = PRODUCT_CTA[product.id] ?? product.cta;
+            const reversed = i % 2 === 1;
 
             return (
               <motion.a
@@ -92,108 +56,86 @@ export function ProductsSection() {
                 href={product.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={`${cta} (abre en una pestaña nueva)`}
+                aria-label={`Abrir ${product.name} en ${product.domain} (pestaña nueva)`}
                 variants={reveal}
-                style={{ "--card-accent": accent } as CSSProperties}
                 className={cn(
-                  "group relative grid gap-8 rounded-2xl border border-hairline bg-green-panel p-8",
+                  "group grid items-center gap-7 rounded-2xl border border-hairline bg-green-panel/50 p-5 md:gap-12 md:p-6 lg:grid-cols-12",
                   "border-t-[1px] [border-top-color:var(--color-hairline-strong)]",
-                  "transition-colors duration-300 hover:bg-green-700 hover:border-[color-mix(in_oklab,var(--card-accent)_45%,var(--color-hairline-strong))]",
-                  "md:grid-cols-12 md:gap-10 md:p-10",
+                  "transition-[transform,border-color,background-color] duration-300",
+                  "hover:-translate-y-1 hover:border-gold/45 hover:bg-green-panel",
                 )}
               >
-                {/* Identidad + estado */}
-                <div className="md:col-span-5">
+                {/* Captura en marco de browser */}
+                <div
+                  className={cn(
+                    "lg:col-span-7",
+                    reversed && "lg:order-2",
+                  )}
+                >
+                  <div className="overflow-hidden rounded-xl border border-hairline bg-green-900 shadow-[0_24px_60px_-32px_rgba(0,0,0,0.85)]">
+                    <div className="flex items-center gap-3 border-b border-hairline px-4 py-2.5">
+                      <span aria-hidden className="flex items-center gap-1.5">
+                        <span className="size-2 rounded-full bg-cream/15" />
+                        <span className="size-2 rounded-full bg-cream/15" />
+                        <span className="size-2 rounded-full bg-cream/15" />
+                      </span>
+                      <span className="inline-flex max-w-full items-center truncate rounded-md bg-green-deep px-2.5 py-1 font-mono text-[11px] tracking-tight text-cream/55">
+                        {product.domain}
+                      </span>
+                    </div>
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      <Image
+                        src={product.image}
+                        alt={product.imageAlt}
+                        fill
+                        sizes="(min-width: 1024px) 58vw, 92vw"
+                        className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Identidad + outcome */}
+                <div
+                  className={cn(
+                    "lg:col-span-5",
+                    reversed && "lg:order-1",
+                  )}
+                >
                   <div className="flex items-center gap-2.5">
                     <span
                       aria-hidden
-                      className="size-2 shrink-0 rounded-full bg-[var(--card-accent)]"
+                      className="size-2 rounded-full bg-[#5FB85B] shadow-[0_0_0_3px_rgba(95,184,91,0.16)]"
                     />
-                    <span className="text-xs font-semibold uppercase tracking-[0.15em] text-cream/55">
+                    <span className="font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-cream/55">
                       {product.badge}
                     </span>
                   </div>
 
-                  <h3 className="mt-6 flex items-start gap-4 font-display text-3xl font-bold leading-[0.98] tracking-[-0.02em] text-cream md:text-4xl">
+                  <h3 className="mt-5 font-display text-3xl font-bold leading-[0.98] tracking-[-0.02em] text-cream md:text-4xl">
                     {product.name}
-                    {Icon && (
-                      <Icon
-                        className="mt-1 size-6 shrink-0 text-[var(--card-accent)]"
-                        strokeWidth={1.5}
-                        aria-hidden
-                      />
-                    )}
                   </h3>
 
-                  {spec && (
-                    <p className="mt-4 text-sm text-cream/55">{spec}</p>
-                  )}
-                </div>
-
-                {/* Descripción + CTA */}
-                <div className="flex flex-col justify-between gap-8 md:col-span-7 md:pt-1">
-                  <p className="max-w-2xl text-cream/72 leading-relaxed text-pretty">
+                  <p className="mt-4 max-w-md text-lg text-cream/72 leading-relaxed text-pretty">
                     {product.description}
                   </p>
 
-                  <div className="flex items-center gap-4">
+                  <div className="mt-7 flex items-center gap-4">
                     <span className="inline-flex items-center gap-2 text-sm font-semibold text-gold">
-                      {cta}
+                      {product.cta}
                       <ArrowUpRight
                         className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                         aria-hidden
                       />
                     </span>
-                    <span
-                      aria-hidden
-                      className="block h-px w-12 bg-hairline-strong transition-all duration-300 group-hover:w-24 group-hover:bg-[var(--card-accent)]"
-                    />
+                    <span className="font-mono text-xs text-cream/40">
+                      {product.domain}
+                    </span>
                   </div>
                 </div>
               </motion.a>
             );
           })}
-
-          {comingSoonProducts.length > 0 &&
-            PRODUCTS.map((product) => {
-              if (product.available) return null;
-
-              const Icon = getIcon(product.id);
-
-              return (
-                <motion.div
-                  key={product.id}
-                  variants={reveal}
-                  className={cn(
-                    "grid gap-6 rounded-2xl border border-hairline bg-green-panel/40 p-8",
-                    "md:grid-cols-12 md:gap-10 md:p-10",
-                  )}
-                >
-                  <div className="md:col-span-5">
-                    <span className="text-xs font-semibold uppercase tracking-[0.15em] text-cream/40">
-                      Próximamente
-                    </span>
-
-                    <h3 className="mt-6 flex items-start gap-4 font-display text-2xl font-bold leading-[1] tracking-[-0.02em] text-cream/45 md:text-3xl">
-                      {product.name}
-                      {Icon && (
-                        <Icon
-                          className="mt-1 size-5 shrink-0 text-cream/40"
-                          strokeWidth={1.5}
-                          aria-hidden
-                        />
-                      )}
-                    </h3>
-                  </div>
-
-                  <div className="md:col-span-7 md:pt-1">
-                    <p className="max-w-2xl text-cream/45 leading-relaxed text-pretty">
-                      {product.description}
-                    </p>
-                  </div>
-                </motion.div>
-              );
-            })}
         </motion.div>
       </Container>
     </Section>

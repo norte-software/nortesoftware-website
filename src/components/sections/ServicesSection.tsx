@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 import Link from "next/link";
-import { ShieldAlert, Code2, Bot, Compass, ArrowRight } from "lucide-react";
+import { ShieldAlert, Code2, Bot, Compass, ArrowUpRight } from "lucide-react";
 import { Section } from "@/components/ui/Section";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Container } from "@/components/ui/Container";
@@ -16,13 +16,6 @@ const SERVICE_ICONS = {
   consultoria: Compass,
 } as const;
 
-const SERVICE_VERBS = {
-  ciberseguridad: "Ver pentesting",
-  desarrollo: "Ver desarrollo",
-  "ia-agentes": "Ver IA aplicada",
-  consultoria: "Ver consultoría",
-} as const;
-
 const reveal = {
   hidden: { opacity: 0, y: 8 },
   visible: {
@@ -33,21 +26,21 @@ const reveal = {
 };
 
 /**
- * Qué hacemos — lista editorial sobria de cuatro disciplinas.
- * Número + ícono + nombre a la izquierda, descripción al centro, verbo a la
- * derecha. Hover sutil (sube la fila). Sin notación de código ni mono.
+ * Servicios — desde la autoridad ya ganada por la prueba (brief §4.4).
+ * Lista editorial en seco, NO menú: la seguridad es el hilo. Cuatro
+ * disciplinas, sin verbos de catálogo ni name-drop como crédito.
  */
 export function ServicesSection() {
   return (
     <Section anchor="servicios">
       <SectionHeader
-        eyebrow="Qué hacemos"
+        eyebrow="Servicios"
         title={
           <>
-            Cuatro disciplinas, <Accent>un mismo equipo</Accent>.
+            Lo que construimos <Accent>para ti</Accent>.
           </>
         }
-        description="Diseño, construcción, seguridad y operación bajo un mismo techo. Sin saltar de proveedor en proveedor, sin perder contexto entre etapas."
+        description="Cuatro disciplinas, un solo equipo —y la seguridad como hilo en todas. Desde la dirección, no desde un menú."
       />
 
       <Container size="wide" className="mt-14 md:mt-20">
@@ -61,8 +54,6 @@ export function ServicesSection() {
           {SERVICES.map((service, i) => {
             const Icon =
               SERVICE_ICONS[service.id as keyof typeof SERVICE_ICONS];
-            const verb =
-              SERVICE_VERBS[service.id as keyof typeof SERVICE_VERBS];
 
             return (
               <motion.div key={service.id} variants={reveal}>
@@ -71,7 +62,7 @@ export function ServicesSection() {
                   className="group -mx-4 grid gap-5 border-t border-hairline px-4 py-9 transition-colors duration-300 hover:bg-green-700 focus-visible:bg-green-700 focus-visible:outline-none md:py-12 lg:grid-cols-12 lg:items-baseline lg:gap-10"
                 >
                   <div className="flex items-center gap-4 lg:col-span-5">
-                    <span className="font-display text-base font-semibold text-slate/50 transition-colors duration-300 group-hover:text-gold">
+                    <span className="font-mono text-sm font-medium text-slate/60 transition-colors duration-300 group-hover:text-gold">
                       0{i + 1}
                     </span>
                     {Icon && (
@@ -86,21 +77,18 @@ export function ServicesSection() {
                     </h3>
                   </div>
 
-                  <div className="lg:col-span-5">
-                    <p className="max-w-[56ch] text-cream/72 leading-relaxed text-pretty">
+                  <div className="lg:col-span-6">
+                    <p className="max-w-[60ch] text-cream/72 leading-relaxed text-pretty">
                       {service.description}
                     </p>
                   </div>
 
-                  <div className="lg:col-span-2 lg:justify-self-end lg:text-right">
-                    <span className="inline-flex items-center gap-2 text-sm font-semibold text-gold">
-                      {verb}
-                      <ArrowRight
-                        className="size-4 transition-transform duration-300 group-hover:translate-x-1"
-                        strokeWidth={1.75}
-                        aria-hidden
-                      />
-                    </span>
+                  <div className="hidden lg:col-span-1 lg:flex lg:justify-end">
+                    <ArrowUpRight
+                      className="size-5 text-slate/40 transition-all duration-300 group-hover:text-gold group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      strokeWidth={1.75}
+                      aria-hidden
+                    />
                   </div>
                 </Link>
               </motion.div>
